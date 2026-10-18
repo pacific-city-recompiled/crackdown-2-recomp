@@ -21,7 +21,7 @@ foreach ($t in $At) {
   $bmp.Save("$r\out\${Name}_$t.png"); "saved out\${Name}_$t.png"
 }
 $alive = -not $p.HasExited
-if ($alive) { $p.Kill() }
+if ($alive) { $p.Kill(); $p.WaitForExit(15000) | Out-Null }
 $f = Get-ChildItem "$b\logs" | sort LastWriteTime | select -Last 1
 "alive=$alive log=$($f.Name)"
 Select-String -Path $f.FullName -Pattern "critical|FATAL|Unhandled guest" | select -First 3 | % { $_.Line.Substring(0, [Math]::Min(200, $_.Line.Length)) }

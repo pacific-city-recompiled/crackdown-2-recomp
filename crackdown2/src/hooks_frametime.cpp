@@ -103,5 +103,6 @@ void FlushFrameLog() {
 REX_HOOK_RAW(sub_82385DA8) {
   PaceFrame();
   OnFrame();
+  crackdown2::UpdateSimClock();
   __imp__sub_82385DA8(ctx, base);
 }

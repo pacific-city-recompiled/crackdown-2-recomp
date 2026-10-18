@@ -17,6 +17,7 @@ set(CRACKDOWN2_SOURCES
     src/host_tuning.cpp
     src/hooks_intro.cpp
     src/hooks_frametime.cpp
+    src/hooks_framerate.cpp
 )
 
 if(WIN32)

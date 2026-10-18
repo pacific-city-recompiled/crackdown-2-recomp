@@ -14,4 +14,6 @@ void DumpGuestImage(rex::Runtime* runtime);
 // Guest frame rate for the F3 overlay, and --frame_log flushing (hooks_frametime.cpp).
 rex::ui::FrameStats GuestFrameStats();
 void FlushFrameLog();
+// --sim_game_clock: measures this frame (hooks_framerate.cpp); called from the per-frame hook.
+void UpdateSimClock();
 }  // namespace crackdown2

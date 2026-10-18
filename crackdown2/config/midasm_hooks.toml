@@ -1,0 +1,107 @@
+# Mid-asm hooks (SDK [[midasm_hook]]). Every entry cites why it exists.
+# SDK v0.10.0, default.xex + TU default.xexp (0.0.5.1).
+#
+# Game ms clock (--sim_game_clock, crackdown2/src/hooks_framerate.cpp). Same design as Crackdown 1.
+# Each address is the `li rX,33` in an inlined per-frame ms choice
+#   ms = [[0x82800B0C]+13] ? 33 : ([0x82800FB9] ? [0x8277ADCC] : 16)
+# (`lwz ..,2828(..); lbz ..,13(..); cmplwi; beq L; li rX,33; b ...`, so the li is at L - 8; every site below
+# was checked for that). The 16th, 0x827671A4, is the non-inlined copy sub_82767190 (`li r3,33; blr`).
+# The clock is locked in retail, so these timers advance a fixed 33 ms per frame. After the li,
+# Cd2FrameMs_<address> puts the measured frame ms in the register (it leaves 33 when the cvar is off or the
+# site's bit in --sim_game_clock_sites is clear; bit 0 = first entry).
+
+[[midasm_hook]]  # sub_823AAFE8
+address = 0x823AB418
+name = "Cd2FrameMs_823AB418"
+registers = ["r11"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_823AAFE8
+address = 0x823AB474
+name = "Cd2FrameMs_823AB474"
+registers = ["r11"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_82391268
+address = 0x823914B0
+name = "Cd2FrameMs_823914B0"
+registers = ["r11"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_8252D318
+address = 0x8252D34C
+name = "Cd2FrameMs_8252D34C"
+registers = ["r11"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_82762158
+address = 0x8276226C
+name = "Cd2FrameMs_8276226C"
+registers = ["r11"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_827EA9F0
+address = 0x827EAA24
+name = "Cd2FrameMs_827EAA24"
+registers = ["r11"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_823815F0
+address = 0x82381634
+name = "Cd2FrameMs_82381634"
+registers = ["r11"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_8223F520
+address = 0x82240290
+name = "Cd2FrameMs_82240290"
+registers = ["r10"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_82338648
+address = 0x8233869C
+name = "Cd2FrameMs_8233869C"
+registers = ["r10"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_8220BD80
+address = 0x8220C0DC
+name = "Cd2FrameMs_8220C0DC"
+registers = ["r9"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_8278FBE0
+address = 0x8278FC88
+name = "Cd2FrameMs_8278FC88"
+registers = ["r11"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_82783780
+address = 0x827837FC
+name = "Cd2FrameMs_827837FC"
+registers = ["r11"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_82339150
+address = 0x823397F0
+name = "Cd2FrameMs_823397F0"
+registers = ["r11"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_8224FF60
+address = 0x82250438
+name = "Cd2FrameMs_82250438"
+registers = ["r10"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_827AEAB0
+address = 0x827AEAE0
+name = "Cd2FrameMs_827AEAE0"
+registers = ["r11"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_82767190
+address = 0x827671A4
+name = "Cd2FrameMs_827671A4"
+registers = ["r3"]
+after_instruction = true
