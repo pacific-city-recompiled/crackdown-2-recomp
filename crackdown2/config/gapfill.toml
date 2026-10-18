@@ -1448,3 +1448,10 @@
 0x8290DCA8 = {}  # gap after a bctr (32 bytes); run-driven: 0x824CCA68 FATAL in the combat tutorial (Austin, 2026-10-18), so register every such gap
 0x829C2258 = {}  # gap after a bctr (32 bytes); run-driven: 0x824CCA68 FATAL in the combat tutorial (Austin, 2026-10-18), so register every such gap
 0x82DC3BB0 = {}  # gap after a bctr (48 bytes); run-driven: 0x824CCA68 FATAL in the combat tutorial (Austin, 2026-10-18), so register every such gap
+0x823BF8C8 = {}  # referenced from data (tools/re/ptrscan.js on a live image dump, 2026-10-18), not in any function
+0x823BF8E4 = {}  # referenced from data (tools/re/ptrscan.js on a live image dump, 2026-10-18), not in any function
+0x823BFA70 = {}  # referenced from data (tools/re/ptrscan.js on a live image dump, 2026-10-18), not in any function
+0x823BFA7C = {}  # referenced from data (tools/re/ptrscan.js on a live image dump, 2026-10-18), not in any function
+0x82450F70 = {}  # referenced from data (tools/re/ptrscan.js on a live image dump, 2026-10-18), not in any function
+0x824CCAA8 = {}  # referenced from data (tools/re/ptrscan.js on a live image dump, 2026-10-18), not in any function
+0x82DC3BC8 = {}  # referenced from data (tools/re/ptrscan.js on a live image dump, 2026-10-18), not in any function
