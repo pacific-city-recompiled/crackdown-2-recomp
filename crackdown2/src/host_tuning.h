@@ -1,6 +1,8 @@
 // crackdown2 - host-side defaults the SDK leaves off
 #pragma once
 
+#include <rex/ui/overlay/debug_overlay.h>
+
 namespace rex { class Runtime; }
 
 namespace crackdown2 {
@@ -9,4 +11,7 @@ namespace crackdown2 {
 void ApplyGameDefaults();
 // --dump_image: writes the loaded guest image to a file.
 void DumpGuestImage(rex::Runtime* runtime);
+// Guest frame rate for the F3 overlay, and --frame_log flushing (hooks_frametime.cpp).
+rex::ui::FrameStats GuestFrameStats();
+void FlushFrameLog();
 }  // namespace crackdown2

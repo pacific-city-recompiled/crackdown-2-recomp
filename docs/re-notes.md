@@ -40,3 +40,8 @@ Not measured yet: frame pacing with vsync off (the game's own limiter should hol
 - Order: MGS.usm (Microsoft Game Studios, plays during state 0), then the boot state machine sub_828AB9F0 (state u32 at this+324): 0 save notice (SaveWarning.gfx), 1 Ruffian.usm, 2 legal text for 4500 ms (start time u32 at this+328, ms from sub_82954E48), 3 TitleFadeUp.usm, then Press Start. Strings at 0x82163980 ("MGS.usm"), 0x82163988 ("Ruffian.usm"), 0x821639B4 ("TitleFadeUp.usm"). Ruffian.usm is in UI\splash.pack.
 - sub_828B60C8 = "any of the four pads has A/B/Start down" (bits 12/13/4 of the button word). States 1 and 3 advance when it returns nonzero; state 2 treats a press as "wait for release".
 - `crackdown2/src/hooks_intro.cpp` (--skip_intro_videos, default on): forces "pressed" in states 1 and 3 after 15 frames, and moves state 2's start time back 4500 ms. Forcing state 0 or state 2 left the game stuck on the save notice. PC runs crackdown2_049/050: Press Start shows about 11 s after launch (was ~30 s). MGS.usm is not skipped yet.
+
+## Frame timing (2026-10-18)
+
+- Guest 0x82385DA8 is the end-of-frame/present function (only caller of the VdSwap import). `crackdown2/src/hooks_frametime.cpp` times its calls: `--frame_log=<csv>` (frame_time_us rows, Crackdown 1 format) and the F3 overlay frame rate.
+- 150GS save, standing in the city at night (PC run crackdown2_055, vsync on): last 40 s = 1200 frames, avg 33.33 ms (30.0 fps), 1% low 35.7 ms, max 36.3 ms. Stock 30 fps holds with headroom unknown (next: uncapped test once the game-speed clock is understood; vsync=false alone runs the game too fast).

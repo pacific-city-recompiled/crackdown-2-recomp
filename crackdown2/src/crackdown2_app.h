@@ -22,6 +22,13 @@ class Crackdown2App : public rex::ReXApp {
   void OnPreLaunchModule() override {
     crackdown2::ApplyGameDefaults();
     crackdown2::DumpGuestImage(runtime());
+    SetGuestFrameStats(&crackdown2::GuestFrameStats);
+  }
+
+  // Close button / Alt+F4: the SDK then hard-exits, so flush the frame log now.
+  bool OnWindowCloseRequested() override {
+    crackdown2::FlushFrameLog();
+    return true;
   }
 
   // Override virtual hooks for customization:
