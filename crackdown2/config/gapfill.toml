@@ -1441,3 +1441,10 @@
 0x82EB8F9C = {}  # gap 8 bytes
 0x82F1E9B0 = {}  # 8-byte stub between sub_82F1E908 (ends b at 0x82F1E9AC) and sub_82F1E9B8; runtime FATAL 'invalid or unregistered function at 0x82F1E9B0' (out/run1)
 0x82580A58 = {}  # runtime FATAL 'invalid or unregistered function' after New Game (out/run, 2026-10-18); inside rejected gap 0x82580A0C
+0x82450F30 = {}  # gap after a bctr (80 bytes); run-driven: 0x824CCA68 FATAL in the combat tutorial (Austin, 2026-10-18), so register every such gap
+0x824B0C58 = {}  # gap after a bctr (8 bytes); run-driven: 0x824CCA68 FATAL in the combat tutorial (Austin, 2026-10-18), so register every such gap
+0x824B0D28 = {}  # gap after a bctr (80 bytes); run-driven: 0x824CCA68 FATAL in the combat tutorial (Austin, 2026-10-18), so register every such gap
+0x824CCA68 = {}  # gap after a bctr (80 bytes); run-driven: 0x824CCA68 FATAL in the combat tutorial (Austin, 2026-10-18), so register every such gap
+0x8290DCA8 = {}  # gap after a bctr (32 bytes); run-driven: 0x824CCA68 FATAL in the combat tutorial (Austin, 2026-10-18), so register every such gap
+0x829C2258 = {}  # gap after a bctr (32 bytes); run-driven: 0x824CCA68 FATAL in the combat tutorial (Austin, 2026-10-18), so register every such gap
+0x82DC3BB0 = {}  # gap after a bctr (48 bytes); run-driven: 0x824CCA68 FATAL in the combat tutorial (Austin, 2026-10-18), so register every such gap

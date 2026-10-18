@@ -1,6 +1,7 @@
 // crackdown2 - host-side defaults the SDK leaves off
 //
-// vsync=false: with the SDK default (true) the guest's loading is ~3x slower. The command processor's
+// vsync is left on (2026-10-18): with vsync=false the game runs too fast in play (Austin, PC), so the frame
+// limiter must be found first (60 fps work). Kept for reference: with vsync on, loading is ~3x slower. The command processor's
 // PM4 WAIT_REG_MEM handler sleeps `wait/0x100` ms per poll when vsync is on (sdk
 // src/graphics/command_processor.cpp, the `if (!REXCVAR_GET(vsync))` branch), and the game issues those waits
 // all through a level load. PC run 2026-10-18, same scripted input (--auto_input START + 14 A):
@@ -12,10 +13,18 @@
 
 #include "host_tuning.h"
 
+#include <fstream>
+#include <string>
 #include <string_view>
 
 #include <rex/cvar.h>
 #include <rex/logging/macros.h>
+#include <rex/memory/utils.h>
+#include <rex/runtime.h>
+#include <rex/system/kernel_state.h>
+#include <rex/system/user_module.h>
+#include <rex/system/xex_module.h>
+#include <rex/system/xmemory.h>
 
 namespace crackdown2 {
 
@@ -25,8 +34,10 @@ void ApplyGameDefaults() {
     const char* value;
   };
   static constexpr Default kDefaults[] = {
-      {"vsync", "false"},
       {"clear_memory_page_state", "false"},
+      // SDK patch 0027: yield instead of sleeping on PM4 WAIT_REG_MEM polls, so loads run at the vsync-off
+      // speed while vsync keeps the frame rate.
+      {"wait_reg_mem_sleep", "false"},
   };
   for (const Default& d : kDefaults) {
     // Only where nothing else set it. GetFlagSource also reports kDefault for an unregistered flag.
@@ -37,6 +48,29 @@ void ApplyGameDefaults() {
       REXLOG_WARN("crackdown2 default: could not set --{}={}", d.name, d.value);
     }
   }
+}
+
+}  // namespace crackdown2
+
+// --dump_image=<file>: write the loaded (title-update-patched) guest image for offline analysis (string and
+// data references). Same as Crackdown 1's helper.
+REXCVAR_DEFINE_STRING(dump_image, "", "Crackdown2", "Write the loaded guest image to this file at startup");
+
+namespace crackdown2 {
+
+void DumpGuestImage(rex::Runtime* runtime) {
+  const std::string& path = REXCVAR_GET(dump_image);
+  if (path.empty() || !runtime || !runtime->kernel_state()) return;
+  auto module = runtime->kernel_state()->GetExecutableModule();
+  if (!module || !module->xex_module()) {
+    REXLOG_WARN("dump_image: no executable module");
+    return;
+  }
+  const uint32_t base = module->xex_module()->base_address();
+  const uint32_t size = module->xex_module()->image_size();
+  std::ofstream out(path, std::ios::binary);
+  out.write(reinterpret_cast<const char*>(runtime->memory()->TranslateVirtual<uint8_t*>(base)), size);
+  REXLOG_INFO("dump_image: {:08X}..{:08X} ({} bytes) -> {}", base, base + size, size, path);
 }
 
 }  // namespace crackdown2

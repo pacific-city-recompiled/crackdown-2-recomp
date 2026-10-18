@@ -1,0 +1,29 @@
+From: Claude <noreply@anthropic.com>
+Subject: [PATCH] gpu: wait_reg_mem_sleep cvar (yield instead of sleeping on PM4 WAIT_REG_MEM with vsync on)
+
+With vsync on the command processor slept wait/256 ms per unmatched WAIT_REG_MEM poll.
+Crackdown 2 issues these throughout a level load; the guest loader thread then spins
+waiting for ring space (cdb samples, 2026-10-18). Off-by-default switch so vsync can stay
+on for frame pacing while loads run at vsync-off speed.
+---
+--- a/src/graphics/command_processor.cpp
++++ b/src/graphics/command_processor.cpp
+@@ -36,6 +36,9 @@
+ #include <rex/system/user_module.h>
+ 
+ REXCVAR_DEFINE_BOOL(vsync, true, "GPU", "Enable vertical sync");
++REXCVAR_DEFINE_BOOL(wait_reg_mem_sleep, true, "GPU",
++                    "With vsync on, sleep wait/256 ms per unmatched PM4 WAIT_REG_MEM poll (Xenia behavior); "
++                    "false yields instead, as with vsync off");
+ 
+ REXCVAR_DEFINE_BOOL(clear_memory_page_state, true, "GPU",
+                     "Refresh page-valid state from GPU-written memory at frame end. "
+@@ -1068,7 +1071,7 @@
+       // Wait.
+       if (wait >= 0x100) {
+         PrepareForWait();
+-        if (!REXCVAR_GET(vsync)) {
++        if (!REXCVAR_GET(vsync) || !REXCVAR_GET(wait_reg_mem_sleep)) {
+           // User wants it fast and dangerous.
+           rex::thread::MaybeYield();
+         } else {

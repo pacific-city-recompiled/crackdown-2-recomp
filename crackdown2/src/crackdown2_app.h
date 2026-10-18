@@ -19,7 +19,10 @@ class Crackdown2App : public rex::ReXApp {
   }
 
   // After the GPU plugin has loaded, right before the guest starts.
-  void OnPreLaunchModule() override { crackdown2::ApplyGameDefaults(); }
+  void OnPreLaunchModule() override {
+    crackdown2::ApplyGameDefaults();
+    crackdown2::DumpGuestImage(runtime());
+  }
 
   // Override virtual hooks for customization:
   // void OnPostInitLogging() override {}

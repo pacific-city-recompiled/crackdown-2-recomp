@@ -4,7 +4,7 @@ param([string]$Sdk, [int]$Max = 8, [string]$AutoInput = "START,A,A,A,A,A", [int]
 $r = Split-Path $PSScriptRoot -Parent
 $b = "$r\crackdown2\out\build\win-amd64-release"
 for ($i = 1; $i -le $Max; $i++) {
-  Get-Process crackdown2 -EA SilentlyContinue | Stop-Process -Force
+  if (Get-Process crackdown2 -EA SilentlyContinue) { "crackdown2 is already running (maybe someone is playing): stop"; break }
   $p = Start-Process "$b\crackdown2.exe" -ArgumentList '--game_data_root=..\..\..\..\game','--update_data_root=..\..\..\..\tu','--gpu_plugin=xenos',"--auto_input=$AutoInput" -WorkingDirectory $b -PassThru
   $p.WaitForExit($Seconds * 1000) | Out-Null
   $alive = -not $p.HasExited
