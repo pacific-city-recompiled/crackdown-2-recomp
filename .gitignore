@@ -1,0 +1,14 @@
+# Game data and generated code never go in git (users supply their own dump)
+/Crackdown 2 Game Files/
+/Crackdown 2 DLC/
+/Crackdown 2 Title Update/
+/game/
+/game-tu/
+/dlc/
+/tu/
+*.iso
+*.xex
+*.xexp
+crackdown2/generated/default/
+out/
+__pycache__/
