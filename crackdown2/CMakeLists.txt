@@ -15,6 +15,7 @@ set(CRACKDOWN2_SOURCES
     src/main.cpp
     src/hooks_autoinput.cpp
     src/host_tuning.cpp
+    src/hooks_intro.cpp
 )
 
 if(WIN32)
