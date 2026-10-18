@@ -11,6 +11,7 @@
 #include <chrono>
 #include <cstdio>
 #include <string>
+#include <thread>
 
 #include <rex/cvar.h>
 #include <rex/hook.h>
@@ -18,6 +19,10 @@
 
 #include "host_tuning.h"
 
+REXCVAR_DEFINE_INT32(fps_cap, 0, "Crackdown2",
+                     "Host frame limiter at the end of each guest frame (0 = off). With vsync on the guest's vblank "
+                     "waits already hold 30 fps; use with --vsync=false")
+    .range(0, 1000);
 REXCVAR_DEFINE_STRING(frame_log, "", "Crackdown2", "Write one row per guest frame (frame_time_us) to this CSV");
 
 namespace {
@@ -56,6 +61,30 @@ void OnFrame() {
     window_frames = 0;
   }
 }
+// --fps_cap: the game has no frame limiter of its own once vsync is off (it ran too fast, Austin 2026-10-18),
+// so frames are paced here, right before the present: sleep to ~1.5 ms before the deadline, then spin. Same
+// pacer as Crackdown 1's hooks_framerate.cpp PaceFrame. A frame that ran long resets the deadline (no catch-up).
+void PaceFrame() {
+  const int32_t cap = REXCVAR_GET(fps_cap);
+  if (cap <= 0) return;
+  const Clock::duration period =
+      std::chrono::duration_cast<Clock::duration>(std::chrono::duration<double>(1.0 / cap));
+  static Clock::time_point deadline{};
+  Clock::time_point now = Clock::now();
+  if (now >= deadline) {
+    deadline = now + period;
+    return;
+  }
+  while (deadline - now > std::chrono::microseconds(1500)) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    now = Clock::now();
+  }
+  while (now < deadline) {
+    std::this_thread::yield();
+    now = Clock::now();
+  }
+  deadline += period;
+}
 }  // namespace
 
 namespace crackdown2 {
@@ -72,6 +101,7 @@ void FlushFrameLog() {
 }  // namespace crackdown2
 
 REX_HOOK_RAW(sub_82385DA8) {
+  PaceFrame();
   OnFrame();
   __imp__sub_82385DA8(ctx, base);
 }

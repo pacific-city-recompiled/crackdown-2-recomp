@@ -1,14 +1,12 @@
 // crackdown2 - host-side defaults the SDK leaves off
 //
-// vsync is left on (2026-10-18): with vsync=false the game runs too fast in play (Austin, PC), so the frame
-// limiter must be found first (60 fps work). Kept for reference: with vsync on, loading is ~3x slower. The command processor's
-// PM4 WAIT_REG_MEM handler sleeps `wait/0x100` ms per poll when vsync is on (sdk
-// src/graphics/command_processor.cpp, the `if (!REXCVAR_GET(vsync))` branch), and the game issues those waits
-// all through a level load. PC run 2026-10-18, same scripted input (--auto_input START + 14 A):
-// New Game to first gameplay HUD files 164 s -> 51 s after launch (about 25 s of that is the script's own
-// start delay); with vsync on, the guest's main loader thread spent ~100 s spinning in sub_829196A8/sub_82918A10
-// waiting for ring space (cdb stack samples, 30 samples: 17 in those two functions). Same default Crackdown 1
-// uses, there for the 60 fps work as well.
+// vsync=false + fps_cap=30 (2026-10-18): the game steps its simulation a fixed 1/30 s per frame (dt = [0x832B60F8] *
+// 1/30 at 0x82114994, sub_82369AA0), so it must run at exactly 30 frames a second. With vsync on, the guest's vblank
+// waits hold that, but the SDK also sleeps on PM4 WAIT_REG_MEM polls (patch 0027 removes that) and New Game loaded
+// ~3x slower. With vsync off the game has no limiter of its own and ran too fast (Austin, PC). So vsync is off
+// and the host pacer in hooks_frametime.cpp holds 30 fps. City, 150GS save, last 30 s (PC runs crackdown2_055/056):
+// vsync on 33.33 ms avg / 35.7 ms 1% low; vsync off + fps_cap=30 33.33 / 34.1; uncapped 16.75 / 30.7 (59.7 fps).
+// An explicit --vsync=true keeps the stock path (and no cap); an explicit --fps_cap wins.
 // clear_memory_page_state=false: Crackdown 1's measured fix (2026-10-17: re-uploaded ~20 MB/frame otherwise).
 
 #include "host_tuning.h"
@@ -34,12 +32,18 @@ void ApplyGameDefaults() {
     const char* value;
   };
   static constexpr Default kDefaults[] = {
+      {"vsync", "false"},
+      {"fps_cap", "30"},
       {"clear_memory_page_state", "false"},
       // SDK patch 0027: yield instead of sleeping on PM4 WAIT_REG_MEM polls, so loads run at the vsync-off
       // speed while vsync keeps the frame rate.
       {"wait_reg_mem_sleep", "false"},
   };
+  const bool stock_vsync = rex::cvar::GetFlagSource("vsync") != rex::cvar::Source::kDefault &&
+                           rex::cvar::Query<bool>("vsync");
   for (const Default& d : kDefaults) {
+    const std::string_view name = d.name;
+    if (stock_vsync && (name == "vsync" || name == "fps_cap")) continue;
     // Only where nothing else set it. GetFlagSource also reports kDefault for an unregistered flag.
     if (rex::cvar::GetFlagSource(d.name) != rex::cvar::Source::kDefault) continue;
     if (rex::cvar::SetFlagByName(d.name, d.value)) {
