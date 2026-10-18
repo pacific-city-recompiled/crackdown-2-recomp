@@ -14,6 +14,7 @@ include(generated/rexglue.cmake)
 set(CRACKDOWN2_SOURCES
     src/main.cpp
     src/hooks_autoinput.cpp
+    src/host_tuning.cpp
 )
 
 if(WIN32)

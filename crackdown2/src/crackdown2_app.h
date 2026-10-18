@@ -6,6 +6,8 @@
 
 #include <rex/rex_app.h>
 
+#include "host_tuning.h"
+
 class Crackdown2App : public rex::ReXApp {
  public:
   using rex::ReXApp::ReXApp;
@@ -15,6 +17,9 @@ class Crackdown2App : public rex::ReXApp {
     return std::unique_ptr<Crackdown2App>(new Crackdown2App(ctx, "crackdown2",
         PPCImageConfig));
   }
+
+  // After the GPU plugin has loaded, right before the guest starts.
+  void OnPreLaunchModule() override { crackdown2::ApplyGameDefaults(); }
 
   // Override virtual hooks for customization:
   // void OnPostInitLogging() override {}
