@@ -1440,3 +1440,4 @@
 0x82DC3B98 = {}  # gap 72 bytes
 0x82EB8F9C = {}  # gap 8 bytes
 0x82F1E9B0 = {}  # 8-byte stub between sub_82F1E908 (ends b at 0x82F1E9AC) and sub_82F1E9B8; runtime FATAL 'invalid or unregistered function at 0x82F1E9B0' (out/run1)
+0x82580A58 = {}  # runtime FATAL 'invalid or unregistered function' after New Game (out/run, 2026-10-18); inside rejected gap 0x82580A0C

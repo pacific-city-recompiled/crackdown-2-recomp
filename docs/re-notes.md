@@ -20,3 +20,11 @@ Evidence log. Every address is in the title-update-patched image (0.0.5.1), `.te
 ## Randomizer notes
 
 (none yet; record pickup/orb/spawn tables here with guest addresses.)
+
+## Press Start to gameplay (2026-10-18)
+
+- **Input for unattended runs:** `crackdown2/src/hooks_autoinput.cpp`, `--auto_input=START,A,A,...` presses one button per 3 s (300 ms each) after 25 s, through the game's XInputGetState wrappers. Guest 0x829551D0 is a raw `XamInputGetState(user r3, flags r4, state r5)` thunk to import 0x83047EAC; 0x829551D8 is `XInputGetState(user r3, state r4)` (sets r4=1, r5=state); 0x829552B0 is XInputGetKeystroke (import 0x83047ECC). Same shape as Crackdown 1's 0x82743798/0x827437C0. Windows would not give the test run keyboard focus (foreground lock), hence the hook.
+- **Bug found on the way:** the first version of the hook used r4 as the state pointer in 0x829551D0 and wrote to guest 0x5; found with cdb by logging every access violation (`sxe -c ".exr -1; k 8; g" av`) and grepping for `Parameter[1]: 0000000100000005`. The many other first-chance AVs (sub_8291B900+0xc3b, sub_82F1E480+0xdcd, sub_82917780) are the SDK's lazy guest-memory commits and are harmless.
+- **One more run-driven gap:** 0x82580A58 (`li r11,0; stb r11,32(r3); sth r11,28(r3) ...`) inside a rejected gap-scan range.
+- **Reached with no Crackdown 1 hooks at all:** Press Start, main menu (Main Game, Deluge, Keys to the City, Multiplayer, Options: the DLC/title-update entries show), Agent Setup (head select, 3D agent), and the first gameplay area (the training room: HUD, radar, tutorial prompts, agent model). `--auto_input` with 14 A presses reaches it about 5 min after launch (includes load). Screenshot: `out/ingame.png` (local).
+- **Not yet checked:** the event-reset and HDD-cache hangs from Crackdown 1 did not appear in this path (no hang in 5 min, but New Game into the open city is not tested). Render log spam: `Resolve region 16376 <= x < 16384 is outside the surface pitch 1040` and `PM4_DRAW_INDX_2 ... Failed in backend (edram_mode=6)` appear around the menu-to-agent-setup transition; the image looks correct, so low priority.
