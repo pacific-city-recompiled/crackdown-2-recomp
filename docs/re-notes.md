@@ -53,3 +53,10 @@ Not measured yet: frame pacing with vsync off (the game's own limiter should hol
 - `crackdown2/src/hooks_framerate.cpp` + `config/midasm_hooks.toml` (--sim_game_clock): scales the update dt (sub_82915C70, only caller sub_82369AA0) and the step query sub_827671D0 by measured step / (1/30), and gives the 16 `li rX,33` timer sites the measured whole ms. The pooled 1/30 literal is left alone (Crackdown 1 lesson: Havok and others read it).
 - Frame rate, city standing, last 20 s (runs 059/060/061): --fps_cap=30 33.33 ms avg; --fps_cap=60 16.67 ms avg, 1% low 17.7 ms (clock on) / 17.3 ms (off).
 - Speed A/B (runs 062-064): same save, scripted 1.2 s forward run, screenshot 80 s after launch. 30 fps and 60 fps + clock stop at the same spot; 60 fps without the clock runs about twice as far (out/speed_ab.png, local). Not yet checked at 60: vehicles, stairs (Crackdown 1 needed a ground-snap fix), animation clocks, audio/VO timeouts, physics; defaults stay at 30 until then.
+
+## City frame rate: memexport readback (2026-10-19)
+
+- cdb samples (30, city spawn, uncapped, RelWithDebInfo SDK DLLs for symbols) put the guest render thread in the ring-space wait (sub_82385DA8 -> sub_829196A8 -> sub_82918A10) and the GPU command thread in `CheckSubmissionFence` under `IssueDraw_MemexportReadbackFullPath` in 13 of 30 samples: the SDK's `readback_memexport` (default true) copies every memexport draw's output to the CPU and waits for the GPU. Xenia's `d3d12_readback_memexport` defaults to false.
+- `--readback_memexport=false`: 69.0 -> 146.5 fps avg, 1% low 17.0 -> 8.7 ms (runs 068/071; default build run 074: 144.2 / 9.8). Screenshots at 30 fps with it on and off are the same image (072/073). Now a default in `host_tuning.cpp`.
+- Ruled out first: writing the CP read pointer back every 1024 dwords inside a batch (tried as SDK patch, dropped): 66.8 fps vs 69.0.
+- Note: uncapped, the simulation runs faster than real time (fixed 1/30 s step per frame), so time of day moves on and screenshots taken at the same wall time differ. Compare visuals at 30 fps.

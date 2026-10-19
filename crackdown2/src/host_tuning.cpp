@@ -40,6 +40,11 @@ void ApplyGameDefaults() {
       // SDK patch 0027: yield instead of sleeping on PM4 WAIT_REG_MEM polls, so loads run at the vsync-off
       // speed while vsync keeps the frame rate.
       {"wait_reg_mem_sleep", "false"},
+      // The SDK reads every memexport draw's output back to the CPU and waits for the GPU each time (Xenia's
+      // d3d12_readback_memexport defaults to false). City spawn, uncapped, PC 2026-10-19: the GPU command
+      // thread sat in CheckSubmissionFence under IssueDraw_MemexportReadbackFullPath in 13 of 30 cdb samples;
+      // off: 69.0 -> 146.5 fps avg, 1% low 17.0 -> 8.7 ms (runs 068/071). Same image at 30 fps (072/073).
+      {"readback_memexport", "false"},
   };
   const bool stock_vsync = rex::cvar::GetFlagSource("vsync") != rex::cvar::Source::kDefault &&
                            rex::cvar::Query<bool>("vsync");
