@@ -18,3 +18,11 @@
 #define CD2_DECLARE_FRAME_MS(bit, addr) void Cd2FrameMs_##addr(PPCRegister& r);
 CD2_FRAME_MS_SITES(CD2_DECLARE_FRAME_MS)
 #undef CD2_DECLARE_FRAME_MS
+
+// hooks_framerate.cpp, --sim_frame_fixes: frame-locked steps outside the 16 ms sites (config/midasm_hooks.toml).
+#define CD2_SCALE_STEP_SITES(X)   X(1, 825E4CBC) X(1, 825E4CEC) X(1, 825E4F80) X(1, 825E4FB0) X(2, 82733908) X(4, 826C9618) X(5, 82549968)   X(6, 8256DFC0)
+#define CD2_DECLARE_SCALE_STEP(bit, addr) void Cd2ScaleStep_##addr(PPCRegister& f);
+CD2_SCALE_STEP_SITES(CD2_DECLARE_SCALE_STEP)
+#undef CD2_DECLARE_SCALE_STEP
+void Cd2ScaleDecay_82334B2C(PPCRegister& f);
+void Cd2FrameCounterTick(PPCRegister& r);

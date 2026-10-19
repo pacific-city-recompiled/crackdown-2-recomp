@@ -1,8 +1,8 @@
 # Unattended test run: start the game with scripted input, save game-window screenshots at the given seconds,
 # then close it. Usage: tools/run-shots.ps1 -AutoInput "START,A,..." -At 60,90 -Name test [-Extra "--flag=x"]
-param([string]$AutoInput, [int[]]$At, [string]$Name = "run", [string[]]$Extra = @())
+param([string]$AutoInput, [int[]]$At, [string]$Name = "run", [string[]]$Extra = @(), [string]$Build = "win-amd64-release")
 $r = Split-Path $PSScriptRoot -Parent
-$b = "$r\crackdown2\out\build\win-amd64-release"
+$b = "$r\crackdown2\out\build\$Build"
 Add-Type -AssemblyName System.Drawing
 Add-Type @"
 using System;using System.Runtime.InteropServices;

@@ -105,3 +105,79 @@ address = 0x827671A4
 name = "Cd2FrameMs_827671A4"
 registers = ["r3"]
 after_instruction = true
+
+# Frame-locked steps the 16 ms sites don't cover (hooks_framerate.cpp, --sim_frame_fixes; Crackdown 1's
+# docs/60fps-audit.md has the same classes). Each loads or adds a fixed 30 Hz amount once per frame; the hook
+# rescales it by measured step / (1/30) when --sim_game_clock is on and leaves it alone otherwise.
+#
+# Global frame counter 0x8383A96C (`lwz r10,-22164(r9); addi r10,r10,1; stw r10,-22164(r9)` in sub_82338648,
+# the same per-frame function as ms site 0x8233869C). 38 functions use it as a 30 Hz clock: deadlines like
+# `counter > start + 30` (one second, sub_82720FD0), `(counter - t) / 30 >= 10` (sub_82835698),
+# `counter % 1800` (sub_827758C8), `start + durationMs / 1000 * 30` (sub_82721EC0). After the addi the hook
+# makes it old + whole 30 Hz ticks elapsed (Crackdown 1's --sim_frame_counter_30hz).
+[[midasm_hook]]  # sub_82338648
+address = 0x82338688
+name = "Cd2FrameCounterTick"
+registers = ["r10"]
+after_instruction = true
+
+# Crowd/NPC animation clock sub_825E4AA0 (Crackdown 1 sub_82330888): anim time [obj+88] += 1/30 (pooled
+# literal 0x82114994), or a random rate * 1/30, then wrapped at the clip length. Plays 2x fast at 60 fps.
+[[midasm_hook]]  # sub_825E4AA0, random-rate path
+address = 0x825E4CBC
+name = "Cd2ScaleStep_825E4CBC"
+registers = ["f11"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_825E4AA0
+address = 0x825E4CEC
+name = "Cd2ScaleStep_825E4CEC"
+registers = ["f0"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_825E4AA0, second copy, random-rate path
+address = 0x825E4F80
+name = "Cd2ScaleStep_825E4F80"
+registers = ["f11"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_825E4AA0, second copy
+address = 0x825E4FB0
+name = "Cd2ScaleStep_825E4FB0"
+registers = ["f0"]
+after_instruction = true
+
+# sub_827338E8: [obj+3876] += 1/30 (`lfs f0,18836(r11); fadds f12,f13,f0; stfs f12,3876(r31)`).
+[[midasm_hook]]  # sub_827338E8
+address = 0x82733908
+name = "Cd2ScaleStep_82733908"
+registers = ["f0"]
+after_instruction = true
+
+# sub_82334738: [obj+2596] = x - x * 1/30 (`lfs f13,18836(r11); fnmsubs f0,f0,f13,f0`), a per-frame decay.
+[[midasm_hook]]  # sub_82334738
+address = 0x82334B2C
+name = "Cd2ScaleDecay_82334B2C"
+registers = ["f13"]
+after_instruction = true
+
+# Calls that pass a literal step as dt (f1): sub_826C9278 -> sub_8221EC40(0.033, own literal 0x820F98D4,
+# Crackdown 1 sub_823FF3B8's 0.033 timer), sub_82549940 -> virtual [vtable+1760](1/30),
+# sub_8256DCD0 -> sub_8256BB90(1/30).
+[[midasm_hook]]  # sub_826C9278
+address = 0x826C9618
+name = "Cd2ScaleStep_826C9618"
+registers = ["f1"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_82549940
+address = 0x82549968
+name = "Cd2ScaleStep_82549968"
+registers = ["f1"]
+after_instruction = true
+
+[[midasm_hook]]  # sub_8256DCD0
+address = 0x8256DFC0
+name = "Cd2ScaleStep_8256DFC0"
+registers = ["f1"]
+after_instruction = true

@@ -47,6 +47,21 @@ Not measured yet: frame pacing with vsync off (the game's own limiter should hol
 - 150GS save, standing in the city at night (PC run crackdown2_055, vsync on): last 40 s = 1200 frames, avg 33.33 ms (30.0 fps), 1% low 35.7 ms, max 36.3 ms. Stock 30 fps holds with headroom unknown (next: uncapped test once the game-speed clock is understood; vsync=false alone runs the game too fast).
 - 2026-10-18 later: host pacer `--fps_cap` (hooks_frametime.cpp, before the present). Defaults are now `vsync=false fps_cap=30`: city last 30 s 33.33 ms avg, 1% low 34.1-34.3 ms (runs 056, 058), steadier than vsync on (35.7 ms). Uncapped: 59.7 fps avg, 1% low 30.7 ms (run 057).
 - Game clock for 60 fps (same design as Crackdown 1): fixed step dt = [0x832B60F8] * 1/30 (pooled literal 0x82114994, read in sub_82369AA0 and ~30 other functions); clock object at [0x82800B0C] with the "locked" byte at +13, variable-clock flag byte 0x82800FB9, variable ms at [0x8277ADCC]; 16 inlined `ms = locked ? 33 : (flag ? var : 16)` sites (Crackdown 1 had 13), e.g. 0x823AB4xx in crackdown2_recomp.7.cpp.
+- 60 fps leftovers (2026-10-19, `--sim_frame_fixes`, hooks_framerate.cpp; addresses checked against out/guest-image.bin):
+  - Global frame counter 0x8383A96C, `+= 1` per frame in sub_82338648 (0x82338688, same function as ms site 0x8233869C),
+    38 reader functions using it as a 30 Hz clock: `counter > t + 30` (sub_82720FD0), `(counter - t) / 30 >= 10`
+    (sub_82835698), `counter % 1800` (sub_827758C8), deadline `t + durationMs / 1000 * 30` (sub_82721EC0, line/event
+    expiry; inferred to be the early speech cut-off, not yet heard). Now advanced by whole 30 Hz ticks.
+  - Pooled 1/30 0x82114994 readers (22): crowd anim clock sub_825E4AA0 (anim time [+88] += 1/30, wrapped at clip
+    length; Crackdown 1 sub_82330888), sub_827338E8 ([+3876] += 1/30), sub_82334738 (x *= 1 - 1/30, decay),
+    dt arguments in sub_82549940 / sub_8256DCD0; 0.033 at 0x820F98D4 passed as dt by sub_826C9278. Others look like
+    unit conversions or thresholds, left alone. 0x832D5088 and 0x837C312C hold copies of the (already scaled) step.
+  - Stairs ground snap: sub_82208998 (called by the character controller sub_822498F8), out.y = -drop*gain/dt at
+    0x8220911C..0x82209124, same as Crackdown 1 sub_822B4D40.
+  - Run crackdown2_002 (dev, `--fps_cap=60 --sim_game_clock --diag_sim_sites`, city at night): counter and decay sites
+    run exactly once per frame (300/5 s); the crowd, timer and dt sites never ran there, ground snap not exercised
+    (standing). Audible speech and stairs need a playtest.
+  - No CD1-style wave safety timeout (`samples/48000*30+70`) exists in CD2; its audio stack differs.
 
 ## 60 fps: measured game clock (2026-10-18)
 
