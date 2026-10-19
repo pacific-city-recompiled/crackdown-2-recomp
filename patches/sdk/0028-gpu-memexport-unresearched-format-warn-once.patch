@@ -1,0 +1,41 @@
+From: Claude <noreply@anthropic.com>
+Subject: [PATCH] gpu: log the unresearched memexport format warning once per format
+
+Crackdown 2 does ~1200 such exports a second in the city; the warning filled a 5 MB log
+every ~20 s from the GPU command thread (Austin, 2026-10-19: major slowdown downtown).
+---
+--- a/src/graphics/util/draw.cpp
++++ b/src/graphics/util/draw.cpp
+@@ -10,6 +10,7 @@
+  */
+ 
+ #include <algorithm>
++#include <atomic>
+ #include <cmath>
+ 
+ #include <rex/assert.h>
+@@ -655,12 +656,19 @@
+     switch (stream.format) {
+       case xenos::ColorFormat::k_8_A:
+       case xenos::ColorFormat::k_8_B:
+-      case xenos::ColorFormat::k_8_8_8_8_A:
+-        REXGPU_WARN(
+-            "Memexport done to an unresearched format {}, report the game to "
+-            "Xenia developers!",
+-            format_info.name);
++      case xenos::ColorFormat::k_8_8_8_8_A: {
++        // Once per format: Crackdown 2 hits this on ~1200 exports a second, and the log
++        // spam (5 MB every ~20 s) cost frame time in busy areas.
++        static std::atomic<uint32_t> warned{0};
++        const uint32_t bit = uint32_t(1) << (uint32_t(stream.format) & 31);
++        if (!(warned.fetch_or(bit) & bit)) {
++          REXGPU_WARN(
++              "Memexport done to an unresearched format {}, report the game to "
++              "Xenia developers! (logged once)",
++              format_info.name);
++        }
+         break;
++      }
+       default:
+         break;
+     }
