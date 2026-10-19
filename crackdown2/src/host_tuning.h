@@ -3,12 +3,15 @@
 
 #include <rex/ui/overlay/debug_overlay.h>
 
-namespace rex { class Runtime; }
+namespace rex { class Runtime; struct PathConfig; }
 
 namespace crackdown2 {
 // Sets SDK flags the game wants unless the user set them (command line, config, environment).
 // Call from OnPreLaunchModule: GPU plugin flags only exist once the plugin has loaded.
 void ApplyGameDefaults();
+// gpu_plugin=xenos unless set; portable mode and game folder discovery (host_tuning.cpp).
+void ApplyGpuPluginDefault();
+void ApplyStartupDefaults(rex::PathConfig& paths);
 // --dump_image: writes the loaded guest image to a file.
 void DumpGuestImage(rex::Runtime* runtime);
 // Guest frame rate for the F3 overlay, and --frame_log flushing (hooks_frametime.cpp).

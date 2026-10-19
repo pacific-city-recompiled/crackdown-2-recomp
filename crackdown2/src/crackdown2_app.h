@@ -8,6 +8,8 @@
 
 #include "host_tuning.h"
 
+#include "host_tuning.h"
+
 class Crackdown2App : public rex::ReXApp {
  public:
   using rex::ReXApp::ReXApp;
@@ -17,6 +19,12 @@ class Crackdown2App : public rex::ReXApp {
     return std::unique_ptr<Crackdown2App>(new Crackdown2App(ctx, "crackdown2",
         PPCImageConfig));
   }
+
+  // After cvars are parsed and logging is up: pick the GPU plugin.
+  void OnPostInitLogging() override { crackdown2::ApplyGpuPluginDefault(); }
+
+  // No-argument starts: portable mode and the default game folder.
+  void OnConfigurePaths(rex::PathConfig& paths) override { crackdown2::ApplyStartupDefaults(paths); }
 
   // After the GPU plugin has loaded, right before the guest starts.
   void OnPreLaunchModule() override {

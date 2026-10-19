@@ -16,7 +16,9 @@
 #include <string_view>
 
 #include <rex/cvar.h>
+#include <rex/filesystem.h>
 #include <rex/logging/macros.h>
+#include <rex/rex_app.h>
 #include <rex/memory/utils.h>
 #include <rex/runtime.h>
 #include <rex/system/kernel_state.h>
@@ -75,6 +77,44 @@ void DumpGuestImage(rex::Runtime* runtime) {
   std::ofstream out(path, std::ios::binary);
   out.write(reinterpret_cast<const char*>(runtime->memory()->TranslateVirtual<uint8_t*>(base)), size);
   REXLOG_INFO("dump_image: {:08X}..{:08X} ({} bytes) -> {}", base, base + size, size, path);
+}
+
+}  // namespace crackdown2
+
+REXCVAR_DECLARE(std::string, gpu_plugin);  // SDK rex_app.cpp
+
+namespace crackdown2 {
+
+// Runs from OnPostInitLogging: after the config file has loaded (a gpu_plugin set there wins) and before the
+// plugin is chosen. Without it a start with no --gpu_plugin (the launcher's) has no GPU and stays black
+// (Austin, launcher test package 2026-10-19: "VdInitializeRingBuffer: no GPU emulation loaded"). Same as
+// Crackdown 1.
+void ApplyGpuPluginDefault() {
+  if (rex::cvar::GetFlagSource("gpu_plugin") == rex::cvar::Source::kDefault && REXCVAR_GET(gpu_plugin).empty()) {
+    rex::cvar::SetFlagByName("gpu_plugin", "xenos");
+    REXLOG_INFO("crackdown2 default: --gpu_plugin=xenos");
+  }
+}
+
+// Portable mode: a portable.txt next to the exe keeps saves and the shader cache in userdata/ beside it (the
+// launcher creates the marker and also passes the roots). A start without --game_data_root finds game/ next to
+// the exe or in a parent folder (the dev build under crackdown2/out/build/<preset>/).
+void ApplyStartupDefaults(rex::PathConfig& paths) {
+  const std::filesystem::path exe_dir = rex::filesystem::GetExecutableFolder();
+  std::error_code ec;
+  if (std::filesystem::is_regular_file(exe_dir / "portable.txt", ec)) {
+    if (rex::cvar::Query<std::string>("user_data_root").empty()) paths.user_data_root = exe_dir / "userdata";
+    if (rex::cvar::Query<std::string>("cache_root").empty()) paths.cache_root = exe_dir / "userdata" / "cache";
+  }
+  if (!paths.game_data_root.empty()) return;
+  std::filesystem::path dir = exe_dir;
+  for (int depth = 0; depth < 6 && !dir.empty(); ++depth, dir = dir.parent_path()) {
+    if (std::filesystem::is_regular_file(dir / "game" / "default.xex", ec)) {
+      paths.game_data_root = dir / "game";
+      REXLOG_INFO("crackdown2 default: --game_data_root={}", paths.game_data_root.string());
+      return;
+    }
+  }
 }
 
 }  // namespace crackdown2
