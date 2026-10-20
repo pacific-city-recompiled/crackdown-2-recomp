@@ -16,7 +16,10 @@
 #include "bridge.h"
 
 #include <bit>
+#include <algorithm>
 #include <chrono>
+#include <cmath>
+#include <vector>
 #include <cstdint>
 #include <cstdio>
 #include <filesystem>
@@ -33,7 +36,13 @@ REXCVAR_DEFINE_STRING(ap_probe_dump, "", "Crackdown2",
 REXCVAR_DEFINE_INT32(ap_dev_teleport_orb, -1, "Crackdown2",
                      "Test tool: move the agent onto this registry ordinal's pickup once, "
                      "--ap_dev_teleport_delay_s after the agent's controller first updates");
-REXCVAR_DEFINE_DOUBLE(ap_dev_teleport_delay_s, 8.0, "Crackdown2", "With --ap_dev_teleport_orb: delay in seconds");
+REXCVAR_DEFINE_DOUBLE(ap_dev_teleport_delay_s, 8.0, "Crackdown2",
+                      "With --ap_dev_teleport_orb / --ap_dev_sweep: delay in seconds");
+REXCVAR_DEFINE_STRING(ap_dev_sweep, "", "Crackdown2", "Test tool: pickups or jump (see ap_probe.cpp)");
+REXCVAR_DEFINE_STRING(ap_dev_sweep_out, "", "Crackdown2", "Test tool: CSV for --ap_dev_sweep");
+REXCVAR_DEFINE_INT32(ap_dev_sweep_from, 0, "Crackdown2", "Test tool: first registry ordinal for --ap_dev_sweep");
+REXCVAR_DEFINE_INT32(ap_dev_sweep_to, 9999, "Crackdown2", "Test tool: last registry ordinal for --ap_dev_sweep");
+REXCVAR_DEFINE_BOOL(ap_dev_sweep_ring, false, "Crackdown2", "Test tool: --ap_dev_sweep=pickups also drops around orbs");
 
 namespace {
 constexpr uint32_t kStatsPtr = 0x83800E20;
@@ -86,6 +95,8 @@ void LogSkills(uint8_t* base, uint32_t set, const char* what) {
 }
 }  // namespace
 
+namespace crackdown2 { void SetTestButtons(uint16_t buttons); }
+
 namespace crackdown2::ap {
 void ProbeFrame(uint8_t* base) {
   static const bool on = REXCVAR_GET(ap_probe);
@@ -130,47 +141,181 @@ REX_HOOK_RAW(sub_82753EB8) {
   }
 }
 
-// --ap_dev_teleport_orb (Crackdown 1's --teleport, hooks_diag_physics.cpp, on Crackdown 2's controller). The
-// character controller update sub_822498F8 (fp match 0.18 to Crackdown 1's sub_822A9E78) keeps the controller's
-// position at +656 (Crackdown 1: +336) and the Havok character proxy at +560 (+660); setPosition is
-// sub_82BFEC28 (identical 5-instruction body to Crackdown 1's sub_829D3560). +304 is the owning character, so
+// --ap_dev_teleport_orb / --ap_dev_sweep (Crackdown 1's --teleport, hooks_diag_physics.cpp, on Crackdown 2's
+// controller). The character controller update sub_822498F8 (fp match 0.18 to Crackdown 1's sub_822A9E78) keeps
+// the controller's position at +656 (Crackdown 1: +336) and the Havok character proxy at +560 (+660); setPosition
+// is sub_82BFEC28 (identical 5-instruction body to Crackdown 1's sub_829D3560). +304 is the owning character, so
 // only the agent's controller is moved: [[0x83800F88]+136]-28.
+//
+// --ap_dev_sweep=pickups: teleport onto every registry pickup in [--ap_dev_sweep_from, --ap_dev_sweep_to] (online
+// orbs skipped), wait until the agent settles, and write a CSV row: whether the pickup was collected and where the
+// agent landed (the surface under it). With --ap_dev_sweep_ring, pickups that are not ground-tier (agility type
+// >= 1, or y >= 150) also get four drops from 2 m above the orb at 12 m around it: the surfaces a player climbs from.
+// --ap_dev_sweep=jump: on the spot where the agent stands, set Agility 1..5 (sub_82753EB8) and hold A for 0.3 s and
+// 1.5 s; each row is the jump's apex above the start.
 namespace {
-void MaybeTeleport(PPCContext& ctx, uint8_t* base, uint32_t controller) {
-  static const int32_t ordinal = REXCVAR_GET(ap_dev_teleport_orb);
-  static bool done = false;
-  static std::chrono::steady_clock::time_point start{};
-  if (ordinal < 0 || done) return;
+using Clock = std::chrono::steady_clock;
+struct Target {
+  std::string what;
+  uint32_t ordinal = 0;
+  int sample = 0;
+  float pos[3]{};
+  int level = 0, hold_ms = 0;
+};
+struct Sweep {
+  bool started = false, done = false, active = false;
+  std::vector<Target> targets;
+  size_t next = 0;
+  Clock::time_point step_start{}, start{};
+  float last_y = 0, base_y = 0, max_y = 0;
+  int still = 0;
+  std::FILE* out = nullptr;
+};
+Sweep g_sweep;
+
+uint32_t AgentCharacter(uint8_t* base) {
   const uint32_t player = REX_LOAD_U32(0x83800F88);
   const uint32_t component = player ? REX_LOAD_U32(player + 136) : 0;
-  if (component < 28 || REX_LOAD_U32(controller + 304) != component - 28) return;
-  const auto now = std::chrono::steady_clock::now();
-  if (start == std::chrono::steady_clock::time_point{}) start = now;
-  if (now - start < std::chrono::duration<double>(REXCVAR_GET(ap_dev_teleport_delay_s))) return;
-  done = true;
-  const uint32_t stats = Stats(base);
-  if (!stats || uint32_t(ordinal) >= REX_LOAD_U32(stats + 4012)) {
-    REXLOG_ERROR("ap_dev_teleport: no registry entry {}", ordinal);
-    return;
-  }
-  const uint32_t pickup = REX_LOAD_U32(stats + 12 + 4 * ordinal);
+  return component >= 28 ? component - 28 : 0;
+}
+
+void Teleport(PPCContext& ctx, uint8_t* base, uint32_t controller, const float (&v)[3]) {
   const uint32_t proxy = REX_LOAD_U32(controller + 560);
   const uint32_t pos = controller + 656;
-  for (int i = 0; i < 3; ++i) REX_STORE_U32(pos + 4 * i, REX_LOAD_U32(pickup + 144 + 4 * i));
+  for (int i = 0; i < 3; ++i) REX_STORE_U32(pos + 4 * i, std::bit_cast<uint32_t>(v[i]));
   for (uint32_t i = 0; i < 16; i += 4) REX_STORE_U32(proxy + 16 + i, 0);
   const PPCContext saved = ctx;
   ctx.r3.u64 = proxy;
   ctx.r4.u64 = pos;
   sub_82BFEC28(ctx, base);
   ctx = saved;
-  REXLOG_INFO("ap_dev_teleport: controller {:08X} proxy {:08X} -> pickup {} ({:.1f} {:.1f} {:.1f}) active {}",
-              controller, proxy, ordinal, F32(base, pos), F32(base, pos + 4), F32(base, pos + 8),
-              REX_LOAD_U8(pickup + 160));
+}
+
+void BuildTargets(uint8_t* base, uint32_t controller) {
+  const std::string mode = REXCVAR_GET(ap_dev_sweep);
+  auto& t = g_sweep.targets;
+  const uint32_t stats = Stats(base);
+  if (const int32_t ordinal = REXCVAR_GET(ap_dev_teleport_orb); ordinal >= 0 && mode.empty()) {
+    if (stats && uint32_t(ordinal) < REX_LOAD_U32(stats + 4012)) {
+      const uint32_t p = REX_LOAD_U32(stats + 12 + 4 * ordinal);
+      Target x{"pickup", uint32_t(ordinal)};
+      for (int i = 0; i < 3; ++i) x.pos[i] = F32(base, p + 144 + 4 * i);
+      t.push_back(x);
+    }
+  } else if (mode == "pickups") {
+    const uint32_t count = stats ? REX_LOAD_U32(stats + 4012) : 0;
+    const uint32_t last = std::min<uint32_t>(count, uint32_t(REXCVAR_GET(ap_dev_sweep_to)) + 1);
+    for (uint32_t i = uint32_t(std::max(0, REXCVAR_GET(ap_dev_sweep_from))); i < last; ++i) {
+      const uint32_t p = REX_LOAD_U32(stats + 12 + 4 * i);
+      const uint32_t type = REX_LOAD_U32(p + 136);
+      if (type == 10) continue;  // online orbs: Xbox Live co-op only
+      const float orb[3] = {F32(base, p + 144), F32(base, p + 148), F32(base, p + 152)};
+      Target x{"pickup", i};
+      std::copy(orb, orb + 3, x.pos);
+      t.push_back(x);
+      if (REXCVAR_GET(ap_dev_sweep_ring) && ((type >= 1 && type <= 3) || orb[1] >= 150.0f)) {
+        for (int k = 0; k < 4; ++k) {
+          Target r{"ring", i, k};
+          r.pos[0] = orb[0] + (k == 0 ? 12.f : k == 1 ? -12.f : 0.f);
+          r.pos[1] = orb[1] + 2.f;
+          r.pos[2] = orb[2] + (k == 2 ? 12.f : k == 3 ? -12.f : 0.f);
+          t.push_back(r);
+        }
+      }
+    }
+  } else if (mode == "jump") {
+    const float here[3] = {F32(base, controller + 656), F32(base, controller + 660), F32(base, controller + 664)};
+    for (int level = 1; level <= 5; ++level) {
+      for (int hold : {300, 1500}) {
+        Target x{"jump"};
+        std::copy(here, here + 3, x.pos);
+        x.level = level;
+        x.hold_ms = hold;
+        t.push_back(x);
+      }
+    }
+  }
+  const std::string& path = REXCVAR_GET(ap_dev_sweep_out);
+  if (!path.empty() && (g_sweep.out = std::fopen(path.c_str(), "w")))
+    std::fputs("what,ordinal,sample,type,tx,ty,tz,x,y,z,collected,level,hold_ms,apex,seconds\n", g_sweep.out);
+  REXLOG_INFO("ap_dev_sweep: {} targets ({})", t.size(), mode.empty() ? "teleport_orb" : mode);
+}
+
+void SetAgility(PPCContext& ctx, uint8_t* base, int level) {
+  const uint32_t character = AgentCharacter(base);
+  const uint32_t skills = character + 11460;
+  if (!character || REX_LOAD_U32(skills + 4) != character) return;
+  const PPCContext saved = ctx;
+  ctx.r3.u64 = skills;
+  ctx.r4.u64 = 0;
+  ctx.r5.u64 = uint32_t(level);
+  __imp__sub_82753EB8(ctx, base);
+  ctx = saved;
+}
+
+void StepSweep(PPCContext& ctx, uint8_t* base, uint32_t controller) {
+  auto& w = g_sweep;
+  if (w.done) return;
+  const uint32_t character = AgentCharacter(base);
+  if (!character || REX_LOAD_U32(controller + 304) != character) return;
+  const auto now = Clock::now();
+  if (!w.started) {
+    if (w.start == Clock::time_point{}) w.start = now;
+    if (now - w.start < std::chrono::duration<double>(REXCVAR_GET(ap_dev_teleport_delay_s))) return;
+    w.started = true;
+    BuildTargets(base, controller);
+  }
+  const float y = F32(base, controller + 660);
+  const double elapsed = std::chrono::duration<double>(now - w.step_start).count();
+  if (w.active) {
+    const Target& t = w.targets[w.next - 1];
+    bool finished = false;
+    if (t.what == "jump") {
+      const bool hold = elapsed > 1.0 && elapsed * 1000.0 < 1000.0 + t.hold_ms;
+      crackdown2::SetTestButtons(hold ? 0x1000 : 0);
+      if (elapsed < 1.0) w.base_y = w.max_y = y;
+      w.max_y = std::max(w.max_y, y);
+      finished = elapsed > 1.0 + t.hold_ms / 1000.0 + 3.0;
+    } else {
+      w.still = std::fabs(y - w.last_y) < 0.01f ? w.still + 1 : 0;
+      finished = (elapsed > 0.5 && w.still >= 20) || elapsed > 6.0;
+    }
+    w.last_y = y;
+    if (!finished) return;
+    w.active = false;
+    uint32_t type = 0, collected = 0;
+    if (t.what != "jump") {
+      const uint32_t p = REX_LOAD_U32(Stats(base) + 12 + 4 * t.ordinal);
+      type = REX_LOAD_U32(p + 136);
+      collected = REX_LOAD_U8(p + 160) == 0;
+    }
+    if (w.out) {
+      std::fprintf(w.out, "%s,%u,%d,%u,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%u,%d,%d,%.2f,%.2f\n", t.what.c_str(),
+                   t.ordinal, t.sample, type, t.pos[0], t.pos[1], t.pos[2], F32(base, controller + 656), y,
+                   F32(base, controller + 664), collected, t.level, t.hold_ms, w.max_y - w.base_y, elapsed);
+      std::fflush(w.out);
+    }
+  }
+  if (w.next >= w.targets.size()) {
+    w.done = true;
+    crackdown2::SetTestButtons(0);
+    REXLOG_INFO("ap_dev_sweep: done, {} targets", w.targets.size());
+    return;
+  }
+  const Target& t = w.targets[w.next++];
+  if (t.what == "jump") SetAgility(ctx, base, t.level);
+  Teleport(ctx, base, controller, t.pos);
+  REXLOG_INFO("ap_dev_sweep: {} {} sample {} -> ({:.1f} {:.1f} {:.1f})", t.what, t.ordinal, t.sample, t.pos[0],
+              t.pos[1], t.pos[2]);
+  w.active = true;
+  w.step_start = now;
+  w.still = 0;
+  w.last_y = w.base_y = w.max_y = t.pos[1];
 }
 }  // namespace
 
 REX_HOOK_RAW(sub_822498F8) {
-  MaybeTeleport(ctx, base, ctx.r3.u32);
+  static const bool on = REXCVAR_GET(ap_dev_teleport_orb) >= 0 || !REXCVAR_GET(ap_dev_sweep).empty();
+  if (on) StepSweep(ctx, base, ctx.r3.u32);
   __imp__sub_822498F8(ctx, base);
 }
-
