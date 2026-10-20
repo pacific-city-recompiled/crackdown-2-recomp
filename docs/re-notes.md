@@ -67,6 +67,15 @@ Archipelago Phase 0 (2026-10-20, plan in `docs/plan-archipelago.md`). Probe: `cr
   counts it and unlocks achievement 22, then sub_82883960 (group done: 23 street / 24 rooftop). Position at race+0x70.
   The bridge polls +940 twice a second in a bound save. Run crackdown2_030: `--ap_dev_complete_race=17` (synthetic:
   writes +940) -> "Road Race 08 won" -> check 75401017 sent and acknowledged. A real win is not yet tested.
+- **Campaign objectives (2026-10-20):** campaign manager [0x838009CC]: 103 interface pointers at +12..+16, same
+  order and classes on the 150GS and 370GS saves (runs crackdown2_033/032). Totals are bytes +40 absorption units
+  (27), +41 Freak Breaches (25), +42 tactical locations (27), +43 beacons (9), +44..+46 beacons per district 3/2/4
+  (sub_823C3050 jump table). The game's counters (sub_824728E0 breaches, sub_82465A08) filter entries by class
+  (vcall +4) and call vcall +80 ("finished?"). Entry vtables: 0x820073D8 tactical location (object vtable 0x821044A0,
+  after "cTacticalObjective"), 0x82007210 Freak Breach (object 0x821041EC, after "cBreachHoleMission"),
+  0x820078E0 absorption unit (27). The achievement tracker (0x83A3D500, lists +3044/+3060/+3076) only holds GUIDs
+  finished this session, so it is not used. Run crackdown2_034 (150GS copy, dev bind, local seed): the bridge's
+  vcall +80 poll found the save's 2 tactical locations, 4 absorption units and 1 breach and sent 7 checks.
 - **Agent controller (test teleport):** sub_822498F8 (Crackdown 1 sub_822A9E78): position +656, Havok proxy +560,
   owner character +304; setPosition sub_82BFEC28 (Crackdown 1 sub_829D3560, identical body).
 - **Other check groups** (class strings, not yet traced): cRenegadeOrb 0x820E8708 (ctor sub_82757018), cStuntRing

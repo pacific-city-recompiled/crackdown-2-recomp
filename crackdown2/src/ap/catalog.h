@@ -25,8 +25,15 @@ struct Race {
   std::string kind, name, guid;  // kind: road, rooftop; guid: 32 hex digits
   std::array<float, 3> position{};
 };
+// A campaign objective (campaign manager [0x838009CC] + 12, vector index), checked by the entry's vtable.
+struct Objective {
+  int64_t id = 0;
+  uint32_t index = 0, iface_vt = 0;
+  std::string kind, name;  // kind: tactical, absorption, breach
+};
 struct Options {
   bool hidden_orbs = true, audio_logs = false, races = true;
+  bool tactical = true, absorption = true, breaches = true;
 };
 struct Catalog {
   std::string version, game;
@@ -34,6 +41,7 @@ struct Catalog {
   int64_t filler_item = 0;
   std::map<uint32_t, Pickup> pickups;  // by ordinal
   std::map<uint32_t, Race> races;      // by ordinal
+  std::map<uint32_t, Objective> objectives;  // by campaign vector index
   std::map<int64_t, std::string> item_names;
   std::set<int64_t> Locations(const Options&) const;  // online orbs never (Xbox Live only)
   const Pickup* ByLocation(int64_t id) const;

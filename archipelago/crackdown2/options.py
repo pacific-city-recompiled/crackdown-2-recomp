@@ -19,6 +19,24 @@ class IncludeRaces(DefaultOnToggle):
     display_name = "Include Races"
 
 
+class IncludeTacticalLocations(DefaultOnToggle):
+    """Include the 27 tactical locations (Cell strongholds) as checks. Logic expects one Progressive Firearms or
+    Explosives."""
+    display_name = "Include Tactical Locations"
+
+
+class IncludeAbsorptionUnits(DefaultOnToggle):
+    """Include the 27 absorption units (Freak Lairs) as checks. Logic expects one Progressive Firearms or
+    Explosives."""
+    display_name = "Include Absorption Units"
+
+
+class IncludeFreakBreaches(DefaultOnToggle):
+    """Include the 25 Freak Breaches (they open at night) as checks. Logic expects one Progressive Firearms or
+    Explosives."""
+    display_name = "Include Freak Breaches"
+
+
 class AgilityLogic(Choice):
     """How much Agility the logic expects before an orb can be reached.
 
@@ -44,12 +62,16 @@ class Crackdown2Options(PerGameCommonOptions):
     include_hidden_orbs: IncludeHiddenOrbs
     include_audio_logs: IncludeAudioLogs
     include_races: IncludeRaces
+    include_tactical_locations: IncludeTacticalLocations
+    include_absorption_units: IncludeAbsorptionUnits
+    include_freak_breaches: IncludeFreakBreaches
     agility_logic: AgilityLogic
     goal: Goal
 
 
 option_groups = [
-    OptionGroup("Checks", [IncludeHiddenOrbs, IncludeAudioLogs, IncludeRaces]),
+    OptionGroup("Checks", [IncludeHiddenOrbs, IncludeAudioLogs, IncludeRaces, IncludeTacticalLocations,
+                           IncludeAbsorptionUnits, IncludeFreakBreaches]),
     OptionGroup("Logic", [AgilityLogic]),
     OptionGroup("Goal", [Goal]),
 ]

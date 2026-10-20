@@ -1,5 +1,5 @@
 {
- "version": "crackdown2-ap-4",
+ "version": "crackdown2-ap-5",
  "game": "Crackdown 2",
  "supported_xexp_sha256": "a5e49fc1ff7f6f65e6f95a7b5c4b9392bb9e38674d1237ac0e2f0149d05929d7",
  "source": {
@@ -13524,6 +13524,640 @@
    ],
    "driving": 1,
    "agility": 3
+  }
+ ],
+ "objectives": [
+  {
+   "id": 75402002,
+   "index": 2,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 01",
+   "combat": 1
+  },
+  {
+   "id": 75402003,
+   "index": 3,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 02",
+   "combat": 1
+  },
+  {
+   "id": 75402005,
+   "index": 5,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 03",
+   "combat": 1
+  },
+  {
+   "id": 75402006,
+   "index": 6,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 04",
+   "combat": 1
+  },
+  {
+   "id": 75402008,
+   "index": 8,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 05",
+   "combat": 1
+  },
+  {
+   "id": 75402009,
+   "index": 9,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 06",
+   "combat": 1
+  },
+  {
+   "id": 75402011,
+   "index": 11,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 07",
+   "combat": 1
+  },
+  {
+   "id": 75402012,
+   "index": 12,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 08",
+   "combat": 1
+  },
+  {
+   "id": 75402013,
+   "index": 13,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 09",
+   "combat": 1
+  },
+  {
+   "id": 75402015,
+   "index": 15,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 10",
+   "combat": 1
+  },
+  {
+   "id": 75402016,
+   "index": 16,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 11",
+   "combat": 1
+  },
+  {
+   "id": 75402018,
+   "index": 18,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 12",
+   "combat": 1
+  },
+  {
+   "id": 75402019,
+   "index": 19,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 13",
+   "combat": 1
+  },
+  {
+   "id": 75402021,
+   "index": 21,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 14",
+   "combat": 1
+  },
+  {
+   "id": 75402022,
+   "index": 22,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 15",
+   "combat": 1
+  },
+  {
+   "id": 75402024,
+   "index": 24,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 16",
+   "combat": 1
+  },
+  {
+   "id": 75402025,
+   "index": 25,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 01",
+   "combat": 1
+  },
+  {
+   "id": 75402026,
+   "index": 26,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 02",
+   "combat": 1
+  },
+  {
+   "id": 75402027,
+   "index": 27,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 03",
+   "combat": 1
+  },
+  {
+   "id": 75402029,
+   "index": 29,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 04",
+   "combat": 1
+  },
+  {
+   "id": 75402030,
+   "index": 30,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 05",
+   "combat": 1
+  },
+  {
+   "id": 75402031,
+   "index": 31,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 06",
+   "combat": 1
+  },
+  {
+   "id": 75402033,
+   "index": 33,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 07",
+   "combat": 1
+  },
+  {
+   "id": 75402034,
+   "index": 34,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 08",
+   "combat": 1
+  },
+  {
+   "id": 75402035,
+   "index": 35,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 09",
+   "combat": 1
+  },
+  {
+   "id": 75402037,
+   "index": 37,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 10",
+   "combat": 1
+  },
+  {
+   "id": 75402038,
+   "index": 38,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 11",
+   "combat": 1
+  },
+  {
+   "id": 75402039,
+   "index": 39,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 12",
+   "combat": 1
+  },
+  {
+   "id": 75402041,
+   "index": 41,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 13",
+   "combat": 1
+  },
+  {
+   "id": 75402042,
+   "index": 42,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 14",
+   "combat": 1
+  },
+  {
+   "id": 75402043,
+   "index": 43,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 15",
+   "combat": 1
+  },
+  {
+   "id": 75402045,
+   "index": 45,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 16",
+   "combat": 1
+  },
+  {
+   "id": 75402046,
+   "index": 46,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 17",
+   "combat": 1
+  },
+  {
+   "id": 75402047,
+   "index": 47,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 18",
+   "combat": 1
+  },
+  {
+   "id": 75402049,
+   "index": 49,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 19",
+   "combat": 1
+  },
+  {
+   "id": 75402050,
+   "index": 50,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 20",
+   "combat": 1
+  },
+  {
+   "id": 75402051,
+   "index": 51,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 21",
+   "combat": 1
+  },
+  {
+   "id": 75402053,
+   "index": 53,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 22",
+   "combat": 1
+  },
+  {
+   "id": 75402054,
+   "index": 54,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 23",
+   "combat": 1
+  },
+  {
+   "id": 75402055,
+   "index": 55,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 24",
+   "combat": 1
+  },
+  {
+   "id": 75402057,
+   "index": 57,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 25",
+   "combat": 1
+  },
+  {
+   "id": 75402058,
+   "index": 58,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 26",
+   "combat": 1
+  },
+  {
+   "id": 75402059,
+   "index": 59,
+   "kind": "absorption",
+   "iface_vt": "820078E0",
+   "name": "Absorption Unit 27",
+   "combat": 1
+  },
+  {
+   "id": 75402065,
+   "index": 65,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 01",
+   "combat": 1
+  },
+  {
+   "id": 75402066,
+   "index": 66,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 02",
+   "combat": 1
+  },
+  {
+   "id": 75402067,
+   "index": 67,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 03",
+   "combat": 1
+  },
+  {
+   "id": 75402068,
+   "index": 68,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 04",
+   "combat": 1
+  },
+  {
+   "id": 75402069,
+   "index": 69,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 05",
+   "combat": 1
+  },
+  {
+   "id": 75402070,
+   "index": 70,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 06",
+   "combat": 1
+  },
+  {
+   "id": 75402071,
+   "index": 71,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 07",
+   "combat": 1
+  },
+  {
+   "id": 75402072,
+   "index": 72,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 08",
+   "combat": 1
+  },
+  {
+   "id": 75402073,
+   "index": 73,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 09",
+   "combat": 1
+  },
+  {
+   "id": 75402074,
+   "index": 74,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 10",
+   "combat": 1
+  },
+  {
+   "id": 75402075,
+   "index": 75,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 11",
+   "combat": 1
+  },
+  {
+   "id": 75402076,
+   "index": 76,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 12",
+   "combat": 1
+  },
+  {
+   "id": 75402077,
+   "index": 77,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 13",
+   "combat": 1
+  },
+  {
+   "id": 75402078,
+   "index": 78,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 14",
+   "combat": 1
+  },
+  {
+   "id": 75402079,
+   "index": 79,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 15",
+   "combat": 1
+  },
+  {
+   "id": 75402080,
+   "index": 80,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 16",
+   "combat": 1
+  },
+  {
+   "id": 75402081,
+   "index": 81,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 17",
+   "combat": 1
+  },
+  {
+   "id": 75402082,
+   "index": 82,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 18",
+   "combat": 1
+  },
+  {
+   "id": 75402083,
+   "index": 83,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 19",
+   "combat": 1
+  },
+  {
+   "id": 75402084,
+   "index": 84,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 20",
+   "combat": 1
+  },
+  {
+   "id": 75402085,
+   "index": 85,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 21",
+   "combat": 1
+  },
+  {
+   "id": 75402086,
+   "index": 86,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 22",
+   "combat": 1
+  },
+  {
+   "id": 75402087,
+   "index": 87,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 23",
+   "combat": 1
+  },
+  {
+   "id": 75402088,
+   "index": 88,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 24",
+   "combat": 1
+  },
+  {
+   "id": 75402089,
+   "index": 89,
+   "kind": "breach",
+   "iface_vt": "82007210",
+   "name": "Freak Breach 25",
+   "combat": 1
+  },
+  {
+   "id": 75402090,
+   "index": 90,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 17",
+   "combat": 1
+  },
+  {
+   "id": 75402091,
+   "index": 91,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 18",
+   "combat": 1
+  },
+  {
+   "id": 75402092,
+   "index": 92,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 19",
+   "combat": 1
+  },
+  {
+   "id": 75402093,
+   "index": 93,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 20",
+   "combat": 1
+  },
+  {
+   "id": 75402094,
+   "index": 94,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 21",
+   "combat": 1
+  },
+  {
+   "id": 75402095,
+   "index": 95,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 22",
+   "combat": 1
+  },
+  {
+   "id": 75402096,
+   "index": 96,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 23",
+   "combat": 1
+  },
+  {
+   "id": 75402097,
+   "index": 97,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 24",
+   "combat": 1
+  },
+  {
+   "id": 75402098,
+   "index": 98,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 25",
+   "combat": 1
+  },
+  {
+   "id": 75402099,
+   "index": 99,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 26",
+   "combat": 1
+  },
+  {
+   "id": 75402100,
+   "index": 100,
+   "kind": "tactical",
+   "iface_vt": "820073D8",
+   "name": "Tactical Location 27",
+   "combat": 1
   }
  ]
 }

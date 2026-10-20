@@ -277,6 +277,36 @@ void PollRaces(uint8_t* base) {
   if (any) SendPendingChecks();
 }
 
+// Campaign objectives (campaign manager [0x838009CC]: interface pointers at +12..+16, 103 in runs 032/033). The
+// game's own counters (sub_824728E0 breaches, sub_82465A08) call each entry's vtable +80 to ask "finished?"; so
+// does this, on the game thread, for the catalog's tactical locations, absorption units and Freak Breaches.
+void PollObjectives(PPCContext& ctx, uint8_t* base) {
+  static uint32_t frame = 0;
+  if (++frame % 30 || g.catalog->objectives.empty()) return;
+  const uint32_t c = REX_LOAD_U32(0x838009CC);
+  if (!c) return;
+  const uint32_t begin = REX_LOAD_U32(c + 12), end = REX_LOAD_U32(c + 16);
+  if (!begin || end - begin != 4 * 103) return;
+  bool any = false;
+  for (const auto& [index, x] : g.catalog->objectives) {
+    const uint32_t entry = REX_LOAD_U32(begin + 4 * index);
+    if (!entry || REX_LOAD_U32(entry) != x.iface_vt) return;  // not the supported layout: check nothing
+    if (!g.session->contract().locations.contains(x.id) || g.session->Observed().contains(x.id)) continue;
+    PPCContext call = ctx;
+    call.r3.u64 = entry;
+    call.ctr.u64 = REX_LOAD_U32(REX_LOAD_U32(entry) + 80);
+    {
+      auto& ctx = call;  // REX_CALL_INDIRECT_FUNC uses ctx/base
+      REX_CALL_INDIRECT_FUNC(ctx.ctr.u32);
+    }
+    if ((call.r3.u32 & 0xFF) == 0) continue;
+    REXLOG_INFO("ap: {} finished (campaign objective {})", x.name, index);
+    Observe(x.id, false);
+    any = true;
+  }
+  if (any) SendPendingChecks();
+}
+
 // --- network -------------------------------------------------------------
 
 void SendCommands(nlohmann::json commands) {
@@ -562,6 +592,7 @@ void Reconcile(PPCContext& ctx, uint8_t* base) {
   }
   if (g.server_ready && now - g.last_check_send > std::chrono::seconds(10)) SendPendingChecks();
   PollRaces(base);
+  PollObjectives(ctx, base);
 
   const uint32_t skills = PrimarySkills(base);
   if (!skills || now - g.last_grant_try < std::chrono::milliseconds(500)) return;

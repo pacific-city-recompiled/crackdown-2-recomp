@@ -13,6 +13,7 @@ namespace {
 void Require(bool ok, const char* why) { if (!ok) throw std::runtime_error(why); }
 constexpr uint32_t kRegistrySize = 932;  // 500 agility + 80 online + 300 hidden + 52 audio logs (run crackdown2_003)
 constexpr uint32_t kRaceCount = 30;      // 15 road + 15 rooftop (run crackdown2_028)
+constexpr uint32_t kCampaignSize = 103;  // campaign objectives (runs crackdown2_032/033)
 }  // namespace
 
 std::set<int64_t> Catalog::Locations(const Options& o) const {
@@ -22,6 +23,10 @@ std::set<int64_t> Catalog::Locations(const Options& o) const {
       ids.insert(p.id);
   if (o.races)
     for (const auto& [ordinal, r] : races) ids.insert(r.id);
+  for (const auto& [index, x] : objectives)
+    if ((x.kind == "tactical" && o.tactical) || (x.kind == "absorption" && o.absorption) ||
+        (x.kind == "breach" && o.breaches))
+      ids.insert(x.id);
   return ids;
 }
 
@@ -29,6 +34,8 @@ std::string Catalog::LocationName(int64_t id) const {
   if (const auto* p = ByLocation(id)) return p->name;
   for (const auto& [ordinal, r] : races)
     if (r.id == id) return r.name;
+  for (const auto& [index, x] : objectives)
+    if (x.id == id) return x.name;
   return {};
 }
 
@@ -93,6 +100,18 @@ Catalog ParseCatalog(std::string_view text) {
             "Invalid AP catalog race");
   }
   Require(c.races.size() == kRaceCount, "Incomplete AP catalog races");
+  for (const auto& o : j.at("objectives")) {
+    Objective x;
+    x.id = o.at("id").get<int64_t>();
+    x.index = o.at("index").get<uint32_t>();
+    x.iface_vt = static_cast<uint32_t>(std::stoul(o.at("iface_vt").get<std::string>(), nullptr, 16));
+    x.kind = o.at("kind").get<std::string>();
+    x.name = o.at("name").get<std::string>();
+    Require((x.kind == "tactical" || x.kind == "absorption" || x.kind == "breach") && x.index < kCampaignSize &&
+                !items.contains(x.id) && ids.insert(x.id).second && c.objectives.emplace(x.index, x).second,
+            "Invalid AP catalog objective");
+  }
+  Require(c.objectives.size() == 79, "Incomplete AP catalog objectives");  // 27 tactical + 27 absorption + 25
   return c;
 }
 
@@ -115,7 +134,8 @@ Contract ParseSlotContract(const Catalog& catalog, std::string_view text, const 
   c.goal = data.at("goal").get<std::string>();
   Require(c.goal == "max_skills", "Unsupported slot goal");
   const Options options{data.at("include_hidden_orbs").get<bool>(), data.at("include_audio_logs").get<bool>(),
-                        data.at("include_races").get<bool>()};
+                        data.at("include_races").get<bool>(), data.at("include_tactical_locations").get<bool>(),
+                        data.at("include_absorption_units").get<bool>(), data.at("include_freak_breaches").get<bool>()};
   Require(locations == catalog.Locations(options), "Slot locations mismatch");
   c.locations = locations;
   return c;
@@ -132,9 +152,9 @@ void ValidateStoredContract(const Catalog& catalog, const Contract& c) {
               c.filler_item == catalog.filler_item && c.goal == "max_skills",
           "Stored catalog/skills differ from the embedded catalog");
   bool any_option = false;
-  for (bool hidden : {false, true})
-    for (bool logs : {false, true})
-      for (bool races : {false, true}) any_option |= c.locations == catalog.Locations({hidden, logs, races});
+  for (int bits = 0; bits < 64; ++bits)
+    any_option |= c.locations == catalog.Locations({bool(bits & 1), bool(bits & 2), bool(bits & 4), bool(bits & 8),
+                                                    bool(bits & 16), bool(bits & 32)});
   Require(any_option, "Stored locations differ from the embedded catalog");
 }
 }  // namespace crackdown2::ap

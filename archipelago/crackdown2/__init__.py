@@ -26,6 +26,11 @@ DRIVING_NEEDED = {r["name"]: r["driving"] for r in CATALOG["races"]}
 AGILITY_START = SKILLS["Progressive Agility"]["starting"]
 DRIVING_START = SKILLS["Progressive Driving"]["starting"]
 RACES = {r["name"]: r["id"] for r in CATALOG["races"]}
+COMBAT = {x["name"] for x in CATALOG["objectives"] if x["combat"]}
+
+
+def objectives(kind: str) -> dict:
+    return {x["name"]: x["id"] for x in CATALOG["objectives"] if x["kind"] == kind}
 
 
 def pickups(kind: str) -> dict:
@@ -65,7 +70,7 @@ class Crackdown2Web(WebWorld):
 
 
 class Crackdown2World(World):
-    """Collect orbs and win races across Pacific City while your skills arrive from the multiworld."""
+    """Collect orbs, win races and retake Pacific City while your skills arrive from the multiworld."""
     game = GAME
     web = Crackdown2Web()
     settings: ClassVar[Crackdown2Settings]
@@ -73,12 +78,16 @@ class Crackdown2World(World):
     options_dataclass = Crackdown2Options
     options: Crackdown2Options
     item_name_to_id = dict(CATALOG["items"])
-    location_name_to_id = {**pickups("agility"), **pickups("hidden"), **pickups("audio_log"), **RACES}
+    location_name_to_id = {**pickups("agility"), **pickups("hidden"), **pickups("audio_log"), **RACES,
+                           **objectives("tactical"), **objectives("absorption"), **objectives("breach")}
     item_name_groups = {"Skills": set(SKILLS)}
     location_name_groups = {"Agility Orbs": set(pickups("agility")), "Hidden Orbs": set(pickups("hidden")),
                             "Audio Logs": set(pickups("audio_log")),
                             "Road Races": {r["name"] for r in CATALOG["races"] if r["kind"] == "road"},
-                            "Rooftop Races": {r["name"] for r in CATALOG["races"] if r["kind"] == "rooftop"}}
+                            "Rooftop Races": {r["name"] for r in CATALOG["races"] if r["kind"] == "rooftop"},
+                            "Tactical Locations": set(objectives("tactical")),
+                            "Absorption Units": set(objectives("absorption")),
+                            "Freak Breaches": set(objectives("breach"))}
 
     def create_item(self, name: str) -> Crackdown2Item:
         classification = ItemClassification.progression if name in SKILLS else ItemClassification.filler
@@ -95,6 +104,12 @@ class Crackdown2World(World):
             locations.update(pickups("audio_log"))
         if self.options.include_races:
             locations.update(RACES)
+        if self.options.include_tactical_locations:
+            locations.update(objectives("tactical"))
+        if self.options.include_absorption_units:
+            locations.update(objectives("absorption"))
+        if self.options.include_freak_breaches:
+            locations.update(objectives("breach"))
         return locations
 
     def create_regions(self) -> None:
@@ -126,6 +141,9 @@ class Crackdown2World(World):
                 rule = location.access_rule
                 location.access_rule = lambda state, n=driving, r=rule: (
                     r(state) and state.has("Progressive Driving", self.player, n))
+            if location.name in COMBAT:  # Cell and Freak fights: better guns or explosives
+                location.access_rule = lambda state: state.has_any(
+                    ("Progressive Firearms", "Progressive Explosives"), self.player)
         self.multiworld.completion_condition[self.player] = lambda state: all(
             state.has(name, self.player, s["maximum"] - s["starting"]) for name, s in SKILLS.items())
 
@@ -139,4 +157,7 @@ class Crackdown2World(World):
             "include_hidden_orbs": bool(self.options.include_hidden_orbs),
             "include_audio_logs": bool(self.options.include_audio_logs),
             "include_races": bool(self.options.include_races),
+            "include_tactical_locations": bool(self.options.include_tactical_locations),
+            "include_absorption_units": bool(self.options.include_absorption_units),
+            "include_freak_breaches": bool(self.options.include_freak_breaches),
         }

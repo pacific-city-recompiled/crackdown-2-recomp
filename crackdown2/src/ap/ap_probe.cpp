@@ -148,6 +148,79 @@ void DumpRaces(uint8_t* base) {
   }
 }
 
+// Objective tracker (sub_82760628 returns the static object at 0x83A3D500 in single player): lists of 16-byte
+// GUIDs (object+592) of finished objectives, {+4 begin, +8 end}: +3044 Freak Breaches (achievements 10/11),
+// +3060 absorption units (1/2), +3076 tactical locations (9). Campaign totals: bytes [0x838009CC]+40..+46
+// (sub_823C3050). Logged once, 60 s after the registry is complete.
+void DumpTracker(uint8_t* base) {
+  static int frames = 0;
+  const uint32_t stats = Stats(base);
+  if (!stats || REX_LOAD_U32(stats + 4012) != 932 || ++frames != 3600) return;
+  constexpr uint32_t t = 0x83A3D500;
+  const uint32_t campaign = REX_LOAD_U32(0x838009CC);
+  REXLOG_INFO("ap_probe: tracker {:08X} vt {:08X}; campaign {:08X} bytes40 {:02X} {:02X} {:02X} {:02X} {:02X} {:02X} {:02X}",
+              t, REX_LOAD_U32(t), campaign, campaign ? REX_LOAD_U8(campaign + 40) : 0,
+              campaign ? REX_LOAD_U8(campaign + 41) : 0, campaign ? REX_LOAD_U8(campaign + 42) : 0,
+              campaign ? REX_LOAD_U8(campaign + 43) : 0, campaign ? REX_LOAD_U8(campaign + 44) : 0,
+              campaign ? REX_LOAD_U8(campaign + 45) : 0, campaign ? REX_LOAD_U8(campaign + 46) : 0);
+  for (uint32_t off = 2980; off <= 3140; off += 16) {
+    const uint32_t b = REX_LOAD_U32(t + off + 4), e = REX_LOAD_U32(t + off + 8);
+    REXLOG_INFO("ap_probe: tracker +{}: {:08X} {:08X} {:08X} {:08X} ({} x16)", off, REX_LOAD_U32(t + off), b, e,
+                REX_LOAD_U32(t + off + 12), (e >= b && e - b < 0x10000) ? (e - b) / 16 : 0);
+  }
+  for (uint32_t list : {3044u, 3060u, 3076u}) {
+    const uint32_t b = REX_LOAD_U32(t + list + 4), e = REX_LOAD_U32(t + list + 8);
+    for (uint32_t a = b; a < e && a < b + 16 * 64; a += 16)
+      REXLOG_INFO("ap_probe: tracker list +{} guid {:08X}{:08X}{:08X}{:08X}", list, REX_LOAD_U32(a), REX_LOAD_U32(a + 4),
+                  REX_LOAD_U32(a + 8), REX_LOAD_U32(a + 12));
+  }
+}
+
+// Campaign manager [0x838009CC]: the vector at +12..+16 holds an interface pointer (object+16) per campaign
+// objective. The per-type counters (sub_824728E0 Freak Breaches with total byte +41, sub_82478AA0 +42,
+// sub_82465A08 +43) walk it, keep the entries whose class matches (vcall +4) and count those whose interface
+// vcall +80 returns true (finished). Dumped once on the game thread: vtables, GUID (object+8..+20), position
+// (object+0x70) and the +80 result, to tell the objective types apart.
+void DumpCampaign(PPCContext& ctx, uint8_t* base) {
+  static int frames = 0;
+  const uint32_t stats = Stats(base);
+  if (!stats || REX_LOAD_U32(stats + 4012) != 932 || ++frames != 3600) return;
+  const uint32_t c = REX_LOAD_U32(0x838009CC);
+  if (!c) return;
+  const uint32_t begin = REX_LOAD_U32(c + 12), end = REX_LOAD_U32(c + 16);
+  const uint32_t n = end > begin && end - begin < 0x4000 ? (end - begin) / 4 : 0;
+  REXLOG_INFO("ap_probe: campaign {:08X} objectives {} bytes40 {} {} {} {} {} {} {}", c, n, REX_LOAD_U8(c + 40),
+              REX_LOAD_U8(c + 41), REX_LOAD_U8(c + 42), REX_LOAD_U8(c + 43), REX_LOAD_U8(c + 44), REX_LOAD_U8(c + 45),
+              REX_LOAD_U8(c + 46));
+  const std::string& path = REXCVAR_GET(ap_probe_dump);
+  std::FILE* f = path.empty() ? nullptr : std::fopen((path + ".campaign.json").c_str(), "w");
+  if (f) std::fputs("[\n", f);
+  for (uint32_t i = 0; i < n; ++i) {
+    const uint32_t iface = REX_LOAD_U32(begin + 4 * i);
+    if (!iface) continue;
+    const uint32_t obj = iface - 16;
+    const PPCContext saved = ctx;
+    ctx.r3.u64 = iface;
+    ctx.ctr.u64 = REX_LOAD_U32(REX_LOAD_U32(iface) + 80);
+    REX_CALL_INDIRECT_FUNC(ctx.ctr.u32);
+    const uint32_t done = ctx.r3.u32 & 0xFF;
+    ctx = saved;
+    REXLOG_INFO("ap_probe: objective {} obj {:08X} vt {:08X} iface_vt {:08X} guid {:08X}{:08X}{:08X}{:08X} done {} "
+                "pos {:.1f} {:.1f} {:.1f}", i, obj, REX_LOAD_U32(obj), REX_LOAD_U32(iface), REX_LOAD_U32(obj + 8),
+                REX_LOAD_U32(obj + 12), REX_LOAD_U32(obj + 16), REX_LOAD_U32(obj + 20), done, F32(base, obj + 0x70),
+                F32(base, obj + 0x74), F32(base, obj + 0x78));
+    if (f)
+      std::fprintf(f, "%s{\"n\":%u,\"vt\":\"%08X\",\"guid\":\"%08X%08X%08X%08X\",\"done\":%u,"
+                   "\"pos\":[%.3f,%.3f,%.3f]}\n", i ? "," : "", i, REX_LOAD_U32(obj), REX_LOAD_U32(obj + 8),
+                   REX_LOAD_U32(obj + 12), REX_LOAD_U32(obj + 16), REX_LOAD_U32(obj + 20), done, F32(base, obj + 0x70),
+                   F32(base, obj + 0x74), F32(base, obj + 0x78));
+  }
+  if (f) {
+    std::fputs("]\n", f);
+    std::fclose(f);
+  }
+}
+
 void LogSkills(uint8_t* base, uint32_t set, const char* what) {
   REXLOG_INFO("ap_probe: {} skillset {:08X} owner {:08X} max {} {} {} {} {} level {} {} {} {} {} xp {:.1f} {:.1f} "
               "{:.1f} {:.1f} {:.1f}", what, set, REX_LOAD_U32(set + 4), (int8_t)REX_LOAD_U8(set + 8),
@@ -166,6 +239,7 @@ void ProbeFrame(uint8_t* base) {
   if (on) {
     DumpRegistry(base);
     DumpRaces(base);
+    DumpTracker(base);
   }
 }
 }  // namespace crackdown2::ap
@@ -482,6 +556,8 @@ namespace crackdown2::ap {
 void ProbeUpdate(PPCContext& ctx, uint8_t* base) {
   static const bool on = REXCVAR_GET(ap_dev_teleport_orb) >= 0 || !REXCVAR_GET(ap_dev_sweep).empty();
   if (on && g_controller) StepSweep(ctx, base, g_controller);
+  static const bool probe = REXCVAR_GET(ap_probe);
+  if (probe) DumpCampaign(ctx, base);
   static const int32_t race = REXCVAR_GET(ap_dev_complete_race);
   static int frames = 0;
   if (race >= 0 && g_controller && ++frames == 1200) {

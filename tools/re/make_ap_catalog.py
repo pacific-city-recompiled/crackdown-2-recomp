@@ -13,7 +13,7 @@ import hashlib
 import json
 import sys
 
-VERSION = "crackdown2-ap-4"
+VERSION = "crackdown2-ap-5"
 LOCATION_BASE = 75_400_000  # Crackdown 1 uses 734xxxxx; distinct so both games can share a multiworld
 ITEM_BASE = 75_410_000
 SKILLS = ("Agility", "Driving", "Explosives", "Strength", "Firearms")  # native cSkillSet order
@@ -59,6 +59,29 @@ def races_from(path):
     return out
 
 
+# Campaign objectives (campaign manager [0x838009CC], vector at +12; <dump>.campaign.json from the probe, same
+# order and classes on the 150GS and 370GS saves): classified by the entry's own vtable (the vector holds an
+# interface pointer). Location ID = LOCATION_BASE + 2000 + vector index. Logic v1: one Progressive Firearms or
+# Explosives (combat). No positions yet (object+0x70 is not one for these classes).
+OBJECTIVE_KINDS = {"820073D8": ("tactical", "Tactical Location", 27), "820078E0": ("absorption", "Absorption Unit", 27),
+                   "82007210": ("breach", "Freak Breach", 25)}
+
+
+def objectives_from(path):
+    entries = json.load(open(path))
+    counters, out = {}, []
+    for e in entries:
+        if e["iface_vt"] not in OBJECTIVE_KINDS:
+            continue
+        kind, label, _ = OBJECTIVE_KINDS[e["iface_vt"]]
+        counters[kind] = counters.get(kind, 0) + 1
+        item = {"id": LOCATION_BASE + 2000 + e["n"], "index": e["n"], "kind": kind, "iface_vt": e["iface_vt"],
+                "name": f"{label} {counters[kind]:02d}", "combat": 1}
+        out.append(item)
+    assert counters == {k: n for k, _, n in OBJECTIVE_KINDS.values()}, counters
+    return out
+
+
 EXPECTED = {"agility": 500, "hidden": 300, "audio_log": 52, "online": 80}
 
 
@@ -86,6 +109,7 @@ def main(src, dsts, climb_path=None):
         "filler_item": ITEM_BASE + 1000,
         "pickups": entries,
         "races": races_from(src + ".races.json"),
+        "objectives": objectives_from(src + ".campaign.json"),
     }
     for dst in dsts:
         with open(dst, "w", encoding="ascii", newline="\n") as f:
