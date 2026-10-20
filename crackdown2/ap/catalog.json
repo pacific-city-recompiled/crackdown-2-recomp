@@ -1,5 +1,5 @@
 {
- "version": "crackdown2-ap-1",
+ "version": "crackdown2-ap-2",
  "game": "Crackdown 2",
  "supported_xexp_sha256": "a5e49fc1ff7f6f65e6f95a7b5c4b9392bb9e38674d1237ac0e2f0149d05929d7",
  "source": {
@@ -61,6 +61,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 001",
    "position": [
     2354.153,
@@ -74,6 +75,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 002",
    "position": [
     2316.717,
@@ -87,6 +89,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 003",
    "position": [
     2417.044,
@@ -100,6 +103,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 004",
    "position": [
     2486.684,
@@ -113,6 +117,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 005",
    "position": [
     2075.991,
@@ -126,6 +131,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 006",
    "position": [
     2418.66,
@@ -139,6 +145,7 @@
    "kind": "agility",
    "type": 3,
    "district": 0,
+   "agility": 4,
    "name": "Agility Orb 007",
    "position": [
     2380.514,
@@ -152,6 +159,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 008",
    "position": [
     2398.625,
@@ -165,6 +173,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 009",
    "position": [
     2263.605,
@@ -178,6 +187,7 @@
    "kind": "agility",
    "type": 3,
    "district": 0,
+   "agility": 4,
    "name": "Agility Orb 010",
    "position": [
     2136.411,
@@ -191,6 +201,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 011",
    "position": [
     2279.233,
@@ -204,6 +215,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 012",
    "position": [
     2157.397,
@@ -217,6 +229,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 013",
    "position": [
     2151.712,
@@ -230,6 +243,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 014",
    "position": [
     2516.665,
@@ -243,6 +257,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 015",
    "position": [
     2310.692,
@@ -256,6 +271,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 016",
    "position": [
     2516.648,
@@ -269,6 +285,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 017",
    "position": [
     2185.264,
@@ -282,6 +299,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 018",
    "position": [
     2374.376,
@@ -295,6 +313,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 019",
    "position": [
     2498.666,
@@ -308,6 +327,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 020",
    "position": [
     2563.511,
@@ -321,6 +341,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 021",
    "position": [
     2563.376,
@@ -334,6 +355,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 022",
    "position": [
     2335.071,
@@ -347,6 +369,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 023",
    "position": [
     2381.001,
@@ -360,6 +383,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 024",
    "position": [
     2418.17,
@@ -373,6 +397,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 025",
    "position": [
     2473.457,
@@ -386,6 +411,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 026",
    "position": [
     2520.799,
@@ -399,6 +425,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 027",
    "position": [
     2261.724,
@@ -412,6 +439,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 028",
    "position": [
     2132.77,
@@ -425,6 +453,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 029",
    "position": [
     2126.667,
@@ -438,6 +467,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 030",
    "position": [
     2442.89,
@@ -451,6 +481,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 031",
    "position": [
     2409.582,
@@ -464,6 +495,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 032",
    "position": [
     2430.109,
@@ -477,6 +509,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 033",
    "position": [
     2387.172,
@@ -490,6 +523,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 034",
    "position": [
     2317.879,
@@ -503,6 +537,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 035",
    "position": [
     2292.36,
@@ -516,6 +551,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 036",
    "position": [
     2249.723,
@@ -529,6 +565,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 037",
    "position": [
     2178.795,
@@ -542,6 +579,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 038",
    "position": [
     2138.413,
@@ -555,6 +593,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 039",
    "position": [
     2126.139,
@@ -568,6 +607,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 040",
    "position": [
     2214.276,
@@ -581,6 +621,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 041",
    "position": [
     2258.965,
@@ -594,6 +635,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 042",
    "position": [
     2281.425,
@@ -607,6 +649,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 043",
    "position": [
     2228.875,
@@ -620,6 +663,7 @@
    "kind": "agility",
    "type": 3,
    "district": 0,
+   "agility": 4,
    "name": "Agility Orb 044",
    "position": [
     2195.868,
@@ -633,6 +677,7 @@
    "kind": "agility",
    "type": 3,
    "district": 0,
+   "agility": 4,
    "name": "Agility Orb 045",
    "position": [
     2199.339,
@@ -646,6 +691,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 046",
    "position": [
     1961.538,
@@ -659,6 +705,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 047",
    "position": [
     2026.106,
@@ -672,6 +719,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 048",
    "position": [
     2069.715,
@@ -685,6 +733,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 049",
    "position": [
     2071.74,
@@ -698,6 +747,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 050",
    "position": [
     1996.383,
@@ -711,6 +761,7 @@
    "kind": "agility",
    "type": 3,
    "district": 0,
+   "agility": 4,
    "name": "Agility Orb 051",
    "position": [
     1986.667,
@@ -724,6 +775,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 052",
    "position": [
     1989.844,
@@ -737,6 +789,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 053",
    "position": [
     1968.0,
@@ -750,6 +803,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 054",
    "position": [
     2087.172,
@@ -763,6 +817,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 055",
    "position": [
     2106.33,
@@ -776,6 +831,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 056",
    "position": [
     2105.316,
@@ -789,6 +845,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 057",
    "position": [
     2085.277,
@@ -802,6 +859,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 058",
    "position": [
     2006.697,
@@ -815,6 +873,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 059",
    "position": [
     1928.799,
@@ -828,6 +887,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 060",
    "position": [
     2007.382,
@@ -841,6 +901,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 061",
    "position": [
     2007.566,
@@ -854,6 +915,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 062",
    "position": [
     2018.014,
@@ -867,6 +929,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 063",
    "position": [
     1894.575,
@@ -880,6 +943,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 064",
    "position": [
     2520.334,
@@ -893,6 +957,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 065",
    "position": [
     2601.687,
@@ -906,6 +971,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 066",
    "position": [
     2701.232,
@@ -919,6 +985,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 067",
    "position": [
     2757.976,
@@ -932,6 +999,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 068",
    "position": [
     2874.975,
@@ -945,6 +1013,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 069",
    "position": [
     2813.908,
@@ -958,6 +1027,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 070",
    "position": [
     2857.585,
@@ -971,6 +1041,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 071",
    "position": [
     2816.745,
@@ -984,6 +1055,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 072",
    "position": [
     2720.868,
@@ -997,6 +1069,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 073",
    "position": [
     2727.099,
@@ -1010,6 +1083,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 074",
    "position": [
     2690.394,
@@ -1023,6 +1097,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 075",
    "position": [
     2736.929,
@@ -1036,6 +1111,7 @@
    "kind": "agility",
    "type": 3,
    "district": 0,
+   "agility": 4,
    "name": "Agility Orb 076",
    "position": [
     2274.679,
@@ -1049,6 +1125,7 @@
    "kind": "agility",
    "type": 3,
    "district": 0,
+   "agility": 4,
    "name": "Agility Orb 077",
    "position": [
     2426.853,
@@ -1062,6 +1139,7 @@
    "kind": "agility",
    "type": 3,
    "district": 0,
+   "agility": 4,
    "name": "Agility Orb 078",
    "position": [
     2533.732,
@@ -1075,6 +1153,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 079",
    "position": [
     2508.796,
@@ -1088,6 +1167,7 @@
    "kind": "agility",
    "type": 3,
    "district": 0,
+   "agility": 4,
    "name": "Agility Orb 080",
    "position": [
     2233.112,
@@ -1101,6 +1181,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 081",
    "position": [
     2272.209,
@@ -1114,6 +1195,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 082",
    "position": [
     2202.93,
@@ -1127,6 +1209,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 083",
    "position": [
     2324.52,
@@ -1140,6 +1223,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 084",
    "position": [
     2396.168,
@@ -1153,6 +1237,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 085",
    "position": [
     2478.328,
@@ -1166,6 +1251,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 086",
    "position": [
     2466.507,
@@ -1179,6 +1265,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 087",
    "position": [
     2510.55,
@@ -1192,6 +1279,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 088",
    "position": [
     2363.487,
@@ -1205,6 +1293,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 089",
    "position": [
     2380.125,
@@ -1218,6 +1307,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 090",
    "position": [
     2408.889,
@@ -1231,6 +1321,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 091",
    "position": [
     2345.132,
@@ -1244,6 +1335,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 092",
    "position": [
     2409.735,
@@ -1257,6 +1349,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 093",
    "position": [
     2223.233,
@@ -1270,6 +1363,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 094",
    "position": [
     2402.007,
@@ -1283,6 +1377,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 095",
    "position": [
     2352.406,
@@ -1296,6 +1391,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 096",
    "position": [
     2344.989,
@@ -1309,6 +1405,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 097",
    "position": [
     2334.021,
@@ -1322,6 +1419,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 098",
    "position": [
     2484.215,
@@ -1335,6 +1433,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 099",
    "position": [
     2414.755,
@@ -1348,6 +1447,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 100",
    "position": [
     2440.663,
@@ -1361,6 +1461,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 101",
    "position": [
     2512.438,
@@ -1374,6 +1475,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 102",
    "position": [
     2151.892,
@@ -1387,6 +1489,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 103",
    "position": [
     2227.991,
@@ -1400,6 +1503,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 104",
    "position": [
     2205.749,
@@ -1413,6 +1517,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 105",
    "position": [
     2176.07,
@@ -1426,6 +1531,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 106",
    "position": [
     2162.797,
@@ -1439,6 +1545,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 107",
    "position": [
     2146.425,
@@ -1452,6 +1559,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 108",
    "position": [
     2171.163,
@@ -1465,6 +1573,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 109",
    "position": [
     2208.954,
@@ -1478,6 +1587,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 110",
    "position": [
     2238.06,
@@ -1491,6 +1601,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 111",
    "position": [
     2178.417,
@@ -1504,6 +1615,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 112",
    "position": [
     2175.259,
@@ -1517,6 +1629,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 113",
    "position": [
     2181.34,
@@ -1530,6 +1643,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 114",
    "position": [
     2166.596,
@@ -1543,6 +1657,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 115",
    "position": [
     2232.805,
@@ -1556,6 +1671,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 116",
    "position": [
     2255.848,
@@ -1569,6 +1685,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 117",
    "position": [
     2298.673,
@@ -1582,6 +1699,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 118",
    "position": [
     2270.611,
@@ -1595,6 +1713,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 119",
    "position": [
     2312.821,
@@ -1608,6 +1727,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 120",
    "position": [
     2215.055,
@@ -1621,6 +1741,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 121",
    "position": [
     2266.172,
@@ -1634,6 +1755,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 122",
    "position": [
     2274.354,
@@ -1647,6 +1769,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 123",
    "position": [
     2319.5,
@@ -1660,6 +1783,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 124",
    "position": [
     2342.161,
@@ -1673,6 +1797,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 125",
    "position": [
     2366.428,
@@ -1686,6 +1811,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 126",
    "position": [
     2351.557,
@@ -1699,6 +1825,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 127",
    "position": [
     2316.484,
@@ -1712,6 +1839,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 128",
    "position": [
     2313.963,
@@ -1725,6 +1853,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 129",
    "position": [
     2252.733,
@@ -1738,6 +1867,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 130",
    "position": [
     2316.937,
@@ -1751,6 +1881,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 131",
    "position": [
     2375.427,
@@ -1764,6 +1895,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 132",
    "position": [
     2224.528,
@@ -1777,6 +1909,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 133",
    "position": [
     2322.966,
@@ -1790,6 +1923,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 134",
    "position": [
     2440.09,
@@ -1803,6 +1937,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 135",
    "position": [
     2398.756,
@@ -1816,6 +1951,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 136",
    "position": [
     2431.848,
@@ -1829,6 +1965,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 137",
    "position": [
     2387.108,
@@ -1842,6 +1979,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 138",
    "position": [
     2413.826,
@@ -1855,6 +1993,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 139",
    "position": [
     2400.324,
@@ -1868,6 +2007,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 140",
    "position": [
     2377.099,
@@ -1881,6 +2021,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 141",
    "position": [
     2168.316,
@@ -1894,6 +2035,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 142",
    "position": [
     2701.981,
@@ -1907,6 +2049,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 143",
    "position": [
     2648.569,
@@ -1920,6 +2063,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 144",
    "position": [
     2859.794,
@@ -1933,6 +2077,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 145",
    "position": [
     2767.385,
@@ -1946,6 +2091,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 146",
    "position": [
     2716.571,
@@ -1959,6 +2105,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 147",
    "position": [
     2728.108,
@@ -1972,6 +2119,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 148",
    "position": [
     2718.693,
@@ -1985,6 +2133,7 @@
    "kind": "agility",
    "type": 3,
    "district": 0,
+   "agility": 4,
    "name": "Agility Orb 149",
    "position": [
     2642.907,
@@ -1998,6 +2147,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 150",
    "position": [
     2621.142,
@@ -2011,6 +2161,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 151",
    "position": [
     2548.801,
@@ -2024,6 +2175,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 152",
    "position": [
     2784.337,
@@ -2037,6 +2189,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 153",
    "position": [
     2834.925,
@@ -2050,6 +2203,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 154",
    "position": [
     2753.648,
@@ -2063,6 +2217,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 155",
    "position": [
     2756.116,
@@ -2076,6 +2231,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 156",
    "position": [
     2673.781,
@@ -2089,6 +2245,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 157",
    "position": [
     2652.988,
@@ -2102,6 +2259,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 158",
    "position": [
     2622.746,
@@ -2115,6 +2273,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 159",
    "position": [
     2491.133,
@@ -2128,6 +2287,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 160",
    "position": [
     2539.141,
@@ -2141,6 +2301,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 161",
    "position": [
     2495.042,
@@ -2154,6 +2315,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 162",
    "position": [
     2488.454,
@@ -2167,6 +2329,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 163",
    "position": [
     2477.497,
@@ -2180,6 +2343,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 164",
    "position": [
     2521.818,
@@ -2193,6 +2357,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 165",
    "position": [
     2596.332,
@@ -2206,6 +2371,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 166",
    "position": [
     2692.265,
@@ -2219,6 +2385,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 167",
    "position": [
     2588.61,
@@ -2232,6 +2399,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 168",
    "position": [
     2613.825,
@@ -2245,6 +2413,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 169",
    "position": [
     2798.167,
@@ -2258,6 +2427,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 170",
    "position": [
     2798.095,
@@ -2271,6 +2441,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 171",
    "position": [
     2912.445,
@@ -2284,6 +2455,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 172",
    "position": [
     3159.516,
@@ -2297,6 +2469,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 173",
    "position": [
     3485.685,
@@ -2310,6 +2483,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 174",
    "position": [
     3417.457,
@@ -2323,6 +2497,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 175",
    "position": [
     3501.472,
@@ -2336,6 +2511,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 176",
    "position": [
     3551.299,
@@ -2349,6 +2525,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 177",
    "position": [
     3076.661,
@@ -2362,6 +2539,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 178",
    "position": [
     3103.91,
@@ -2375,6 +2553,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 179",
    "position": [
     3076.11,
@@ -2388,6 +2567,7 @@
    "kind": "agility",
    "type": 3,
    "district": 0,
+   "agility": 4,
    "name": "Agility Orb 180",
    "position": [
     3020.02,
@@ -2401,6 +2581,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 181",
    "position": [
     2032.262,
@@ -2414,6 +2595,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 182",
    "position": [
     1994.764,
@@ -2427,6 +2609,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 183",
    "position": [
     2216.964,
@@ -2440,6 +2623,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 184",
    "position": [
     2206.96,
@@ -2453,6 +2637,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 185",
    "position": [
     2219.033,
@@ -2466,6 +2651,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 186",
    "position": [
     2251.072,
@@ -2479,6 +2665,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 187",
    "position": [
     2334.051,
@@ -2492,6 +2679,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 188",
    "position": [
     2368.936,
@@ -2505,6 +2693,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 189",
    "position": [
     2263.008,
@@ -2518,6 +2707,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 190",
    "position": [
     2312.799,
@@ -2531,6 +2721,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 191",
    "position": [
     2238.962,
@@ -2544,6 +2735,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 192",
    "position": [
     2286.991,
@@ -2557,6 +2749,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 193",
    "position": [
     2324.657,
@@ -2570,6 +2763,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 194",
    "position": [
     2348.994,
@@ -2583,6 +2777,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 195",
    "position": [
     2414.604,
@@ -2596,6 +2791,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 196",
    "position": [
     2469.15,
@@ -2609,6 +2805,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 197",
    "position": [
     2474.637,
@@ -2622,6 +2819,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 198",
    "position": [
     2452.633,
@@ -2635,6 +2833,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 199",
    "position": [
     2388.989,
@@ -2648,6 +2847,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 200",
    "position": [
     2442.538,
@@ -2661,6 +2861,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 201",
    "position": [
     2430.569,
@@ -2674,6 +2875,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 202",
    "position": [
     2270.793,
@@ -2687,6 +2889,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 203",
    "position": [
     2238.948,
@@ -2700,6 +2903,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 204",
    "position": [
     2264.136,
@@ -2713,6 +2917,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 205",
    "position": [
     2457.118,
@@ -2726,6 +2931,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 206",
    "position": [
     3541.318,
@@ -2739,6 +2945,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 207",
    "position": [
     3582.666,
@@ -2752,6 +2959,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 208",
    "position": [
     3611.575,
@@ -2765,6 +2973,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 209",
    "position": [
     3639.657,
@@ -2778,6 +2987,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 210",
    "position": [
     3649.528,
@@ -2791,6 +3001,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 211",
    "position": [
     3016.106,
@@ -2804,6 +3015,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 212",
    "position": [
     2938.581,
@@ -2817,6 +3029,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 213",
    "position": [
     2969.867,
@@ -2830,6 +3043,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 214",
    "position": [
     3002.992,
@@ -2843,6 +3057,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 215",
    "position": [
     3093.336,
@@ -2856,6 +3071,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 216",
    "position": [
     2069.747,
@@ -2869,6 +3085,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 217",
    "position": [
     2101.064,
@@ -2882,6 +3099,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 218",
    "position": [
     2513.246,
@@ -2895,6 +3113,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 219",
    "position": [
     2474.583,
@@ -2908,6 +3127,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 220",
    "position": [
     1926.263,
@@ -2921,6 +3141,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 221",
    "position": [
     2415.304,
@@ -2934,6 +3155,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 222",
    "position": [
     2401.177,
@@ -2947,6 +3169,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 223",
    "position": [
     2448.618,
@@ -2960,6 +3183,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 224",
    "position": [
     2515.003,
@@ -2973,6 +3197,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 225",
    "position": [
     2474.717,
@@ -2986,6 +3211,7 @@
    "kind": "agility",
    "type": 2,
    "district": 0,
+   "agility": 3,
    "name": "Agility Orb 226",
    "position": [
     2511.629,
@@ -2999,6 +3225,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 227",
    "position": [
     2378.625,
@@ -3012,6 +3239,7 @@
    "kind": "agility",
    "type": 0,
    "district": 0,
+   "agility": 1,
    "name": "Agility Orb 228",
    "position": [
     2374.35,
@@ -3025,6 +3253,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 229",
    "position": [
     2045.633,
@@ -3038,6 +3267,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 230",
    "position": [
     2030.584,
@@ -3051,6 +3281,7 @@
    "kind": "agility",
    "type": 1,
    "district": 0,
+   "agility": 2,
    "name": "Agility Orb 231",
    "position": [
     1987.279,
@@ -3064,6 +3295,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 232",
    "position": [
     1788.819,
@@ -3077,6 +3309,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 233",
    "position": [
     1420.364,
@@ -3090,6 +3323,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 234",
    "position": [
     1394.16,
@@ -3103,6 +3337,7 @@
    "kind": "agility",
    "type": 2,
    "district": 1,
+   "agility": 3,
    "name": "Agility Orb 235",
    "position": [
     1471.319,
@@ -3116,6 +3351,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 236",
    "position": [
     1444.442,
@@ -3129,6 +3365,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 237",
    "position": [
     1361.072,
@@ -3142,6 +3379,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 238",
    "position": [
     1389.876,
@@ -3155,6 +3393,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 239",
    "position": [
     1430.044,
@@ -3168,6 +3407,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 240",
    "position": [
     1120.714,
@@ -3181,6 +3421,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 241",
    "position": [
     1145.397,
@@ -3194,6 +3435,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 242",
    "position": [
     1096.443,
@@ -3207,6 +3449,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 243",
    "position": [
     1201.028,
@@ -3220,6 +3463,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 244",
    "position": [
     1305.189,
@@ -3233,6 +3477,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 245",
    "position": [
     1250.075,
@@ -3246,6 +3491,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 246",
    "position": [
     1142.306,
@@ -3259,6 +3505,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 247",
    "position": [
     1052.219,
@@ -3272,6 +3519,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 248",
    "position": [
     1002.758,
@@ -3285,6 +3533,7 @@
    "kind": "agility",
    "type": 2,
    "district": 1,
+   "agility": 3,
    "name": "Agility Orb 249",
    "position": [
     1021.13,
@@ -3298,6 +3547,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 250",
    "position": [
     983.008,
@@ -3311,6 +3561,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 251",
    "position": [
     1086.519,
@@ -3324,6 +3575,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 252",
    "position": [
     954.906,
@@ -3337,6 +3589,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 253",
    "position": [
     979.197,
@@ -3350,6 +3603,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 254",
    "position": [
     972.332,
@@ -3363,6 +3617,7 @@
    "kind": "agility",
    "type": 2,
    "district": 1,
+   "agility": 3,
    "name": "Agility Orb 255",
    "position": [
     903.457,
@@ -3376,6 +3631,7 @@
    "kind": "agility",
    "type": 2,
    "district": 1,
+   "agility": 3,
    "name": "Agility Orb 256",
    "position": [
     873.328,
@@ -3389,6 +3645,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 257",
    "position": [
     815.222,
@@ -3402,6 +3659,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 258",
    "position": [
     865.14,
@@ -3415,6 +3673,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 259",
    "position": [
     829.309,
@@ -3428,6 +3687,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 260",
    "position": [
     904.524,
@@ -3441,6 +3701,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 261",
    "position": [
     1032.815,
@@ -3454,6 +3715,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 262",
    "position": [
     971.017,
@@ -3467,6 +3729,7 @@
    "kind": "agility",
    "type": 2,
    "district": 1,
+   "agility": 3,
    "name": "Agility Orb 263",
    "position": [
     1111.526,
@@ -3480,6 +3743,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 264",
    "position": [
     968.525,
@@ -3493,6 +3757,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 265",
    "position": [
     1129.622,
@@ -3506,6 +3771,7 @@
    "kind": "agility",
    "type": 2,
    "district": 1,
+   "agility": 3,
    "name": "Agility Orb 266",
    "position": [
     1161.255,
@@ -3519,6 +3785,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 267",
    "position": [
     1181.68,
@@ -3532,6 +3799,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 268",
    "position": [
     1185.14,
@@ -3545,6 +3813,7 @@
    "kind": "agility",
    "type": 3,
    "district": 1,
+   "agility": 4,
    "name": "Agility Orb 269",
    "position": [
     1063.551,
@@ -3558,6 +3827,7 @@
    "kind": "agility",
    "type": 3,
    "district": 1,
+   "agility": 4,
    "name": "Agility Orb 270",
    "position": [
     1124.528,
@@ -3571,6 +3841,7 @@
    "kind": "agility",
    "type": 2,
    "district": 1,
+   "agility": 3,
    "name": "Agility Orb 271",
    "position": [
     1158.952,
@@ -3584,6 +3855,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 272",
    "position": [
     1043.497,
@@ -3597,6 +3869,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 273",
    "position": [
     1040.386,
@@ -3610,6 +3883,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 274",
    "position": [
     1177.266,
@@ -3623,6 +3897,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 275",
    "position": [
     1117.192,
@@ -3636,6 +3911,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 276",
    "position": [
     1005.81,
@@ -3649,6 +3925,7 @@
    "kind": "agility",
    "type": 3,
    "district": 1,
+   "agility": 4,
    "name": "Agility Orb 277",
    "position": [
     1174.814,
@@ -3662,6 +3939,7 @@
    "kind": "agility",
    "type": 3,
    "district": 1,
+   "agility": 4,
    "name": "Agility Orb 278",
    "position": [
     1185.737,
@@ -3675,6 +3953,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 279",
    "position": [
     1211.987,
@@ -3688,6 +3967,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 280",
    "position": [
     1233.82,
@@ -3701,6 +3981,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 281",
    "position": [
     1205.12,
@@ -3714,6 +3995,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 282",
    "position": [
     1324.714,
@@ -3727,6 +4009,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 283",
    "position": [
     1259.796,
@@ -3740,6 +4023,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 284",
    "position": [
     1299.565,
@@ -3753,6 +4037,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 285",
    "position": [
     1358.365,
@@ -3766,6 +4051,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 286",
    "position": [
     1343.201,
@@ -3779,6 +4065,7 @@
    "kind": "agility",
    "type": 3,
    "district": 1,
+   "agility": 4,
    "name": "Agility Orb 287",
    "position": [
     1270.107,
@@ -3792,6 +4079,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 288",
    "position": [
     1282.098,
@@ -3805,6 +4093,7 @@
    "kind": "agility",
    "type": 2,
    "district": 1,
+   "agility": 3,
    "name": "Agility Orb 289",
    "position": [
     1348.424,
@@ -3818,6 +4107,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 290",
    "position": [
     1353.517,
@@ -3831,6 +4121,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 291",
    "position": [
     1326.61,
@@ -3844,6 +4135,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 292",
    "position": [
     1240.901,
@@ -3857,6 +4149,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 293",
    "position": [
     1285.321,
@@ -3870,6 +4163,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 294",
    "position": [
     1316.29,
@@ -3883,6 +4177,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 295",
    "position": [
     1321.442,
@@ -3896,6 +4191,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 296",
    "position": [
     1308.774,
@@ -3909,6 +4205,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 297",
    "position": [
     1299.53,
@@ -3922,6 +4219,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 298",
    "position": [
     1272.763,
@@ -3935,6 +4233,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 299",
    "position": [
     1241.325,
@@ -3948,6 +4247,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 300",
    "position": [
     1047.026,
@@ -3961,6 +4261,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 301",
    "position": [
     1200.208,
@@ -3974,6 +4275,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 302",
    "position": [
     1192.807,
@@ -3987,6 +4289,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 303",
    "position": [
     1217.415,
@@ -4000,6 +4303,7 @@
    "kind": "agility",
    "type": 2,
    "district": 1,
+   "agility": 3,
    "name": "Agility Orb 304",
    "position": [
     1234.218,
@@ -4013,6 +4317,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 305",
    "position": [
     1258.636,
@@ -4026,6 +4331,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 306",
    "position": [
     1093.199,
@@ -4039,6 +4345,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 307",
    "position": [
     1067.432,
@@ -4052,6 +4359,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 308",
    "position": [
     1110.699,
@@ -4065,6 +4373,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 309",
    "position": [
     1138.261,
@@ -4078,6 +4387,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 310",
    "position": [
     1164.865,
@@ -4091,6 +4401,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 311",
    "position": [
     1184.976,
@@ -4104,6 +4415,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 312",
    "position": [
     1124.084,
@@ -4117,6 +4429,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 313",
    "position": [
     1071.264,
@@ -4130,6 +4443,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 314",
    "position": [
     1124.894,
@@ -4143,6 +4457,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 315",
    "position": [
     1162.944,
@@ -4156,6 +4471,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 316",
    "position": [
     1091.878,
@@ -4169,6 +4485,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 317",
    "position": [
     1049.859,
@@ -4182,6 +4499,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 318",
    "position": [
     1022.273,
@@ -4195,6 +4513,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 319",
    "position": [
     1003.907,
@@ -4208,6 +4527,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 320",
    "position": [
     978.278,
@@ -4221,6 +4541,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 321",
    "position": [
     962.615,
@@ -4234,6 +4555,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 322",
    "position": [
     1074.624,
@@ -4247,6 +4569,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 323",
    "position": [
     1024.764,
@@ -4260,6 +4583,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 324",
    "position": [
     973.223,
@@ -4273,6 +4597,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 325",
    "position": [
     1123.311,
@@ -4286,6 +4611,7 @@
    "kind": "agility",
    "type": 2,
    "district": 1,
+   "agility": 3,
    "name": "Agility Orb 326",
    "position": [
     1034.804,
@@ -4299,6 +4625,7 @@
    "kind": "agility",
    "type": 2,
    "district": 1,
+   "agility": 3,
    "name": "Agility Orb 327",
    "position": [
     879.143,
@@ -4312,6 +4639,7 @@
    "kind": "agility",
    "type": 3,
    "district": 1,
+   "agility": 4,
    "name": "Agility Orb 328",
    "position": [
     935.352,
@@ -4325,6 +4653,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 329",
    "position": [
     851.885,
@@ -4338,6 +4667,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 330",
    "position": [
     803.659,
@@ -4351,6 +4681,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 331",
    "position": [
     775.549,
@@ -4364,6 +4695,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 332",
    "position": [
     553.298,
@@ -4377,6 +4709,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 333",
    "position": [
     518.571,
@@ -4390,6 +4723,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 334",
    "position": [
     964.288,
@@ -4403,6 +4737,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 335",
    "position": [
     950.509,
@@ -4416,6 +4751,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 336",
    "position": [
     916.672,
@@ -4429,6 +4765,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 337",
    "position": [
     878.878,
@@ -4442,6 +4779,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 338",
    "position": [
     855.251,
@@ -4455,6 +4793,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 339",
    "position": [
     882.325,
@@ -4468,6 +4807,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 340",
    "position": [
     842.245,
@@ -4481,6 +4821,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 341",
    "position": [
     810.342,
@@ -4494,6 +4835,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 342",
    "position": [
     803.95,
@@ -4507,6 +4849,7 @@
    "kind": "agility",
    "type": 3,
    "district": 1,
+   "agility": 4,
    "name": "Agility Orb 343",
    "position": [
     781.793,
@@ -4520,6 +4863,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 344",
    "position": [
     724.585,
@@ -4533,6 +4877,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 345",
    "position": [
     758.762,
@@ -4546,6 +4891,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 346",
    "position": [
     770.64,
@@ -4559,6 +4905,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 347",
    "position": [
     721.274,
@@ -4572,6 +4919,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 348",
    "position": [
     733.596,
@@ -4585,6 +4933,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 349",
    "position": [
     747.211,
@@ -4598,6 +4947,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 350",
    "position": [
     710.37,
@@ -4611,6 +4961,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 351",
    "position": [
     718.922,
@@ -4624,6 +4975,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 352",
    "position": [
     759.375,
@@ -4637,6 +4989,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 353",
    "position": [
     836.062,
@@ -4650,6 +5003,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 354",
    "position": [
     855.892,
@@ -4663,6 +5017,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 355",
    "position": [
     838.35,
@@ -4676,6 +5031,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 356",
    "position": [
     898.734,
@@ -4689,6 +5045,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 357",
    "position": [
     914.372,
@@ -4702,6 +5059,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 358",
    "position": [
     937.943,
@@ -4715,6 +5073,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 359",
    "position": [
     881.297,
@@ -4728,6 +5087,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 360",
    "position": [
     524.062,
@@ -4741,6 +5101,7 @@
    "kind": "agility",
    "type": 3,
    "district": 1,
+   "agility": 4,
    "name": "Agility Orb 361",
    "position": [
     526.904,
@@ -4754,6 +5115,7 @@
    "kind": "agility",
    "type": 2,
    "district": 1,
+   "agility": 3,
    "name": "Agility Orb 362",
    "position": [
     325.611,
@@ -4767,6 +5129,7 @@
    "kind": "agility",
    "type": 2,
    "district": 1,
+   "agility": 3,
    "name": "Agility Orb 363",
    "position": [
     278.649,
@@ -4780,6 +5143,7 @@
    "kind": "agility",
    "type": 2,
    "district": 1,
+   "agility": 3,
    "name": "Agility Orb 364",
    "position": [
     415.733,
@@ -4793,6 +5157,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 365",
    "position": [
     1071.891,
@@ -4806,6 +5171,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 366",
    "position": [
     1098.567,
@@ -4819,6 +5185,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 367",
    "position": [
     1091.934,
@@ -4832,6 +5199,7 @@
    "kind": "agility",
    "type": 0,
    "district": 1,
+   "agility": 1,
    "name": "Agility Orb 368",
    "position": [
     1052.291,
@@ -4845,6 +5213,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 369",
    "position": [
     1005.939,
@@ -4858,6 +5227,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 370",
    "position": [
     1188.828,
@@ -4871,6 +5241,7 @@
    "kind": "agility",
    "type": 1,
    "district": 1,
+   "agility": 2,
    "name": "Agility Orb 371",
    "position": [
     879.523,
@@ -4884,6 +5255,7 @@
    "kind": "agility",
    "type": 3,
    "district": 3,
+   "agility": 4,
    "name": "Agility Orb 372",
    "position": [
     1927.206,
@@ -4897,6 +5269,7 @@
    "kind": "agility",
    "type": 3,
    "district": 3,
+   "agility": 4,
    "name": "Agility Orb 373",
    "position": [
     1849.127,
@@ -4910,6 +5283,7 @@
    "kind": "agility",
    "type": 3,
    "district": 3,
+   "agility": 4,
    "name": "Agility Orb 374",
    "position": [
     1929.936,
@@ -4923,6 +5297,7 @@
    "kind": "agility",
    "type": 3,
    "district": 3,
+   "agility": 4,
    "name": "Agility Orb 375",
    "position": [
     2009.207,
@@ -4936,6 +5311,7 @@
    "kind": "agility",
    "type": 3,
    "district": 3,
+   "agility": 4,
    "name": "Agility Orb 376",
    "position": [
     1884.708,
@@ -4949,6 +5325,7 @@
    "kind": "agility",
    "type": 3,
    "district": 3,
+   "agility": 4,
    "name": "Agility Orb 377",
    "position": [
     1972.755,
@@ -4962,6 +5339,7 @@
    "kind": "agility",
    "type": 3,
    "district": 3,
+   "agility": 4,
    "name": "Agility Orb 378",
    "position": [
     1929.793,
@@ -4975,6 +5353,7 @@
    "kind": "agility",
    "type": 3,
    "district": 3,
+   "agility": 4,
    "name": "Agility Orb 379",
    "position": [
     2006.102,
@@ -4988,6 +5367,7 @@
    "kind": "agility",
    "type": 3,
    "district": 3,
+   "agility": 4,
    "name": "Agility Orb 380",
    "position": [
     1905.469,
@@ -5001,6 +5381,7 @@
    "kind": "agility",
    "type": 3,
    "district": 3,
+   "agility": 4,
    "name": "Agility Orb 381",
    "position": [
     1917.29,
@@ -5014,6 +5395,7 @@
    "kind": "agility",
    "type": 3,
    "district": 3,
+   "agility": 5,
    "name": "Agility Orb 382",
    "position": [
     1978.799,
@@ -5027,6 +5409,7 @@
    "kind": "agility",
    "type": 3,
    "district": 3,
+   "agility": 5,
    "name": "Agility Orb 383",
    "position": [
     1929.322,
@@ -5040,6 +5423,7 @@
    "kind": "agility",
    "type": 3,
    "district": 3,
+   "agility": 5,
    "name": "Agility Orb 384",
    "position": [
     1876.637,
@@ -5053,6 +5437,7 @@
    "kind": "agility",
    "type": 3,
    "district": 3,
+   "agility": 5,
    "name": "Agility Orb 385",
    "position": [
     1910.913,
@@ -5066,6 +5451,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 386",
    "position": [
     1594.341,
@@ -5079,6 +5465,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 387",
    "position": [
     1927.565,
@@ -5092,6 +5479,7 @@
    "kind": "agility",
    "type": 0,
    "district": 2,
+   "agility": 1,
    "name": "Agility Orb 388",
    "position": [
     2101.007,
@@ -5105,6 +5493,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 389",
    "position": [
     2386.39,
@@ -5118,6 +5507,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 390",
    "position": [
     2597.348,
@@ -5131,6 +5521,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 391",
    "position": [
     2562.667,
@@ -5144,6 +5535,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 392",
    "position": [
     2483.217,
@@ -5157,6 +5549,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 393",
    "position": [
     2414.618,
@@ -5170,6 +5563,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 394",
    "position": [
     2393.291,
@@ -5183,6 +5577,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 395",
    "position": [
     2483.447,
@@ -5196,6 +5591,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 396",
    "position": [
     2464.194,
@@ -5209,6 +5605,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 397",
    "position": [
     2420.973,
@@ -5222,6 +5619,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 398",
    "position": [
     2543.015,
@@ -5235,6 +5633,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 399",
    "position": [
     2573.437,
@@ -5248,6 +5647,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 400",
    "position": [
     2617.843,
@@ -5261,6 +5661,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 401",
    "position": [
     2658.281,
@@ -5274,6 +5675,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 402",
    "position": [
     2607.013,
@@ -5287,6 +5689,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 403",
    "position": [
     2525.572,
@@ -5300,6 +5703,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 404",
    "position": [
     2475.74,
@@ -5313,6 +5717,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 405",
    "position": [
     2470.623,
@@ -5326,6 +5731,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 406",
    "position": [
     2457.698,
@@ -5339,6 +5745,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 407",
    "position": [
     2438.58,
@@ -5352,6 +5759,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 408",
    "position": [
     2385.241,
@@ -5365,6 +5773,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 409",
    "position": [
     2334.465,
@@ -5378,6 +5787,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 410",
    "position": [
     2378.124,
@@ -5391,6 +5801,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 411",
    "position": [
     2304.037,
@@ -5404,6 +5815,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 412",
    "position": [
     2223.122,
@@ -5417,6 +5829,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 413",
    "position": [
     2299.153,
@@ -5430,6 +5843,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 414",
    "position": [
     2100.013,
@@ -5443,6 +5857,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 415",
    "position": [
     1939.827,
@@ -5456,6 +5871,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 416",
    "position": [
     1906.594,
@@ -5469,6 +5885,7 @@
    "kind": "agility",
    "type": 0,
    "district": 2,
+   "agility": 1,
    "name": "Agility Orb 417",
    "position": [
     2397.376,
@@ -5482,6 +5899,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 418",
    "position": [
     2282.398,
@@ -5495,6 +5913,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 419",
    "position": [
     2298.412,
@@ -5508,6 +5927,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 420",
    "position": [
     2190.251,
@@ -5521,6 +5941,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 421",
    "position": [
     2143.617,
@@ -5534,6 +5955,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 422",
    "position": [
     2200.475,
@@ -5547,6 +5969,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 423",
    "position": [
     2297.132,
@@ -5560,6 +5983,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 424",
    "position": [
     2224.923,
@@ -5573,6 +5997,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 425",
    "position": [
     2171.089,
@@ -5586,6 +6011,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 426",
    "position": [
     2044.645,
@@ -5599,6 +6025,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 427",
    "position": [
     1971.122,
@@ -5612,6 +6039,7 @@
    "kind": "agility",
    "type": 3,
    "district": 2,
+   "agility": 4,
    "name": "Agility Orb 428",
    "position": [
     2575.832,
@@ -5625,6 +6053,7 @@
    "kind": "agility",
    "type": 3,
    "district": 2,
+   "agility": 4,
    "name": "Agility Orb 429",
    "position": [
     2534.843,
@@ -5638,6 +6067,7 @@
    "kind": "agility",
    "type": 3,
    "district": 2,
+   "agility": 4,
    "name": "Agility Orb 430",
    "position": [
     2570.511,
@@ -5651,6 +6081,7 @@
    "kind": "agility",
    "type": 3,
    "district": 2,
+   "agility": 4,
    "name": "Agility Orb 431",
    "position": [
     2492.663,
@@ -5664,6 +6095,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 432",
    "position": [
     2586.2,
@@ -5677,6 +6109,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 433",
    "position": [
     2673.874,
@@ -5690,6 +6123,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 434",
    "position": [
     2762.876,
@@ -5703,6 +6137,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 435",
    "position": [
     2778.491,
@@ -5716,6 +6151,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 436",
    "position": [
     2690.407,
@@ -5729,6 +6165,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 437",
    "position": [
     2665.628,
@@ -5742,6 +6179,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 438",
    "position": [
     2656.934,
@@ -5755,6 +6193,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 439",
    "position": [
     2781.629,
@@ -5768,6 +6207,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 440",
    "position": [
     2773.445,
@@ -5781,6 +6221,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 441",
    "position": [
     2464.473,
@@ -5794,6 +6235,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 442",
    "position": [
     2604.629,
@@ -5807,6 +6249,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 443",
    "position": [
     2612.35,
@@ -5820,6 +6263,7 @@
    "kind": "agility",
    "type": 3,
    "district": 2,
+   "agility": 4,
    "name": "Agility Orb 444",
    "position": [
     2382.35,
@@ -5833,6 +6277,7 @@
    "kind": "agility",
    "type": 3,
    "district": 2,
+   "agility": 4,
    "name": "Agility Orb 445",
    "position": [
     2420.872,
@@ -5846,6 +6291,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 446",
    "position": [
     2464.429,
@@ -5859,6 +6305,7 @@
    "kind": "agility",
    "type": 3,
    "district": 2,
+   "agility": 4,
    "name": "Agility Orb 447",
    "position": [
     2356.915,
@@ -5872,6 +6319,7 @@
    "kind": "agility",
    "type": 3,
    "district": 2,
+   "agility": 4,
    "name": "Agility Orb 448",
    "position": [
     2327.433,
@@ -5885,6 +6333,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 449",
    "position": [
     2544.927,
@@ -5898,6 +6347,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 450",
    "position": [
     2562.778,
@@ -5911,6 +6361,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 451",
    "position": [
     2636.19,
@@ -5924,6 +6375,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 452",
    "position": [
     2455.086,
@@ -5937,6 +6389,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 453",
    "position": [
     1789.093,
@@ -5950,6 +6403,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 454",
    "position": [
     1782.321,
@@ -5963,6 +6417,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 455",
    "position": [
     1788.018,
@@ -5976,6 +6431,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 456",
    "position": [
     1771.878,
@@ -5989,6 +6445,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 457",
    "position": [
     1778.537,
@@ -6002,6 +6459,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 458",
    "position": [
     1763.47,
@@ -6015,6 +6473,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 459",
    "position": [
     1840.994,
@@ -6028,6 +6487,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 460",
    "position": [
     1863.691,
@@ -6041,6 +6501,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 461",
    "position": [
     1880.649,
@@ -6054,6 +6515,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 462",
    "position": [
     1887.884,
@@ -6067,6 +6529,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 463",
    "position": [
     1864.38,
@@ -6080,6 +6543,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 464",
    "position": [
     1894.512,
@@ -6093,6 +6557,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 465",
    "position": [
     1884.392,
@@ -6106,6 +6571,7 @@
    "kind": "agility",
    "type": 3,
    "district": 2,
+   "agility": 4,
    "name": "Agility Orb 466",
    "position": [
     1893.592,
@@ -6119,6 +6585,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 467",
    "position": [
     1843.179,
@@ -6132,6 +6599,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 468",
    "position": [
     1841.438,
@@ -6145,6 +6613,7 @@
    "kind": "agility",
    "type": 0,
    "district": 2,
+   "agility": 1,
    "name": "Agility Orb 469",
    "position": [
     1815.909,
@@ -6158,6 +6627,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 470",
    "position": [
     1815.085,
@@ -6171,6 +6641,7 @@
    "kind": "agility",
    "type": 1,
    "district": 2,
+   "agility": 2,
    "name": "Agility Orb 471",
    "position": [
     1733.51,
@@ -6184,6 +6655,7 @@
    "kind": "agility",
    "type": 3,
    "district": 2,
+   "agility": 4,
    "name": "Agility Orb 472",
    "position": [
     1734.53,
@@ -6197,6 +6669,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 473",
    "position": [
     1833.614,
@@ -6210,6 +6683,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 474",
    "position": [
     1927.344,
@@ -6223,6 +6697,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 475",
    "position": [
     1976.371,
@@ -6236,6 +6711,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 476",
    "position": [
     2054.875,
@@ -6249,6 +6725,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 477",
    "position": [
     2036.078,
@@ -6262,6 +6739,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 478",
    "position": [
     2098.845,
@@ -6275,6 +6753,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 479",
    "position": [
     2275.555,
@@ -6288,6 +6767,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 480",
    "position": [
     2322.424,
@@ -6301,6 +6781,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 481",
    "position": [
     2271.304,
@@ -6314,6 +6795,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 482",
    "position": [
     2209.268,
@@ -6327,6 +6809,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 4,
    "name": "Agility Orb 483",
    "position": [
     2185.771,
@@ -6340,6 +6823,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 484",
    "position": [
     2124.576,
@@ -6353,6 +6837,7 @@
    "kind": "agility",
    "type": 3,
    "district": 2,
+   "agility": 4,
    "name": "Agility Orb 485",
    "position": [
     2391.416,
@@ -6366,6 +6851,7 @@
    "kind": "agility",
    "type": 3,
    "district": 2,
+   "agility": 4,
    "name": "Agility Orb 486",
    "position": [
     2393.53,
@@ -6379,6 +6865,7 @@
    "kind": "agility",
    "type": 3,
    "district": 2,
+   "agility": 4,
    "name": "Agility Orb 487",
    "position": [
     2218.384,
@@ -6392,6 +6879,7 @@
    "kind": "agility",
    "type": 3,
    "district": 2,
+   "agility": 4,
    "name": "Agility Orb 488",
    "position": [
     2167.114,
@@ -6405,6 +6893,7 @@
    "kind": "agility",
    "type": 3,
    "district": 2,
+   "agility": 4,
    "name": "Agility Orb 489",
    "position": [
     2250.229,
@@ -6418,6 +6907,7 @@
    "kind": "agility",
    "type": 3,
    "district": 2,
+   "agility": 4,
    "name": "Agility Orb 490",
    "position": [
     2181.389,
@@ -6431,6 +6921,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 491",
    "position": [
     2085.752,
@@ -6444,6 +6935,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 492",
    "position": [
     2021.928,
@@ -6457,6 +6949,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 493",
    "position": [
     1976.561,
@@ -6470,6 +6963,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 494",
    "position": [
     2017.641,
@@ -6483,6 +6977,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 495",
    "position": [
     2019.068,
@@ -6496,6 +6991,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 496",
    "position": [
     2020.935,
@@ -6509,6 +7005,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 497",
    "position": [
     1967.139,
@@ -6522,6 +7019,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 4,
    "name": "Agility Orb 498",
    "position": [
     2048.606,
@@ -6535,6 +7033,7 @@
    "kind": "agility",
    "type": 2,
    "district": 2,
+   "agility": 3,
    "name": "Agility Orb 499",
    "position": [
     1976.277,
@@ -6548,6 +7047,7 @@
    "kind": "agility",
    "type": 3,
    "district": 2,
+   "agility": 4,
    "name": "Agility Orb 500",
    "position": [
     2054.092,
@@ -6561,6 +7061,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 001",
    "position": [
     1046.397,
@@ -6574,6 +7075,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 002",
    "position": [
     979.382,
@@ -6587,6 +7089,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 003",
    "position": [
     1113.307,
@@ -6600,6 +7103,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 004",
    "position": [
     904.814,
@@ -6613,6 +7117,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 005",
    "position": [
     880.737,
@@ -6626,6 +7131,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 006",
    "position": [
     894.006,
@@ -6639,6 +7145,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 007",
    "position": [
     1109.987,
@@ -6652,6 +7159,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 008",
    "position": [
     1180.406,
@@ -6665,6 +7173,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 009",
    "position": [
     1166.157,
@@ -6678,6 +7187,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 010",
    "position": [
     1249.327,
@@ -6691,6 +7201,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 011",
    "position": [
     1279.776,
@@ -6704,6 +7215,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 012",
    "position": [
     1267.59,
@@ -6717,6 +7229,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 013",
    "position": [
     594.614,
@@ -6730,6 +7243,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 014",
    "position": [
     415.169,
@@ -6743,6 +7257,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 015",
    "position": [
     239.161,
@@ -6756,6 +7271,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 016",
    "position": [
     637.296,
@@ -6769,6 +7285,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 017",
    "position": [
     749.389,
@@ -6782,6 +7299,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 018",
    "position": [
     749.841,
@@ -6795,6 +7313,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 019",
    "position": [
     892.705,
@@ -6808,6 +7327,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 020",
    "position": [
     1160.503,
@@ -6821,6 +7341,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 021",
    "position": [
     894.427,
@@ -6834,6 +7355,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 022",
    "position": [
     870.409,
@@ -6847,6 +7369,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 023",
    "position": [
     796.426,
@@ -6860,6 +7383,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 024",
    "position": [
     686.71,
@@ -6873,6 +7397,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 025",
    "position": [
     1114.221,
@@ -6886,6 +7411,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 026",
    "position": [
     1004.061,
@@ -6899,6 +7425,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 027",
    "position": [
     1051.109,
@@ -6912,6 +7439,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 028",
    "position": [
     602.311,
@@ -6925,6 +7453,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 029",
    "position": [
     349.747,
@@ -6938,6 +7467,7 @@
    "kind": "online",
    "type": 10,
    "district": 1,
+   "agility": 1,
    "name": "Online Orb 030",
    "position": [
     585.503,
@@ -6951,6 +7481,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 031",
    "position": [
     2346.799,
@@ -6964,6 +7495,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 032",
    "position": [
     2346.794,
@@ -6977,6 +7509,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 033",
    "position": [
     2247.352,
@@ -6990,6 +7523,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 034",
    "position": [
     3073.468,
@@ -7003,6 +7537,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 035",
    "position": [
     3102.782,
@@ -7016,6 +7551,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 036",
    "position": [
     3078.533,
@@ -7029,6 +7565,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 037",
    "position": [
     2667.639,
@@ -7042,6 +7579,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 038",
    "position": [
     1981.633,
@@ -7055,6 +7593,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 039",
    "position": [
     2058.702,
@@ -7068,6 +7607,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 040",
    "position": [
     1997.859,
@@ -7081,6 +7621,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 041",
    "position": [
     3139.859,
@@ -7094,6 +7635,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 042",
    "position": [
     2576.59,
@@ -7107,6 +7649,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 043",
    "position": [
     2549.498,
@@ -7120,6 +7663,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 044",
    "position": [
     2114.572,
@@ -7133,6 +7677,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 045",
    "position": [
     2293.303,
@@ -7146,6 +7691,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 046",
    "position": [
     2270.017,
@@ -7159,6 +7705,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 047",
    "position": [
     2744.275,
@@ -7172,6 +7719,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 048",
    "position": [
     2636.005,
@@ -7185,6 +7733,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 049",
    "position": [
     2689.897,
@@ -7198,6 +7747,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 050",
    "position": [
     3240.353,
@@ -7211,6 +7761,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 051",
    "position": [
     3579.299,
@@ -7224,6 +7775,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 052",
    "position": [
     3610.208,
@@ -7237,6 +7789,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 053",
    "position": [
     2845.54,
@@ -7250,6 +7803,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 054",
    "position": [
     2931.959,
@@ -7263,6 +7817,7 @@
    "kind": "online",
    "type": 10,
    "district": 0,
+   "agility": 1,
    "name": "Online Orb 055",
    "position": [
     3144.782,
@@ -7276,6 +7831,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 056",
    "position": [
     2455.34,
@@ -7289,6 +7845,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 057",
    "position": [
     2610.481,
@@ -7302,6 +7859,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 058",
    "position": [
     2519.953,
@@ -7315,6 +7873,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 059",
    "position": [
     2122.921,
@@ -7328,6 +7887,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 060",
    "position": [
     2051.938,
@@ -7341,6 +7901,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 061",
    "position": [
     1900.531,
@@ -7354,6 +7915,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 062",
    "position": [
     2191.454,
@@ -7367,6 +7929,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 063",
    "position": [
     2214.783,
@@ -7380,6 +7943,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 064",
    "position": [
     2152.75,
@@ -7393,6 +7957,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 065",
    "position": [
     2508.62,
@@ -7406,6 +7971,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 066",
    "position": [
     2493.522,
@@ -7419,6 +7985,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 067",
    "position": [
     2394.181,
@@ -7432,6 +7999,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 068",
    "position": [
     2832.82,
@@ -7445,6 +8013,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 069",
    "position": [
     2776.595,
@@ -7458,6 +8027,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 070",
    "position": [
     2836.907,
@@ -7471,6 +8041,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 071",
    "position": [
     1960.264,
@@ -7484,6 +8055,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 072",
    "position": [
     1764.671,
@@ -7497,6 +8069,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 073",
    "position": [
     1802.984,
@@ -7510,6 +8083,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 074",
    "position": [
     2609.539,
@@ -7523,6 +8097,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 075",
    "position": [
     2756.603,
@@ -7536,6 +8111,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 076",
    "position": [
     2735.399,
@@ -7549,6 +8125,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 077",
    "position": [
     2158.521,
@@ -7562,6 +8139,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 078",
    "position": [
     2117.595,
@@ -7575,6 +8153,7 @@
    "kind": "online",
    "type": 10,
    "district": 2,
+   "agility": 1,
    "name": "Online Orb 079",
    "position": [
     2158.337,
@@ -7588,6 +8167,7 @@
    "kind": "online",
    "type": 10,
    "district": 3,
+   "agility": 5,
    "name": "Online Orb 080",
    "position": [
     1947.775,
@@ -7601,6 +8181,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 001",
    "position": [
     2294.287,
@@ -7614,6 +8195,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 002",
    "position": [
     2206.409,
@@ -7627,6 +8209,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 003",
    "position": [
     2188.009,
@@ -7640,6 +8223,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 004",
    "position": [
     1923.07,
@@ -7653,6 +8237,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 005",
    "position": [
     2110.962,
@@ -7666,6 +8251,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 006",
    "position": [
     1983.05,
@@ -7679,6 +8265,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 007",
    "position": [
     2366.664,
@@ -7692,6 +8279,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 008",
    "position": [
     2557.387,
@@ -7705,6 +8293,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 009",
    "position": [
     2934.257,
@@ -7718,6 +8307,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 010",
    "position": [
     2729.194,
@@ -7731,6 +8321,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 011",
    "position": [
     2728.253,
@@ -7744,6 +8335,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 012",
    "position": [
     2618.04,
@@ -7757,6 +8349,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 013",
    "position": [
     2539.097,
@@ -7770,6 +8363,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 014",
    "position": [
     3782.891,
@@ -7783,6 +8377,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 4,
    "name": "Hidden Orb 015",
    "position": [
     3050.654,
@@ -7796,6 +8391,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 016",
    "position": [
     3014.812,
@@ -7809,6 +8405,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 017",
    "position": [
     2878.264,
@@ -7822,6 +8419,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 018",
    "position": [
     3167.054,
@@ -7835,6 +8433,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 019",
    "position": [
     2911.673,
@@ -7848,6 +8447,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 020",
    "position": [
     3028.131,
@@ -7861,6 +8461,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 021",
    "position": [
     3183.511,
@@ -7874,6 +8475,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 022",
    "position": [
     2719.832,
@@ -7887,6 +8489,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 023",
    "position": [
     3062.726,
@@ -7900,6 +8503,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 024",
    "position": [
     2950.61,
@@ -7913,6 +8517,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 025",
    "position": [
     3180.21,
@@ -7926,6 +8531,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 026",
    "position": [
     3176.369,
@@ -7939,6 +8545,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 027",
    "position": [
     3218.68,
@@ -7952,6 +8559,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 028",
    "position": [
     2620.071,
@@ -7965,6 +8573,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 029",
    "position": [
     2701.969,
@@ -7978,6 +8587,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 030",
    "position": [
     2615.328,
@@ -7991,6 +8601,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 031",
    "position": [
     2645.05,
@@ -8004,6 +8615,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 032",
    "position": [
     2847.159,
@@ -8017,6 +8629,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 033",
    "position": [
     1840.641,
@@ -8030,6 +8643,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 034",
    "position": [
     2274.837,
@@ -8043,6 +8657,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 035",
    "position": [
     2284.205,
@@ -8056,6 +8671,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 036",
    "position": [
     2503.28,
@@ -8069,6 +8685,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 037",
    "position": [
     2419.699,
@@ -8082,6 +8699,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 038",
    "position": [
     2939.489,
@@ -8095,6 +8713,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 039",
    "position": [
     3199.218,
@@ -8108,6 +8727,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 040",
    "position": [
     3201.319,
@@ -8121,6 +8741,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 041",
    "position": [
     3193.271,
@@ -8134,6 +8755,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 042",
    "position": [
     3223.496,
@@ -8147,6 +8769,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 043",
    "position": [
     2320.441,
@@ -8160,6 +8783,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 044",
    "position": [
     2053.188,
@@ -8173,6 +8797,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 045",
    "position": [
     3086.491,
@@ -8186,6 +8811,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 046",
    "position": [
     3644.5,
@@ -8199,6 +8825,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 047",
    "position": [
     3684.244,
@@ -8212,6 +8839,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 048",
    "position": [
     2864.295,
@@ -8225,6 +8853,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 049",
    "position": [
     2980.585,
@@ -8238,6 +8867,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 050",
    "position": [
     2206.703,
@@ -8251,6 +8881,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 051",
    "position": [
     2176.746,
@@ -8264,6 +8895,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 052",
    "position": [
     2149.21,
@@ -8277,6 +8909,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 053",
    "position": [
     2114.737,
@@ -8290,6 +8923,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 054",
    "position": [
     2378.947,
@@ -8303,6 +8937,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 055",
    "position": [
     1999.679,
@@ -8316,6 +8951,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 056",
    "position": [
     2076.423,
@@ -8329,6 +8965,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 057",
    "position": [
     2105.584,
@@ -8342,6 +8979,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 058",
    "position": [
     2017.803,
@@ -8355,6 +8993,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 059",
    "position": [
     2055.726,
@@ -8368,6 +9007,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 060",
    "position": [
     2082.049,
@@ -8381,6 +9021,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 061",
    "position": [
     2051.984,
@@ -8394,6 +9035,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 062",
    "position": [
     2160.394,
@@ -8407,6 +9049,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 063",
    "position": [
     2355.898,
@@ -8420,6 +9063,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 064",
    "position": [
     2264.839,
@@ -8433,6 +9077,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 065",
    "position": [
     2407.378,
@@ -8446,6 +9091,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 066",
    "position": [
     2400.761,
@@ -8459,6 +9105,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 067",
    "position": [
     2146.076,
@@ -8472,6 +9119,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 068",
    "position": [
     2518.575,
@@ -8485,6 +9133,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 069",
    "position": [
     2575.292,
@@ -8498,6 +9147,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 070",
    "position": [
     2482.832,
@@ -8511,6 +9161,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 071",
    "position": [
     2574.828,
@@ -8524,6 +9175,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 072",
    "position": [
     2608.563,
@@ -8537,6 +9189,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 073",
    "position": [
     2810.27,
@@ -8550,6 +9203,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 074",
    "position": [
     2873.506,
@@ -8563,6 +9217,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 075",
    "position": [
     2690.771,
@@ -8576,6 +9231,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 076",
    "position": [
     2548.754,
@@ -8589,6 +9245,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 077",
    "position": [
     2811.385,
@@ -8602,6 +9259,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 078",
    "position": [
     2583.096,
@@ -8615,6 +9273,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 079",
    "position": [
     2605.334,
@@ -8628,6 +9287,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 080",
    "position": [
     2473.095,
@@ -8641,6 +9301,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 081",
    "position": [
     2430.02,
@@ -8654,6 +9315,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 082",
    "position": [
     2502.846,
@@ -8667,6 +9329,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 083",
    "position": [
     2432.029,
@@ -8680,6 +9343,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 084",
    "position": [
     2127.055,
@@ -8693,6 +9357,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 085",
    "position": [
     1895.743,
@@ -8706,6 +9371,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 086",
    "position": [
     3548.586,
@@ -8719,6 +9385,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 087",
    "position": [
     657.011,
@@ -8732,6 +9399,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 088",
    "position": [
     1297.59,
@@ -8745,6 +9413,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 089",
    "position": [
     1471.3,
@@ -8758,6 +9427,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 090",
    "position": [
     964.33,
@@ -8771,6 +9441,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 091",
    "position": [
     1125.738,
@@ -8784,6 +9455,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 092",
    "position": [
     1394.687,
@@ -8797,6 +9469,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 093",
    "position": [
     1420.596,
@@ -8810,6 +9483,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 094",
    "position": [
     1345.767,
@@ -8823,6 +9497,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 095",
    "position": [
     865.538,
@@ -8836,6 +9511,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 096",
    "position": [
     218.703,
@@ -8849,6 +9525,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 4,
    "name": "Hidden Orb 097",
    "position": [
     879.726,
@@ -8862,6 +9539,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 098",
    "position": [
     1124.039,
@@ -8875,6 +9553,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 099",
    "position": [
     688.418,
@@ -8888,6 +9567,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 100",
    "position": [
     1121.075,
@@ -8901,6 +9581,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 101",
    "position": [
     1016.245,
@@ -8914,6 +9595,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 102",
    "position": [
     1105.438,
@@ -8927,6 +9609,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 103",
    "position": [
     369.823,
@@ -8940,6 +9623,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 104",
    "position": [
     372.606,
@@ -8953,6 +9637,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 105",
    "position": [
     389.836,
@@ -8966,6 +9651,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 106",
    "position": [
     617.69,
@@ -8979,6 +9665,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 107",
    "position": [
     1114.822,
@@ -8992,6 +9679,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 108",
    "position": [
     1204.2,
@@ -9005,6 +9693,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 109",
    "position": [
     1057.277,
@@ -9018,6 +9707,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 110",
    "position": [
     1073.134,
@@ -9031,6 +9721,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 111",
    "position": [
     940.618,
@@ -9044,6 +9735,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 112",
    "position": [
     694.182,
@@ -9057,6 +9749,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 113",
    "position": [
     945.372,
@@ -9070,6 +9763,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 114",
    "position": [
     581.595,
@@ -9083,6 +9777,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 115",
    "position": [
     985.529,
@@ -9096,6 +9791,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 116",
    "position": [
     820.704,
@@ -9109,6 +9805,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 117",
    "position": [
     507.93,
@@ -9122,6 +9819,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 118",
    "position": [
     1142.765,
@@ -9135,6 +9833,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 119",
    "position": [
     1295.914,
@@ -9148,6 +9847,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 120",
    "position": [
     1164.398,
@@ -9161,6 +9861,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 121",
    "position": [
     856.366,
@@ -9174,6 +9875,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 122",
    "position": [
     1162.157,
@@ -9187,6 +9889,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 123",
    "position": [
     1111.597,
@@ -9200,6 +9903,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 124",
    "position": [
     1456.448,
@@ -9213,6 +9917,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 125",
    "position": [
     1265.033,
@@ -9226,6 +9931,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 126",
    "position": [
     781.917,
@@ -9239,6 +9945,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 127",
    "position": [
     842.901,
@@ -9252,6 +9959,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 128",
    "position": [
     592.856,
@@ -9265,6 +9973,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 129",
    "position": [
     1049.644,
@@ -9278,6 +9987,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 130",
    "position": [
     1108.082,
@@ -9291,6 +10001,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 131",
    "position": [
     1521.688,
@@ -9304,6 +10015,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 132",
    "position": [
     935.605,
@@ -9317,6 +10029,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 133",
    "position": [
     916.046,
@@ -9330,6 +10043,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 134",
    "position": [
     1115.219,
@@ -9343,6 +10057,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 4,
    "name": "Hidden Orb 135",
    "position": [
     1287.723,
@@ -9356,6 +10071,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 136",
    "position": [
     1170.639,
@@ -9369,6 +10085,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 137",
    "position": [
     1302.199,
@@ -9382,6 +10099,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 138",
    "position": [
     1186.485,
@@ -9395,6 +10113,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 139",
    "position": [
     1145.311,
@@ -9408,6 +10127,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 140",
    "position": [
     863.167,
@@ -9421,6 +10141,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 141",
    "position": [
     985.076,
@@ -9434,6 +10155,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 142",
    "position": [
     939.11,
@@ -9447,6 +10169,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 143",
    "position": [
     658.948,
@@ -9460,6 +10183,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 144",
    "position": [
     658.689,
@@ -9473,6 +10197,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 145",
    "position": [
     658.847,
@@ -9486,6 +10211,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 146",
    "position": [
     720.493,
@@ -9499,6 +10225,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 147",
    "position": [
     707.346,
@@ -9512,6 +10239,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 148",
    "position": [
     723.912,
@@ -9525,6 +10253,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 149",
    "position": [
     838.886,
@@ -9538,6 +10267,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 150",
    "position": [
     876.071,
@@ -9551,6 +10281,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 151",
    "position": [
     864.978,
@@ -9564,6 +10295,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 152",
    "position": [
     963.06,
@@ -9577,6 +10309,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 153",
    "position": [
     1357.22,
@@ -9590,6 +10323,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 154",
    "position": [
     1345.143,
@@ -9603,6 +10337,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 155",
    "position": [
     1049.836,
@@ -9616,6 +10351,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 156",
    "position": [
     1027.134,
@@ -9629,6 +10365,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 157",
    "position": [
     1117.832,
@@ -9642,6 +10379,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 158",
    "position": [
     838.739,
@@ -9655,6 +10393,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 159",
    "position": [
     708.521,
@@ -9668,6 +10407,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 160",
    "position": [
     1270.08,
@@ -9681,6 +10421,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 161",
    "position": [
     1434.264,
@@ -9694,6 +10435,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 162",
    "position": [
     1681.774,
@@ -9707,6 +10449,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 163",
    "position": [
     1421.903,
@@ -9720,6 +10463,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 164",
    "position": [
     960.109,
@@ -9733,6 +10477,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 165",
    "position": [
     806.883,
@@ -9746,6 +10491,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 166",
    "position": [
     809.157,
@@ -9759,6 +10505,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 167",
    "position": [
     1200.165,
@@ -9772,6 +10519,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 168",
    "position": [
     1085.146,
@@ -9785,6 +10533,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 169",
    "position": [
     899.018,
@@ -9798,6 +10547,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 170",
    "position": [
     945.78,
@@ -9811,6 +10561,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 171",
    "position": [
     599.834,
@@ -9824,6 +10575,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 172",
    "position": [
     842.764,
@@ -9837,6 +10589,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 173",
    "position": [
     730.527,
@@ -9850,6 +10603,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 174",
    "position": [
     313.186,
@@ -9863,6 +10617,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 175",
    "position": [
     510.985,
@@ -9876,6 +10631,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 176",
    "position": [
     524.359,
@@ -9889,6 +10645,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 177",
    "position": [
     1285.424,
@@ -9902,6 +10659,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 178",
    "position": [
     1009.766,
@@ -9915,6 +10673,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 179",
    "position": [
     1330.016,
@@ -9928,6 +10687,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 180",
    "position": [
     1274.314,
@@ -9941,6 +10701,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 181",
    "position": [
     1172.085,
@@ -9954,6 +10715,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 182",
    "position": [
     1234.863,
@@ -9967,6 +10729,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 183",
    "position": [
     1077.368,
@@ -9980,6 +10743,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 184",
    "position": [
     863.435,
@@ -9993,6 +10757,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 185",
    "position": [
     853.501,
@@ -10006,6 +10771,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 186",
    "position": [
     814.514,
@@ -10019,6 +10785,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 1,
+   "agility": 1,
    "name": "Hidden Orb 187",
    "position": [
     878.342,
@@ -10032,6 +10799,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 3,
+   "agility": 5,
    "name": "Hidden Orb 188",
    "position": [
     1923.283,
@@ -10045,6 +10813,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 3,
+   "agility": 1,
    "name": "Hidden Orb 189",
    "position": [
     1872.781,
@@ -10058,6 +10827,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 3,
+   "agility": 1,
    "name": "Hidden Orb 190",
    "position": [
     2030.515,
@@ -10071,6 +10841,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 3,
+   "agility": 1,
    "name": "Hidden Orb 191",
    "position": [
     2234.787,
@@ -10084,6 +10855,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 3,
+   "agility": 1,
    "name": "Hidden Orb 192",
    "position": [
     1928.653,
@@ -10097,6 +10869,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 3,
+   "agility": 1,
    "name": "Hidden Orb 193",
    "position": [
     2088.805,
@@ -10110,6 +10883,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 3,
+   "agility": 1,
    "name": "Hidden Orb 194",
    "position": [
     1907.541,
@@ -10123,6 +10897,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 0,
+   "agility": 1,
    "name": "Hidden Orb 195",
    "position": [
     3214.958,
@@ -10136,6 +10911,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 4,
    "name": "Hidden Orb 196",
    "position": [
     2169.28,
@@ -10149,6 +10925,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 4,
    "name": "Hidden Orb 197",
    "position": [
     2342.321,
@@ -10162,6 +10939,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 198",
    "position": [
     2617.273,
@@ -10175,6 +10953,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 199",
    "position": [
     2338.79,
@@ -10188,6 +10967,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 200",
    "position": [
     2411.326,
@@ -10201,6 +10981,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 4,
    "name": "Hidden Orb 201",
    "position": [
     1953.105,
@@ -10214,6 +10995,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 202",
    "position": [
     2586.361,
@@ -10227,6 +11009,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 203",
    "position": [
     2042.268,
@@ -10240,6 +11023,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 204",
    "position": [
     2825.464,
@@ -10253,6 +11037,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 205",
    "position": [
     2053.208,
@@ -10266,6 +11051,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 206",
    "position": [
     2669.655,
@@ -10279,6 +11065,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 207",
    "position": [
     2528.198,
@@ -10292,6 +11079,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 208",
    "position": [
     2429.429,
@@ -10305,6 +11093,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 209",
    "position": [
     2262.579,
@@ -10318,6 +11107,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 210",
    "position": [
     2597.111,
@@ -10331,6 +11121,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 211",
    "position": [
     2187.512,
@@ -10344,6 +11135,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 212",
    "position": [
     2213.696,
@@ -10357,6 +11149,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 213",
    "position": [
     1721.98,
@@ -10370,6 +11163,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 214",
    "position": [
     1755.74,
@@ -10383,6 +11177,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 215",
    "position": [
     1564.352,
@@ -10396,6 +11191,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 216",
    "position": [
     1929.066,
@@ -10409,6 +11205,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 217",
    "position": [
     2988.654,
@@ -10422,6 +11219,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 218",
    "position": [
     2928.436,
@@ -10435,6 +11233,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 219",
    "position": [
     2741.99,
@@ -10448,6 +11247,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 220",
    "position": [
     2779.052,
@@ -10461,6 +11261,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 221",
    "position": [
     2819.488,
@@ -10474,6 +11275,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 222",
    "position": [
     2597.158,
@@ -10487,6 +11289,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 223",
    "position": [
     2569.946,
@@ -10500,6 +11303,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 224",
    "position": [
     2790.588,
@@ -10513,6 +11317,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 5,
    "name": "Hidden Orb 225",
    "position": [
     1997.141,
@@ -10526,6 +11331,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 4,
    "name": "Hidden Orb 226",
    "position": [
     1964.201,
@@ -10539,6 +11345,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 227",
    "position": [
     1921.441,
@@ -10552,6 +11359,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 228",
    "position": [
     2006.773,
@@ -10565,6 +11373,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 229",
    "position": [
     1920.827,
@@ -10578,6 +11387,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 230",
    "position": [
     1862.569,
@@ -10591,6 +11401,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 4,
    "name": "Hidden Orb 231",
    "position": [
     2060.49,
@@ -10604,6 +11415,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 232",
    "position": [
     1961.306,
@@ -10617,6 +11429,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 233",
    "position": [
     1957.89,
@@ -10630,6 +11443,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 234",
    "position": [
     1970.122,
@@ -10643,6 +11457,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 235",
    "position": [
     1940.271,
@@ -10656,6 +11471,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 236",
    "position": [
     1849.797,
@@ -10669,6 +11485,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 237",
    "position": [
     2114.323,
@@ -10682,6 +11499,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 238",
    "position": [
     2219.207,
@@ -10695,6 +11513,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 239",
    "position": [
     2279.306,
@@ -10708,6 +11527,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 240",
    "position": [
     2328.569,
@@ -10721,6 +11541,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 241",
    "position": [
     2386.894,
@@ -10734,6 +11555,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 242",
    "position": [
     2211.957,
@@ -10747,6 +11569,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 243",
    "position": [
     2120.861,
@@ -10760,6 +11583,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 244",
    "position": [
     2047.185,
@@ -10773,6 +11597,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 245",
    "position": [
     2672.22,
@@ -10786,6 +11611,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 246",
    "position": [
     2364.367,
@@ -10799,6 +11625,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 247",
    "position": [
     2106.722,
@@ -10812,6 +11639,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 248",
    "position": [
     2053.335,
@@ -10825,6 +11653,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 249",
    "position": [
     2428.393,
@@ -10838,6 +11667,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 250",
    "position": [
     2573.463,
@@ -10851,6 +11681,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 251",
    "position": [
     2760.025,
@@ -10864,6 +11695,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 252",
    "position": [
     2638.477,
@@ -10877,6 +11709,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 253",
    "position": [
     1677.551,
@@ -10890,6 +11723,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 254",
    "position": [
     1731.0,
@@ -10903,6 +11737,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 255",
    "position": [
     1865.156,
@@ -10916,6 +11751,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 256",
    "position": [
     1903.217,
@@ -10929,6 +11765,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 257",
    "position": [
     1921.322,
@@ -10942,6 +11779,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 258",
    "position": [
     1838.864,
@@ -10955,6 +11793,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 259",
    "position": [
     1983.965,
@@ -10968,6 +11807,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 260",
    "position": [
     2269.135,
@@ -10981,6 +11821,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 261",
    "position": [
     2368.188,
@@ -10994,6 +11835,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 262",
    "position": [
     2452.174,
@@ -11007,6 +11849,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 263",
    "position": [
     2471.433,
@@ -11020,6 +11863,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 264",
    "position": [
     2590.389,
@@ -11033,6 +11877,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 265",
    "position": [
     2504.294,
@@ -11046,6 +11891,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 266",
    "position": [
     2247.159,
@@ -11059,6 +11905,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 267",
    "position": [
     2160.842,
@@ -11072,6 +11919,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 268",
    "position": [
     2394.941,
@@ -11085,6 +11933,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 269",
    "position": [
     2486.64,
@@ -11098,6 +11947,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 270",
    "position": [
     2217.323,
@@ -11111,6 +11961,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 271",
    "position": [
     2226.068,
@@ -11124,6 +11975,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 272",
    "position": [
     2474.017,
@@ -11137,6 +11989,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 273",
    "position": [
     2537.45,
@@ -11150,6 +12003,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 274",
    "position": [
     2136.893,
@@ -11163,6 +12017,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 275",
    "position": [
     2161.724,
@@ -11176,6 +12031,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 276",
    "position": [
     2100.831,
@@ -11189,6 +12045,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 277",
    "position": [
     2266.137,
@@ -11202,6 +12059,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 278",
    "position": [
     2581.87,
@@ -11215,6 +12073,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 279",
    "position": [
     2606.111,
@@ -11228,6 +12087,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 280",
    "position": [
     2910.47,
@@ -11241,6 +12101,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 281",
    "position": [
     2730.784,
@@ -11254,6 +12115,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 282",
    "position": [
     2629.95,
@@ -11267,6 +12129,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 283",
    "position": [
     2626.433,
@@ -11280,6 +12143,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 284",
    "position": [
     2890.038,
@@ -11293,6 +12157,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 285",
    "position": [
     2920.874,
@@ -11306,6 +12171,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 286",
    "position": [
     2962.449,
@@ -11319,6 +12185,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 287",
    "position": [
     2828.492,
@@ -11332,6 +12199,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 288",
    "position": [
     2713.678,
@@ -11345,6 +12213,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 289",
    "position": [
     2673.406,
@@ -11358,6 +12227,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 290",
    "position": [
     2707.87,
@@ -11371,6 +12241,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 291",
    "position": [
     2299.354,
@@ -11384,6 +12255,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 292",
    "position": [
     2475.146,
@@ -11397,6 +12269,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 293",
    "position": [
     2445.944,
@@ -11410,6 +12283,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 294",
    "position": [
     2559.047,
@@ -11423,6 +12297,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 295",
    "position": [
     2577.279,
@@ -11436,6 +12311,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 296",
    "position": [
     2352.672,
@@ -11449,6 +12325,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 4,
    "name": "Hidden Orb 297",
    "position": [
     2374.421,
@@ -11462,6 +12339,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 298",
    "position": [
     2300.965,
@@ -11475,6 +12353,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 4,
    "name": "Hidden Orb 299",
    "position": [
     1965.068,
@@ -11488,6 +12367,7 @@
    "kind": "hidden",
    "type": 4,
    "district": 2,
+   "agility": 1,
    "name": "Hidden Orb 300",
    "position": [
     2313.655,
@@ -11501,6 +12381,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 001",
    "position": [
     2502.673,
@@ -11514,6 +12395,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 002",
    "position": [
     2001.449,
@@ -11527,6 +12409,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 003",
    "position": [
     2533.498,
@@ -11540,6 +12423,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 004",
    "position": [
     948.986,
@@ -11553,6 +12437,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 005",
    "position": [
     2343.875,
@@ -11566,6 +12451,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 006",
    "position": [
     2003.294,
@@ -11579,6 +12465,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 007",
    "position": [
     1156.14,
@@ -11592,6 +12479,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 008",
    "position": [
     1041.03,
@@ -11605,6 +12493,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 009",
    "position": [
     2793.599,
@@ -11618,6 +12507,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 010",
    "position": [
     2563.108,
@@ -11631,6 +12521,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 011",
    "position": [
     3504.455,
@@ -11644,6 +12535,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 012",
    "position": [
     2879.787,
@@ -11657,6 +12549,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 013",
    "position": [
     2760.242,
@@ -11670,6 +12563,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 014",
    "position": [
     1074.454,
@@ -11683,6 +12577,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 015",
    "position": [
     2751.336,
@@ -11696,6 +12591,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 016",
    "position": [
     2072.535,
@@ -11709,6 +12605,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 017",
    "position": [
     1777.582,
@@ -11722,6 +12619,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 018",
    "position": [
     2745.467,
@@ -11735,6 +12633,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 019",
    "position": [
     2288.347,
@@ -11748,6 +12647,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 020",
    "position": [
     362.161,
@@ -11761,6 +12661,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 021",
    "position": [
     2465.697,
@@ -11774,6 +12675,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 022",
    "position": [
     2531.099,
@@ -11787,6 +12689,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 023",
    "position": [
     600.907,
@@ -11800,6 +12703,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 024",
    "position": [
     1345.364,
@@ -11813,6 +12717,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 025",
    "position": [
     2145.626,
@@ -11826,6 +12731,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 026",
    "position": [
     995.714,
@@ -11839,6 +12745,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 027",
    "position": [
     2479.776,
@@ -11852,6 +12759,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 028",
    "position": [
     2278.672,
@@ -11865,6 +12773,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 029",
    "position": [
     2395.98,
@@ -11878,6 +12787,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 030",
    "position": [
     2105.946,
@@ -11891,6 +12801,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 031",
    "position": [
     2100.993,
@@ -11904,6 +12815,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 032",
    "position": [
     1268.869,
@@ -11917,6 +12829,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 033",
    "position": [
     784.733,
@@ -11930,6 +12843,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 034",
    "position": [
     309.771,
@@ -11943,6 +12857,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 4,
    "name": "Audio Log 035",
    "position": [
     1990.359,
@@ -11956,6 +12871,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 036",
    "position": [
     2557.717,
@@ -11969,6 +12885,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 037",
    "position": [
     2613.367,
@@ -11982,6 +12899,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 038",
    "position": [
     2280.366,
@@ -11995,6 +12913,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 039",
    "position": [
     2158.829,
@@ -12008,6 +12927,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 040",
    "position": [
     687.805,
@@ -12021,6 +12941,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 041",
    "position": [
     428.789,
@@ -12034,6 +12955,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 042",
    "position": [
     655.833,
@@ -12047,6 +12969,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 043",
    "position": [
     852.486,
@@ -12060,6 +12983,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 044",
    "position": [
     1433.831,
@@ -12073,6 +12997,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 045",
    "position": [
     3225.705,
@@ -12086,6 +13011,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 046",
    "position": [
     1721.671,
@@ -12099,6 +13025,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 047",
    "position": [
     1558.061,
@@ -12112,6 +13039,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 048",
    "position": [
     2697.439,
@@ -12125,6 +13053,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 049",
    "position": [
     2824.009,
@@ -12138,6 +13067,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 050",
    "position": [
     2219.946,
@@ -12151,6 +13081,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 051",
    "position": [
     2261.05,
@@ -12164,6 +13095,7 @@
    "kind": "audio_log",
    "type": 9,
    "district": 0,
+   "agility": 1,
    "name": "Audio Log 052",
    "position": [
     1854.221,

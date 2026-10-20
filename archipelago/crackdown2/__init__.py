@@ -2,7 +2,8 @@
 
 The game client is built into the Crackdown 2 Recomp executable. data/catalog.json is the same file the
 executable embeds (crackdown2/ap/catalog.json), so item and location IDs cannot drift. First-version logic is
-permissive (one region); playtests will add Agility bands for high orbs.
+one region; each pickup's "agility" field (native Agility level it needs, from tools/re/make_ap_catalog.py) is the
+rule, so playtest corrections go into the shared catalog.
 """
 import json
 import pkgutil
@@ -12,12 +13,16 @@ from BaseClasses import Item, ItemClassification, Location, Region, Tutorial
 from worlds.AutoWorld import WebWorld, World
 from worlds.LauncherComponents import Component, Type, components
 from .client import launch_client
-from .options import Crackdown2Options, option_groups
+from .options import AgilityLogic, Crackdown2Options, option_groups
 
 CATALOG = json.loads(pkgutil.get_data(__name__, "data/catalog.json"))
 SKILLS = {f"Progressive {s['name']}": s for s in CATALOG["skills"]}
 FILLER = "Agency Commendation"
 GAME = "Crackdown 2"
+
+
+AGILITY_NEEDED = {p["name"]: p["agility"] for p in CATALOG["pickups"]}
+AGILITY_START = SKILLS["Progressive Agility"]["starting"]
 
 
 def pickups(kind: str) -> dict:
@@ -103,6 +108,11 @@ class Crackdown2World(World):
         self.multiworld.itempool += pool
 
     def set_rules(self) -> None:
+        if self.options.agility_logic == AgilityLogic.option_bands:
+            for location in self.multiworld.get_locations(self.player):
+                needed = AGILITY_NEEDED.get(location.name, AGILITY_START) - AGILITY_START
+                if needed > 0:
+                    location.access_rule = lambda state, n=needed: state.has("Progressive Agility", self.player, n)
         self.multiworld.completion_condition[self.player] = lambda state: all(
             state.has(name, self.player, s["maximum"] - s["starting"]) for name, s in SKILLS.items())
 

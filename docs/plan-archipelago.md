@@ -26,6 +26,17 @@ starts in Agent Diagnostics, so the city registry appears later), hidden orb and
 check groups (races, stunt rings, renegade orbs, strongholds, absorption units, beacons, breaches), the Sunburst goal,
 Keys to the City block, in-game messages (log only), host CTest cases, logic bands, launcher tab (launcher thread).
 
+## Logic v1 (2026-10-20)
+
+Each pickup in the catalog carries `agility`, the native Agility level the logic expects (1-5), set by
+`tools/re/make_ap_catalog.py`: agility orb tier + 1 (the game's own type 0-3, whose median heights are 48/56/73/117 m),
+at least 4 at 150 m and 5 at 300 m (Agency Tower: agility orbs 381-385, hidden orbs 188/225). Result: agility orbs
+173/177/98/48/4 at levels 1-5; hidden orbs 288 at 1, 10 at 4, 2 at 5; audio logs 51 at 1, 1 at 4. The apworld turns
+it into `Progressive Agility` counts (option `agility_logic`: bands / none). Playtests: the game appends every
+collected pickup to `<user data>/archipelago/pickups.csv` with the logic level and the agent's level; rows where the
+agent was below the logic level show bands that are too strict, and orbs a player could not reach go into
+`AGILITY_OVERRIDES` (by registry ordinal).
+
 ## 1. What Crackdown 1 does (the shape to copy)
 
 - **Everything runs inside the game exe.** `crackdown/src/ap/`: `client.cpp` (WinHTTP WebSocket, network thread only

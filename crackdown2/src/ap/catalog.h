@@ -14,6 +14,7 @@ namespace crackdown2::ap {
 struct Pickup {
   int64_t id = 0;
   uint32_t ordinal = 0, type = 0, district = 0;
+  int agility = 1;  // native Agility level the logic expects (catalog "agility")
   std::string kind, name;  // kind: agility, hidden, online, audio_log
   std::array<float, 3> position{};
 };

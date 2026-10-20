@@ -56,12 +56,13 @@ Catalog ParseCatalog(std::string_view text) {
     p.type = o.at("type").get<uint32_t>();
     p.district = o.at("district").get<uint32_t>();
     p.kind = o.at("kind").get<std::string>();
+    p.agility = o.at("agility").get<int>();
     p.name = o.at("name").get<std::string>();
     const auto& pos = o.at("position");
     p.position = {pos.at(0).get<float>(), pos.at(1).get<float>(), pos.at(2).get<float>()};
     const bool kind_ok = (p.kind == "agility" && p.type <= 3) || (p.kind == "hidden" && p.type == 4) ||
                          (p.kind == "audio_log" && p.type == 9) || (p.kind == "online" && p.type == 10);
-    Require(kind_ok && p.ordinal < kRegistrySize && p.district <= 3 && !items.contains(p.id) &&
+    Require(kind_ok && p.agility >= 1 && p.agility <= 5 && p.ordinal < kRegistrySize && p.district <= 3 && !items.contains(p.id) &&
                 ids.insert(p.id).second &&
                 std::all_of(p.position.begin(), p.position.end(), [](float v) { return std::isfinite(v); }) &&
                 c.pickups.emplace(p.ordinal, p).second,

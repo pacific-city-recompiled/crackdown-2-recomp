@@ -166,6 +166,11 @@ std::optional<std::string> ProfileXuid() {
   return found;
 }
 
+int64_t Now() {
+  return std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch())
+      .count();
+}
+
 uint32_t Stats(uint8_t* base) { return REX_LOAD_U32(kStatsGlobal); }
 
 // Registry entry for an ordinal, or 0 when the world is not loaded / does not match the catalog layout.
@@ -219,6 +224,19 @@ bool VerifyCatalog(uint8_t* base, std::string& error) {
     }
   }
   return true;
+}
+
+// Playtest record for logic tuning: <user_data>/archipelago/pickups.csv, one row per collected pickup with the
+// Agility the logic expects and the agent's actual level. A row with agent < logic means the band is too strict.
+void LogPickup(const Pickup& p, int agility) {
+  const auto path = g.root / "archipelago" / "pickups.csv";
+  std::error_code ec;
+  const bool fresh = !fs::exists(path, ec);
+  std::ofstream out(path, std::ios::app);
+  if (!out) return;
+  if (fresh) out << "time,name,ordinal,type,district,x,y,z,logic_agility,agent_agility\n";
+  out << Now() << ',' << p.name << ',' << p.ordinal << ',' << p.type << ',' << p.district << ',' << p.position[0]
+      << ',' << p.position[1] << ',' << p.position[2] << ',' << p.agility << ',' << agility << '\n';
 }
 
 // --- network -------------------------------------------------------------
@@ -645,7 +663,11 @@ REX_HOOK_RAW(sub_82709D18) {
     REXLOG_ERROR("ap: collected pickup {:08X} (ordinal {}) does not match the catalog", pickup, ordinal);
     return;
   }
-  REXLOG_INFO("ap: {} collected ordinal {} lr {:08X}", it->second.name, ordinal, lr);
+  const uint32_t skills = PrimarySkills(base);
+  const int agility = skills ? REX_LOAD_U8(skills + 14) : 0;
+  REXLOG_INFO("ap: {} collected ordinal {} lr {:08X} (logic Agility {}, agent Agility {})", it->second.name,
+              ordinal, lr, it->second.agility, agility);
+  LogPickup(it->second, agility);
   if (g.session->contract().locations.contains(it->second.id)) Observe(it->second.id);
 }
 

@@ -9,7 +9,7 @@ import hashlib
 import json
 import sys
 
-VERSION = "crackdown2-ap-1"
+VERSION = "crackdown2-ap-2"
 LOCATION_BASE = 75_400_000  # Crackdown 1 uses 734xxxxx; distinct so both games can share a multiworld
 ITEM_BASE = 75_410_000
 SKILLS = ("Agility", "Driving", "Explosives", "Strength", "Firearms")  # native cSkillSet order
@@ -17,6 +17,22 @@ SKILLS = ("Agility", "Driving", "Explosives", "Strength", "Firearms")  # native 
 XEXP_SHA256 = "a5e49fc1ff7f6f65e6f95a7b5c4b9392bb9e38674d1237ac0e2f0149d05929d7"
 KINDS = {0: "agility", 1: "agility", 2: "agility", 3: "agility", 4: "hidden", 9: "audio_log", 10: "online"}
 NAMES = {"agility": "Agility Orb", "hidden": "Hidden Orb", "audio_log": "Audio Log", "online": "Online Orb"}
+# Logic v1 (docs/plan-archipelago.md "Logic"): native Agility level a pickup needs. The game's own agility orb tier
+# (type 0-3, which rises with height: medians 48/56/73/117 m) plus absolute height for the tallest spots.
+# Playtest corrections go in AGILITY_OVERRIDES (registry ordinal -> level).
+AGILITY_OVERRIDES = {}
+
+
+def agility_needed(p):
+    level = p["type"] + 1 if p["type"] <= 3 else 1
+    y = p["pos"][1]
+    if y >= 300:
+        level = max(level, 5)
+    elif y >= 150:
+        level = max(level, 4)
+    return AGILITY_OVERRIDES.get(p["n"], level)
+
+
 EXPECTED = {"agility": 500, "hidden": 300, "audio_log": 52, "online": 80}
 
 
@@ -29,7 +45,7 @@ def main(src, dsts):
         kind = KINDS[p["type"]]
         counters[kind] = counters.get(kind, 0) + 1
         entries.append({"id": LOCATION_BASE + p["n"], "ordinal": p["n"], "kind": kind, "type": p["type"],
-                        "district": p["district"], "name": f"{NAMES[kind]} {counters[kind]:03d}",
+                        "district": p["district"], "agility": agility_needed(p), "name": f"{NAMES[kind]} {counters[kind]:03d}",
                         "position": [round(v, 3) for v in p["pos"]]})
     assert counters == EXPECTED, counters
     items = {f"Progressive {name}": ITEM_BASE + i for i, name in enumerate(SKILLS)}
