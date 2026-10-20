@@ -1,0 +1,68 @@
+From: Claude <noreply@anthropic.com>
+Subject: [PATCH] xam: dlc_root cvar for installed Marketplace content
+
+Port of Crackdown 1's patch 0025. DLC (content type 00000002) always resolves
+under xuid 0 of the user data root. With --dlc_root set, xuid-0 Marketplace
+packages and their .header files resolve under that folder instead (same
+0000000000000000/<title>/00000002 layout), so the launcher can share one install
+across save profiles. Unset, nothing changes.
+
+Host path handling only; no guest addresses or instructions touched.
+---
+diff --git a/src/system/xam/content_manager.cpp b/src/system/xam/content_manager.cpp
+index bd6c797..f13bd64 100644
+--- a/src/system/xam/content_manager.cpp
++++ b/src/system/xam/content_manager.cpp
+@@ -16,6 +16,7 @@
+ 
+ #include <fmt/format.h>
+ 
++#include <rex/cvar.h>
+ #include <rex/filesystem.h>
+ #include <rex/filesystem/devices/host_path_device.h>
+ #include <rex/filesystem/devices/stfs_container_device.h>
+@@ -26,10 +27,24 @@
+ #include <rex/system/xfile.h>
+ #include <rex/system/xobject.h>
+ 
++REXCVAR_DEFINE_STRING(dlc_root, "", "Runtime",
++                      "Folder of installed DLC (Marketplace content, shared by every user); "
++                      "default: the user data root");
++
+ namespace rex {
+ namespace system {
+ namespace xam {
+ 
++// DLC is stored under xuid 0, so one install can serve several user data roots.
++static std::filesystem::path ContentRoot(const std::filesystem::path& root_path, uint64_t xuid,
++                                         XContentType content_type) {
++  const auto& dlc_root = REXCVAR_GET(dlc_root);
++  if (xuid == 0 && content_type == XContentType::kMarketplaceContent && !dlc_root.empty()) {
++    return std::filesystem::absolute(rex::to_path(dlc_root));
++  }
++  return root_path;
++}
++
+ static const char* kThumbnailFileName = "__thumbnail.png";
+ 
+ static const char* kGameUserContentDirName = "profile";
+@@ -96,7 +111,7 @@ std::filesystem::path ContentManager::ResolvePackageRoot(uint64_t xuid, XContent
+ 
+   // Package root path:
+   // content_root/xuid/title_id/content_type/
+-  return root_path_ / xuid_str / title_id_str / content_type_str;
++  return ContentRoot(root_path_, xuid, content_type) / xuid_str / title_id_str / content_type_str;
+ }
+ 
+ std::filesystem::path ContentManager::ResolvePackagePath(uint64_t xuid,
+@@ -132,8 +147,8 @@ std::filesystem::path ContentManager::ResolvePackageHeaderPath(const std::string
+ 
+   // Header root path:
+   // content_root/xuid/title_id/Headers/content_type/filename.header
+-  return root_path_ / xuid_str / title_id_str / kGameContentHeaderDirName / content_type_str /
+-         final_name;
++  return ContentRoot(root_path_, xuid, content_type) / xuid_str / title_id_str /
++         kGameContentHeaderDirName / content_type_str / final_name;
+ }
+ 
+ std::vector<XCONTENT_AGGREGATE_DATA> ContentManager::ListContent(uint32_t device_id, uint64_t xuid,

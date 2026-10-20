@@ -1,0 +1,25 @@
+From: Claude <noreply@anthropic.com>
+Subject: [PATCH] xam: XamContentCreate keeps its own copy of the root name
+
+The overlapped path runs the create/open lambda later on the deferred-completion
+thread (after a 100 ms sleep), but the lambda captured a string_view into guest
+memory. By then Crackdown 2 had reused the buffer: its three DLC packs were all
+mounted under the root name "" (log: "Registered symbolic link:  : =>
+\Device\Content\1\", then 0xB7 for the next two) and every dlc0:\ open failed.
+Capturing a std::string fixes it. Same logic as Xenia's XamContentCreateEx.
+---
+diff --git a/src/kernel/xam/xam_content.cpp b/src/kernel/xam/xam_content.cpp
+index 1fb1e16..10a505c 100644
+--- a/src/kernel/xam/xam_content.cpp
++++ b/src/kernel/xam/xam_content.cpp
+@@ -141,7 +141,9 @@ u32 xeXamContentCreate(u32 user_index, mapped_string root_name, mapped_void cont
+     *disposition_ptr = 0;
+   }
+ 
+-  auto run = [content_manager, xuid, root_name = root_name.value(), flags, content_data,
++  // Own copy of the root name: the overlapped path runs this later, after the guest has
++  // reused the buffer (Crackdown 2 mounted its DLC as "" and then opened dlc0:\).
++  auto run = [content_manager, xuid, root_name = std::string(root_name.value()), flags, content_data,
+               disposition_ptr,
+               license_mask_ptr](uint32_t& extended_error, uint32_t& length) -> X_RESULT {
+     X_RESULT result = X_ERROR_INVALID_PARAMETER;

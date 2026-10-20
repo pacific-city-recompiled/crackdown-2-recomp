@@ -27,8 +27,11 @@ python -I tools/xiso_extract.py "<disc>.iso" game          # XDVDFS extractor, n
 python -I tools/stfs_extract.py "<title update package>" tu  # checks every block SHA-1
 copy tu\default.xexp game\                                   # SDK picks the sibling .xexp
 xcopy /E tu game\TU\                                         # the game also reads D:\TU\...
-python -I tools/stfs_extract.py "<DLC package>" dlc\<name>   # one folder per DLC package
 ```
+
+DLC: `python -I tools/install_dlc.py "%USERPROFILE%\Documents\crackdown2" "<DLC package>" ...` unpacks each package
+where the game finds it (the user data root, or any folder you pass as `--dlc_root`). With the packs in, the main menu's
+Deluge and Keys to the City entries are enabled.
 
 ## Build and run (Windows)
 
