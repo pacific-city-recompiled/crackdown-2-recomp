@@ -43,6 +43,18 @@ Archipelago Phase 0 (2026-10-20, plan in `docs/plan-archipelago.md`). Probe: `cr
   sub_8232BE00 (fp match to Crackdown 1's 82543BB0); sub_82753EB8(set, skill, level) sets a level, clamped 1..5 (or
   the byte at 0x820E08FB), zeroes XP, then sub_82753F48 plays the level-up effects. Load sets every skill to 1 from
   LR 0x827243B4 first. Player: [0x83800F88] (lwz 3976), +136 - 28 -> vcall +1516 returns the cSkillSet.
+- **Live AP runs (2026-10-20, dev build, isolated copies of the profile, local AP 0.6.8 server with a 2-slot
+  seed from `out/crackdown2.apworld`):** crackdown2_004 crashed (guest AV read 0x20) when the skill setter ran from
+  the present hook, which is on the render thread; the bridge now runs after the game update sub_82915C70.
+  crackdown2_005: connect, `--ap_dev_bind_load` binds the loaded save, 30 natively collected pickups recovered as
+  checks, skills set from items. crackdown2_006: `--ap_dev_teleport_orb=0` puts the agent on agility orb 0; native
+  collection calls SetActive from **LR 0x821D1E18** (inside sub_821D1DF0) -> check 75400000 sent, then the game
+  autosaves (the stats serializer runs: fingerprint recorded). crackdown2_007 (same profile, restart, no dev bind):
+  native load fingerprint 73493bb745347997 is in the lineage -> bound; orb 2 collected -> check 75400002; orb XP
+  arrives as 2.0 Agility XP per call through AddXP from **LR 0x82756A90** (sub_82756A10) and is dropped. Screenshot
+  `out/ap4_110.png` (local): agent on the orb's rooftop, Agility still level 1.
+- **Agent controller (test teleport):** sub_822498F8 (Crackdown 1 sub_822A9E78): position +656, Havok proxy +560,
+  owner character +304; setPosition sub_82BFEC28 (Crackdown 1 sub_829D3560, identical body).
 - **Other check groups** (class strings, not yet traced): cRenegadeOrb 0x820E8708 (ctor sub_82757018), cStuntRing
   sub_82711C28, cSupplyEntryPoint sub_8273FC98, cTacticalObjective sub_824759A8, cBeaconMission sub_82461300; road and
   rooftop race names at 0x833E6A60.. (Volk/GreenBay/ShaiGen road 5 each, Volk/GreenBay rooftop 5, UnityHeights 4,

@@ -13,8 +13,10 @@
 //   skill, level) sets a level (Crackdown 1's 82543BB0 / 82543DB0).
 
 #include "generated/default/crackdown2_init.h"
+#include "bridge.h"
 
 #include <bit>
+#include <chrono>
 #include <cstdint>
 #include <cstdio>
 #include <filesystem>
@@ -28,6 +30,10 @@ REXCVAR_DEFINE_BOOL(ap_probe, false, "Crackdown2",
                     "Diagnostic: log orb pickups, XP and skill-level calls, and dump the orb registry");
 REXCVAR_DEFINE_STRING(ap_probe_dump, "", "Crackdown2",
                       "Diagnostic: with --ap_probe, write the orb registry as JSON to this file");
+REXCVAR_DEFINE_INT32(ap_dev_teleport_orb, -1, "Crackdown2",
+                     "Test tool: move the agent onto this registry ordinal's pickup once, "
+                     "--ap_dev_teleport_delay_s after the agent's controller first updates");
+REXCVAR_DEFINE_DOUBLE(ap_dev_teleport_delay_s, 8.0, "Crackdown2", "With --ap_dev_teleport_orb: delay in seconds");
 
 namespace {
 constexpr uint32_t kStatsPtr = 0x83800E20;
@@ -87,19 +93,20 @@ void ProbeFrame(uint8_t* base) {
 }
 }  // namespace crackdown2::ap
 
-REX_HOOK_RAW(sub_82709D18) {
+namespace crackdown2::ap {
+// Called by bridge.cpp's SetActive hook before the native body.
+void ProbeSetActive(PPCContext& ctx, uint8_t* base) {
   static const bool on = REXCVAR_GET(ap_probe);
-  if (on) {
-    const uint32_t p = ctx.r3.u32;
-    REXLOG_INFO("ap_probe: SetActive pickup {:08X} vt {:08X} reg {} type {} district {} active {} -> {} pos {:.1f} "
-                "{:.1f} {:.1f} lr {:08X}", p, REX_LOAD_U32(p), REX_LOAD_U32(p + 128), REX_LOAD_U32(p + 136),
-                REX_LOAD_U32(p + 140), REX_LOAD_U8(p + 160), ctx.r4.u32 & 0xFF, F32(base, p + 144),
-                F32(base, p + 148), F32(base, p + 152), (uint32_t)ctx.lr);
-  }
-  __imp__sub_82709D18(ctx, base);
+  if (!on) return;
+  const uint32_t p = ctx.r3.u32;
+  REXLOG_INFO("ap_probe: SetActive pickup {:08X} vt {:08X} reg {} type {} district {} active {} -> {} pos {:.1f} "
+              "{:.1f} {:.1f} lr {:08X}", p, REX_LOAD_U32(p), REX_LOAD_U32(p + 128), REX_LOAD_U32(p + 136),
+              REX_LOAD_U32(p + 140), REX_LOAD_U8(p + 160), ctx.r4.u32 & 0xFF, F32(base, p + 144),
+              F32(base, p + 148), F32(base, p + 152), (uint32_t)ctx.lr);
 }
 
-REX_HOOK_RAW(sub_82753CA0) {
+// Called by bridge.cpp's AddXP hook when the XP is not dropped: runs the native body.
+void ProbeAddXP(PPCContext& ctx, uint8_t* base) {
   static const bool on = REXCVAR_GET(ap_probe);
   const uint32_t set = ctx.r3.u32, skill = ctx.r4.u32;
   const double xp = ctx.f1.f64;
@@ -110,6 +117,7 @@ REX_HOOK_RAW(sub_82753CA0) {
     LogSkills(base, set, "after AddXP");
   }
 }
+}  // namespace crackdown2::ap
 
 REX_HOOK_RAW(sub_82753EB8) {
   static const bool on = REXCVAR_GET(ap_probe);
@@ -121,3 +129,48 @@ REX_HOOK_RAW(sub_82753EB8) {
     LogSkills(base, set, "after SetLevel");
   }
 }
+
+// --ap_dev_teleport_orb (Crackdown 1's --teleport, hooks_diag_physics.cpp, on Crackdown 2's controller). The
+// character controller update sub_822498F8 (fp match 0.18 to Crackdown 1's sub_822A9E78) keeps the controller's
+// position at +656 (Crackdown 1: +336) and the Havok character proxy at +560 (+660); setPosition is
+// sub_82BFEC28 (identical 5-instruction body to Crackdown 1's sub_829D3560). +304 is the owning character, so
+// only the agent's controller is moved: [[0x83800F88]+136]-28.
+namespace {
+void MaybeTeleport(PPCContext& ctx, uint8_t* base, uint32_t controller) {
+  static const int32_t ordinal = REXCVAR_GET(ap_dev_teleport_orb);
+  static bool done = false;
+  static std::chrono::steady_clock::time_point start{};
+  if (ordinal < 0 || done) return;
+  const uint32_t player = REX_LOAD_U32(0x83800F88);
+  const uint32_t component = player ? REX_LOAD_U32(player + 136) : 0;
+  if (component < 28 || REX_LOAD_U32(controller + 304) != component - 28) return;
+  const auto now = std::chrono::steady_clock::now();
+  if (start == std::chrono::steady_clock::time_point{}) start = now;
+  if (now - start < std::chrono::duration<double>(REXCVAR_GET(ap_dev_teleport_delay_s))) return;
+  done = true;
+  const uint32_t stats = Stats(base);
+  if (!stats || uint32_t(ordinal) >= REX_LOAD_U32(stats + 4012)) {
+    REXLOG_ERROR("ap_dev_teleport: no registry entry {}", ordinal);
+    return;
+  }
+  const uint32_t pickup = REX_LOAD_U32(stats + 12 + 4 * ordinal);
+  const uint32_t proxy = REX_LOAD_U32(controller + 560);
+  const uint32_t pos = controller + 656;
+  for (int i = 0; i < 3; ++i) REX_STORE_U32(pos + 4 * i, REX_LOAD_U32(pickup + 144 + 4 * i));
+  for (uint32_t i = 0; i < 16; i += 4) REX_STORE_U32(proxy + 16 + i, 0);
+  const PPCContext saved = ctx;
+  ctx.r3.u64 = proxy;
+  ctx.r4.u64 = pos;
+  sub_82BFEC28(ctx, base);
+  ctx = saved;
+  REXLOG_INFO("ap_dev_teleport: controller {:08X} proxy {:08X} -> pickup {} ({:.1f} {:.1f} {:.1f}) active {}",
+              controller, proxy, ordinal, F32(base, pos), F32(base, pos + 4), F32(base, pos + 8),
+              REX_LOAD_U8(pickup + 160));
+}
+}  // namespace
+
+REX_HOOK_RAW(sub_822498F8) {
+  MaybeTeleport(ctx, base, ctx.r3.u32);
+  __imp__sub_822498F8(ctx, base);
+}
+

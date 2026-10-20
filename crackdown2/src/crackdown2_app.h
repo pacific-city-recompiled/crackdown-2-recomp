@@ -7,8 +7,7 @@
 #include <rex/rex_app.h>
 
 #include "host_tuning.h"
-
-#include "host_tuning.h"
+#include "ap/bridge.h"
 
 class Crackdown2App : public rex::ReXApp {
  public:
@@ -31,11 +30,13 @@ class Crackdown2App : public rex::ReXApp {
     crackdown2::ApplyGameDefaults();
     crackdown2::DumpGuestImage(runtime());
     SetGuestFrameStats(&crackdown2::GuestFrameStats);
+    crackdown2::ap::Initialize(user_data_root());
   }
 
   // Close button / Alt+F4: the SDK then hard-exits, so flush the frame log now.
   bool OnWindowCloseRequested() override {
     crackdown2::FlushFrameLog();
+    crackdown2::ap::Shutdown();
     return true;
   }
 

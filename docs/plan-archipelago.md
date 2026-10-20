@@ -1,9 +1,30 @@
 # Plan: Crackdown 2 Archipelago
 
-Status: plan, 2026-10-20. Same function and scope as Crackdown 1's Archipelago (Crackdown Recomp 1.0,
+Status: M1 running (see Status below), 2026-10-20. Same function and scope as Crackdown 1's Archipelago (Crackdown Recomp 1.0,
 `Unowa001/crackdown-recomp`: SETUP.md "Archipelago randomizer", `docs/plan-randomizer.md`, `docs/re-ap-bridge.md`,
 `docs/re-m2-adapters.md`, release asset `crackdown.apworld` world_version 0.1.0). Guest addresses below are in the
 title-update image (0.0.5.1) unless marked otherwise; nothing here is a hook yet.
+
+## Status (2026-10-20, branch `claude/project-thread-gba61l`)
+
+**M1 works end to end on the dev build** (evidence in `docs/re-notes.md` "Randomizer notes"):
+- Runtime `crackdown2/src/ap/`: `client.cpp` (Crackdown 1's WinHTTP client), `session_state.*` (simplified:
+  skills + filler + `max_skills` goal, lineage of native-progress fingerprints), `catalog.*` (932-entry registry
+  catalog), `bridge.cpp` (adapters below), `ap_probe.cpp` (`--ap_probe`, `--ap_dev_teleport_orb`).
+- Adapters: SetActive sub_82709D18 -> check (load serializer and sub_82869528 excluded); AddXP sub_82753CA0 dropped
+  for the agent in a bound save; SetLevel sub_82753EB8 applies received skills; stats reset sub_8270B448 = world
+  transition; load/save serializers sub_8226B2F0 / sub_822708A8 = save binding by fingerprint.
+- Catalog `crackdown2/ap/catalog.json` from `tools/re/make_ap_catalog.py` (probe run crackdown2_003); apworld
+  `archipelago/crackdown2/` (agility orbs always, hidden orbs on by default, audio logs optional; goal max skills;
+  permissive logic), built by `tools/build_apworld.py` (refuses if the two catalogs differ). A 2-slot seed generates
+  on AP 0.6.8.
+- Live: connect, bind, recover native checks, real orb pickup -> check, XP dropped, autosave recorded, restart ->
+  load recognized as the bound save.
+
+**Not done yet:** New Game binding path (only tested through `--ap_dev_bind_load` on an existing save; a New Game
+starts in Agent Diagnostics, so the city registry appears later), hidden orb and audio log pickups live, the other
+check groups (races, stunt rings, renegade orbs, strongholds, absorption units, beacons, breaches), the Sunburst goal,
+Keys to the City block, in-game messages (log only), host CTest cases, logic bands, launcher tab (launcher thread).
 
 ## 1. What Crackdown 1 does (the shape to copy)
 
