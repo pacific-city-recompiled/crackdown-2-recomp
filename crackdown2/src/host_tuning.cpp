@@ -115,12 +115,27 @@ void ApplyStartupDefaults(rex::PathConfig& paths) {
     if (rex::cvar::Query<std::string>("user_data_root").empty()) paths.user_data_root = exe_dir / "userdata";
     if (rex::cvar::Query<std::string>("cache_root").empty()) paths.cache_root = exe_dir / "userdata" / "cache";
   }
-  if (!paths.game_data_root.empty()) return;
-  std::filesystem::path dir = exe_dir;
-  for (int depth = 0; depth < 6 && !dir.empty(); ++depth, dir = dir.parent_path()) {
-    if (std::filesystem::is_regular_file(dir / "game" / "default.xex", ec)) {
-      paths.game_data_root = dir / "game";
-      REXLOG_INFO("crackdown2 default: --game_data_root={}", paths.game_data_root.string());
+  if (paths.game_data_root.empty()) {
+    std::filesystem::path dir = exe_dir;
+    for (int depth = 0; depth < 6 && !dir.empty(); ++depth, dir = dir.parent_path()) {
+      if (std::filesystem::is_regular_file(dir / "game" / "default.xex", ec)) {
+        paths.game_data_root = dir / "game";
+        REXLOG_INFO("crackdown2 default: --game_data_root={}", paths.game_data_root.string());
+        break;
+      }
+    }
+  }
+  // Title update tree (update:\Version.txt etc.): tu/ beside game/ (tools/setup_game.py writes both), else the
+  // game/TU copy the game also reads as D:\TU. Lets the release package run with no arguments.
+  if (paths.game_data_root.empty() || !paths.update_data_root.empty() ||
+      !rex::cvar::Query<std::string>("update_data_root").empty()) {
+    return;
+  }
+  for (const std::filesystem::path& tu :
+       {paths.game_data_root.parent_path() / "tu", paths.game_data_root / "TU"}) {
+    if (std::filesystem::is_regular_file(tu / "Version.txt", ec)) {
+      paths.update_data_root = tu;
+      REXLOG_INFO("crackdown2 default: --update_data_root={}", tu.string());
       return;
     }
   }
