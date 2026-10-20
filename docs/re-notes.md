@@ -20,7 +20,68 @@ Evidence log. Every address is in the title-update-patched image (0.0.5.1), `.te
 
 ## Randomizer notes
 
-(none yet; record pickup/orb/spawn tables here with guest addresses.)
+Archipelago Phase 0 (2026-10-20, plan in `docs/plan-archipelago.md`). Probe: `crackdown2/src/ap/ap_probe.cpp`
+(`--ap_probe --ap_probe_dump=<json>`, logs only). Run crackdown2_003 (dev build, isolated copy of the profile in
+`--user_data_root`, `--auto_input` into the city): registry dump of 932 entries.
+
+- **Orb registry:** player stats object at [0x83800E20] (lis -31872, lwz 3616). sub_8270BA38 registers each pickup at
+  load: stats+12+4*n = pickup pointer, n = u32 stats+4012 (also stored in pickup+128), capacity 1000. Totals: +4016
+  hidden, +4020 agility, +4024 online; collected +4028 hidden, +4032 agility, +4036 online; per-district counts from
+  +4040. Run 003: 932 = 500 agility (types 0-3) + 300 hidden (type 4), vtable 0x82009F90; 80 online orbs (type 10,
+  vtable 0x8200AA08); 52 audio logs (type 9, vtable 0x82139A28, not counted in the totals). Registration order looks
+  stable (positions to be compared across two boots before IDs are frozen).
+- **Pickup object:** +128 registry index, +136 type, +140 district 0..3, +144/+148/+152 position (float), +160 active.
+  Agility type 0..3 is per orb (likely its height/value band; useful for logic).
+- **SetActive:** sub_82709D18(pickup r3, active r4). With +160 set and r4 = 0 it runs the type's counter through a
+  12-entry jump table at 0x82709D70 (types 0-3 -> sub_8270B8D0 agility, achievements 17 first / 18 all; 4 ->
+  sub_8270B778 hidden; 11 -> effect only), then stores r4 to +160. Overrides: sub_82711240 online orbs (achievement
+  27), sub_8270F9B0 audio logs (13/14, manager [0x83800E24]). **Save restore calls it too** (LR 0x8226B3C4: 900
+  pickups -> 1, then the 32 collected in that save -> 0), so a check needs a gameplay LR or a restore filter.
+- **Skills:** cSkillSet, owner character at +4; max-level byte +8+s, level byte +14+s, XP floats +20+4s and +44+4s.
+  Order 0 Agility, 1 Driving, 2 Explosives, 3 Strength, 4 Firearms (stats screen sub_822B4EA0, lines that read +8..+12);
+  a sixth skill 5 exists (SetLevel at load sets 0..5). sub_82753CA0(set, skill, f1 xp) adds XP and levels up via
+  sub_8232BE00 (fp match to Crackdown 1's 82543BB0); sub_82753EB8(set, skill, level) sets a level, clamped 1..5 (or
+  the byte at 0x820E08FB), zeroes XP, then sub_82753F48 plays the level-up effects. Load sets every skill to 1 from
+  LR 0x827243B4 first. Player: [0x83800F88] (lwz 3976), +136 - 28 -> vcall +1516 returns the cSkillSet.
+- **Live AP runs (2026-10-20, dev build, isolated copies of the profile, local AP 0.6.8 server with a 2-slot
+  seed from `out/crackdown2.apworld`):** crackdown2_004 crashed (guest AV read 0x20) when the skill setter ran from
+  the present hook, which is on the render thread; the bridge now runs after the game update sub_82915C70.
+  crackdown2_005: connect, `--ap_dev_bind_load` binds the loaded save, 30 natively collected pickups recovered as
+  checks, skills set from items. crackdown2_006: `--ap_dev_teleport_orb=0` puts the agent on agility orb 0; native
+  collection calls SetActive from **LR 0x821D1E18** (inside sub_821D1DF0) -> check 75400000 sent, then the game
+  autosaves (the stats serializer runs: fingerprint recorded). crackdown2_007 (same profile, restart, no dev bind):
+  native load fingerprint 73493bb745347997 is in the lineage -> bound; orb 2 collected -> check 75400002; orb XP
+  arrives as 2.0 Agility XP per call through AddXP from **LR 0x82756A90** (sub_82756A10) and is dropped. Screenshot
+  `out/ap4_110.png` (local): agent on the orb's rooftop, Agility still level 1.
+- **New Game (run crackdown2_008, fresh profile, local seed):** the registry (932) and the agent exist already in
+  Agent Diagnostics, so the bridge binds there ("new game bound ... randomized save active (new game)"). Diagnostics
+  sets every skill with SetLevel(0) from LR 0x82486710.. (the setter clamps to 1); the bridge leaves native level 0
+  alone. Screenshot `out/apnew1_330.png` (local). The later Diagnostics -> city change is not yet seen: if it
+  happens without a native load, the bridge now binds when the in-memory progress fingerprint is in the lineage.
+- **Races (2026-10-20):** race manager [0x83801614] (sub_825D1478 stores the new object at 0x83800D08+2316; the stats
+  screen reads it as [0x8380195C-840]). Races: vector at +128..+132, 30 entries, the same order and GUIDs (race+8..+20)
+  in runs crackdown2_028 and _029. Its save interface at +8 (vtable 0x8215B688) loads with sub_82840B30: one u32 per
+  race into race+940 (-1 = not won), then counts won road races in +427 and rooftop races in +428. Prototype at
+  race+876: vtable 0x8215CAA0 = road (vcall +56 returns 5), 0x8215C888 = rooftop (4); 15 each, five per group
+  (race+932). Winning runs sub_82855E10 (road-race vtable 0x8218D308 slot), which stores the time in race+940,
+  counts it and unlocks achievement 22, then sub_82883960 (group done: 23 street / 24 rooftop). Position at race+0x70.
+  The bridge polls +940 twice a second in a bound save. Run crackdown2_030: `--ap_dev_complete_race=17` (synthetic:
+  writes +940) -> "Road Race 08 won" -> check 75401017 sent and acknowledged. A real win is not yet tested.
+- **Campaign objectives (2026-10-20):** campaign manager [0x838009CC]: 103 interface pointers at +12..+16, same
+  order and classes on the 150GS and 370GS saves (runs crackdown2_033/032). Totals are bytes +40 absorption units
+  (27), +41 Freak Breaches (25), +42 tactical locations (27), +43 beacons (9), +44..+46 beacons per district 3/2/4
+  (sub_823C3050 jump table). The game's counters (sub_824728E0 breaches, sub_82465A08) filter entries by class
+  (vcall +4) and call vcall +80 ("finished?"). Entry vtables: 0x820073D8 tactical location (object vtable 0x821044A0,
+  after "cTacticalObjective"), 0x82007210 Freak Breach (object 0x821041EC, after "cBreachHoleMission"),
+  0x820078E0 absorption unit (27). The achievement tracker (0x83A3D500, lists +3044/+3060/+3076) only holds GUIDs
+  finished this session, so it is not used. Run crackdown2_034 (150GS copy, dev bind, local seed): the bridge's
+  vcall +80 poll found the save's 2 tactical locations, 4 absorption units and 1 breach and sent 7 checks.
+- **Agent controller (test teleport):** sub_822498F8 (Crackdown 1 sub_822A9E78): position +656, Havok proxy +560,
+  owner character +304; setPosition sub_82BFEC28 (Crackdown 1 sub_829D3560, identical body).
+- **Other check groups** (class strings, not yet traced): cRenegadeOrb 0x820E8708 (ctor sub_82757018), cStuntRing
+  sub_82711C28, cSupplyEntryPoint sub_8273FC98, cTacticalObjective sub_824759A8, cBeaconMission sub_82461300; road and
+  rooftop race names at 0x833E6A60.. (Volk/GreenBay/ShaiGen road 5 each, Volk/GreenBay rooftop 5, UnityHeights 4,
+  AgencyTower 1). Achievement numbering = order of the English strings (0 First Hurdle .. 27 LIVE and Let LIVE).
 
 ## Press Start to gameplay (2026-10-18)
 

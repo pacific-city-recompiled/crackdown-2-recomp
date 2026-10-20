@@ -17,6 +17,8 @@
 #include <string>
 #include <vector>
 
+#include <atomic>
+
 #include <rex/cvar.h>
 #include <rex/hook.h>
 #include <rex/logging/macros.h>
@@ -101,8 +103,17 @@ const Step* Current() {
   return nullptr;
 }
 
+std::atomic<uint16_t> g_test_buttons{0};
+}  // namespace
+namespace crackdown2 { uint16_t SweepWatchdogButtons(); }
+namespace {
+
 void Apply(PPCContext& ctx, uint8_t* base, uint32_t user, uint32_t state_ea) {
   if (user != 0 || !state_ea) return;
+  if (const uint16_t extra = g_test_buttons.load(std::memory_order_relaxed) | crackdown2::SweepWatchdogButtons()) {
+    REX_STORE_U16(state_ea + 4, uint16_t(REX_LOAD_U16(state_ea + 4) | extra));
+    ctx.r3.u64 = 0;
+  }
   const Step* s = Current();
   if (!s) return;
   REX_STORE_U16(state_ea + 4, uint16_t(REX_LOAD_U16(state_ea + 4) | s->buttons));
@@ -115,6 +126,11 @@ void Apply(PPCContext& ctx, uint8_t* base, uint32_t user, uint32_t state_ea) {
   ctx.r3.u64 = 0;
 }
 }  // namespace
+
+namespace crackdown2 {
+// Test tools (ap_probe.cpp --ap_dev_sweep=jump): pad 0 buttons held in addition to the script, 0 = none.
+void SetTestButtons(uint16_t buttons) { g_test_buttons.store(buttons, std::memory_order_relaxed); }
+}  // namespace crackdown2
 
 REX_HOOK_RAW(sub_829551D0) {
   const uint32_t user = ctx.r3.u32, state = ctx.r5.u32;

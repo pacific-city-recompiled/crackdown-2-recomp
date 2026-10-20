@@ -6,6 +6,7 @@
 // Crackdown 1 (frame_time_us per row), so its tools/frametimes.py reads it.
 
 #include "generated/default/crackdown2_init.h"
+#include "ap/bridge.h"  // ProbeFrame
 
 #include <atomic>
 #include <chrono>
@@ -100,8 +101,10 @@ void FlushFrameLog() {
 }
 }  // namespace crackdown2
 
+
 REX_HOOK_RAW(sub_82385DA8) {
   PaceFrame();
+  crackdown2::ap::ProbeFrame(base);
   OnFrame();
   crackdown2::UpdateSimClock();
   __imp__sub_82385DA8(ctx, base);

@@ -23,6 +23,7 @@
 
 #include "generated/default/crackdown2_init.h"
 #include "midasm_hooks.h"
+#include "ap/bridge.h"
 
 #include <algorithm>
 #include <atomic>
@@ -128,6 +129,10 @@ CD2_FRAME_MS_SITES(CD2_DEFINE_FRAME_MS)
 REX_HOOK_RAW(sub_82915C70) {
   if (Sim().game_clock) ctx.f1.f64 = double(float(ctx.f1.f64) * g_step_scale.load(std::memory_order_relaxed));
   __imp__sub_82915C70(ctx, base);
+  // AP bridge on the game thread, after the update: queued network work, checks and skill grants (the present
+  // hook runs on the render thread, where calling the skill setter crashed, run crackdown2_004).
+  crackdown2::ap::OnFrame(ctx, base);
+  crackdown2::ap::ProbeUpdate(ctx, base);
 }
 
 // Step query: returns the step in f1.
