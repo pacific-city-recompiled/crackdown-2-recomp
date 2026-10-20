@@ -429,13 +429,15 @@ void RecoverNativeChecks(uint8_t* base) {
   SendPendingChecks();
 }
 
-bool BindNewGame(std::string& reason) {
+bool BindNewGame(uint8_t* base, std::string& reason) {
   if (g.session) {
-    if (g.session->HasNativeSave()) {
-      reason = "this profile's randomized save already has native saves; New Game would replace it";
-      return false;
-    }
-    return true;  // never saved natively: the same lineage starts over
+    if (!g.session->HasNativeSave()) return true;  // never saved natively: the same lineage starts over
+    // A world change without a native load (e.g. Agent Diagnostics -> Pacific City) keeps the progress in memory:
+    // still this binding's save when that progress is in the lineage.
+    const auto print = Fingerprint(base);
+    if (print && g.session->AcceptLoad(ActiveBinding(), *print)) return true;
+    reason = "this profile's randomized save already has native saves and this world's progress is not one of them";
+    return false;
   }
   if (!g.server_ready || !g.server) {
     reason = "not connected to a validated Archipelago slot when the game started";
@@ -464,7 +466,7 @@ void Decide(uint8_t* base) {
   std::string reason;
   try {
     if (g.load_seen && !g.session && REXCVAR_GET(ap_dev_bind_load)) {
-      bound = BindNewGame(reason);
+      bound = BindNewGame(base, reason);
       if (bound) {
         const auto print = Fingerprint(base);
         if (!print) return Halt("pickup registry not loaded when binding the loaded save");
@@ -475,7 +477,7 @@ void Decide(uint8_t* base) {
       bound = g.load_bound;
       reason = g.load_reason;
     } else {
-      bound = BindNewGame(reason);
+      bound = BindNewGame(base, reason);
     }
     if (bound) {
       std::string error;

@@ -53,6 +53,11 @@ Archipelago Phase 0 (2026-10-20, plan in `docs/plan-archipelago.md`). Probe: `cr
   native load fingerprint 73493bb745347997 is in the lineage -> bound; orb 2 collected -> check 75400002; orb XP
   arrives as 2.0 Agility XP per call through AddXP from **LR 0x82756A90** (sub_82756A10) and is dropped. Screenshot
   `out/ap4_110.png` (local): agent on the orb's rooftop, Agility still level 1.
+- **New Game (run crackdown2_008, fresh profile, local seed):** the registry (932) and the agent exist already in
+  Agent Diagnostics, so the bridge binds there ("new game bound ... randomized save active (new game)"). Diagnostics
+  sets every skill with SetLevel(0) from LR 0x82486710.. (the setter clamps to 1); the bridge leaves native level 0
+  alone. Screenshot `out/apnew1_330.png` (local). The later Diagnostics -> city change is not yet seen: if it
+  happens without a native load, the bridge now binds when the in-memory progress fingerprint is in the lineage.
 - **Agent controller (test teleport):** sub_822498F8 (Crackdown 1 sub_822A9E78): position +656, Havok proxy +560,
   owner character +304; setPosition sub_82BFEC28 (Crackdown 1 sub_829D3560, identical body).
 - **Other check groups** (class strings, not yet traced): cRenegadeOrb 0x820E8708 (ctor sub_82757018), cStuntRing
