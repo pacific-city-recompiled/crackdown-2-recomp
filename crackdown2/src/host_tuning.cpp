@@ -7,6 +7,9 @@
 // and the host pacer in hooks_frametime.cpp holds 30 fps. City, 150GS save, last 30 s (PC runs crackdown2_055/056):
 // vsync on 33.33 ms avg / 35.7 ms 1% low; vsync off + fps_cap=30 33.33 / 34.1; uncapped 16.75 / 30.7 (59.7 fps).
 // An explicit --vsync=true keeps the stock path (and no cap); an explicit --fps_cap wins.
+// 60 fps default (2026-10-20): fps_cap=60 + sim_game_clock (hooks_framerate.cpp: measured step, the 16 ms sites and
+// --sim_frame_fixes). Austin's launcher playtest at 60 fps: speech, crowd anims, stairs, driving all fine.
+// --vsync=true still gives the stock 30 fps path; --fps_cap=30 keeps the clock at a 1/30 step.
 // clear_memory_page_state=false: Crackdown 1's measured fix (2026-10-17: re-uploaded ~20 MB/frame otherwise).
 
 #include "host_tuning.h"
@@ -35,7 +38,8 @@ void ApplyGameDefaults() {
   };
   static constexpr Default kDefaults[] = {
       {"vsync", "false"},
-      {"fps_cap", "30"},
+      {"fps_cap", "60"},
+      {"sim_game_clock", "true"},
       {"clear_memory_page_state", "false"},
       // SDK patch 0027: yield instead of sleeping on PM4 WAIT_REG_MEM polls, so loads run at the vsync-off
       // speed while vsync keeps the frame rate.
@@ -50,7 +54,7 @@ void ApplyGameDefaults() {
                            rex::cvar::Query<bool>("vsync");
   for (const Default& d : kDefaults) {
     const std::string_view name = d.name;
-    if (stock_vsync && (name == "vsync" || name == "fps_cap")) continue;
+    if (stock_vsync && (name == "vsync" || name == "fps_cap" || name == "sim_game_clock")) continue;
     // Only where nothing else set it. GetFlagSource also reports kDefault for an unregistered flag.
     if (rex::cvar::GetFlagSource(d.name) != rex::cvar::Source::kDefault) continue;
     if (rex::cvar::SetFlagByName(d.name, d.value)) {
