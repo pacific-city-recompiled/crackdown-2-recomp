@@ -17,9 +17,13 @@
 
 #include <bit>
 #include <algorithm>
+#include <atomic>
 #include <chrono>
 #include <cmath>
 #include <vector>
+#include <fstream>
+#include <set>
+#include <sstream>
 #include <cstdint>
 #include <cstdio>
 #include <filesystem>
@@ -42,6 +46,8 @@ REXCVAR_DEFINE_STRING(ap_dev_sweep, "", "Crackdown2", "Test tool: pickups or jum
 REXCVAR_DEFINE_STRING(ap_dev_sweep_out, "", "Crackdown2", "Test tool: CSV for --ap_dev_sweep");
 REXCVAR_DEFINE_INT32(ap_dev_sweep_from, 0, "Crackdown2", "Test tool: first registry ordinal for --ap_dev_sweep");
 REXCVAR_DEFINE_INT32(ap_dev_sweep_to, 9999, "Crackdown2", "Test tool: last registry ordinal for --ap_dev_sweep");
+REXCVAR_DEFINE_STRING(ap_dev_sweep_skip, "", "Crackdown2",
+                      "Test tool: skip pickups already in these sweep CSVs (comma-separated paths), to resume");
 REXCVAR_DEFINE_BOOL(ap_dev_sweep_ring, false, "Crackdown2", "Test tool: --ap_dev_sweep=pickups also drops around orbs");
 
 namespace {
@@ -161,6 +167,7 @@ struct Target {
   int sample = 0;
   float pos[3]{};
   int level = 0, hold_ms = 0;
+  int retries = 0;
 };
 struct Sweep {
   bool started = false, done = false, active = false;
@@ -169,9 +176,17 @@ struct Sweep {
   Clock::time_point step_start{}, start{};
   float last_y = 0, base_y = 0, max_y = 0;
   int still = 0;
+  Clock::time_point release_until{};  // a stuck agent (hanging from a ledge) lets go before the next teleport
   std::FILE* out = nullptr;
 };
 Sweep g_sweep;
+uint32_t g_controller = 0;  // the agent's character controller (sub_822498F8 r3)
+// Last time the sweep ran (ms since the steady epoch). The game update stops on the death screen, where only a pad
+// press (A = Regenerate) continues, so the input hook pulses A when this goes stale (run crackdown2_015).
+std::atomic<int64_t> g_sweep_alive_ms{0};
+int64_t NowMs() {
+  return std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now().time_since_epoch()).count();
+}
 
 uint32_t AgentCharacter(uint8_t* base) {
   const uint32_t player = REX_LOAD_U32(0x83800F88);
@@ -205,7 +220,15 @@ void BuildTargets(uint8_t* base, uint32_t controller) {
   } else if (mode == "pickups") {
     const uint32_t count = stats ? REX_LOAD_U32(stats + 4012) : 0;
     const uint32_t last = std::min<uint32_t>(count, uint32_t(REXCVAR_GET(ap_dev_sweep_to)) + 1);
+    std::set<uint32_t> skip;  // resume: a sweep stops when the agent dies (it cannot regenerate it)
+    std::stringstream files(REXCVAR_GET(ap_dev_sweep_skip));
+    for (std::string file; std::getline(files, file, ',');) {
+      std::ifstream in(file);
+      for (std::string line; std::getline(in, line);)
+        if (line.rfind("pickup,", 0) == 0) skip.insert(uint32_t(std::stoul(line.substr(7))));
+    }
     for (uint32_t i = uint32_t(std::max(0, REXCVAR_GET(ap_dev_sweep_from))); i < last; ++i) {
+      if (skip.contains(i)) continue;
       const uint32_t p = REX_LOAD_U32(stats + 12 + 4 * i);
       const uint32_t type = REX_LOAD_U32(p + 136);
       if (type == 10) continue;  // online orbs: Xbox Live co-op only
@@ -223,6 +246,30 @@ void BuildTargets(uint8_t* base, uint32_t controller) {
         }
       }
     }
+    // Visit pickups nearest-first (each with its ring drops), so the world around the next target is mostly
+    // streamed in already.
+    std::vector<std::vector<Target>> groups;
+    for (const auto& x : t) {
+      if (x.what == "pickup") groups.emplace_back();
+      groups.back().push_back(x);
+    }
+    std::vector<Target> ordered;
+    std::vector<bool> used(groups.size());
+    float at[3] = {F32(base, controller + 656), F32(base, controller + 660), F32(base, controller + 664)};
+    for (size_t n = 0; n < groups.size(); ++n) {
+      size_t best = 0;
+      float best_d = 1e30f;
+      for (size_t i = 0; i < groups.size(); ++i) {
+        if (used[i]) continue;
+        const float* q = groups[i][0].pos;
+        const float d = (q[0] - at[0]) * (q[0] - at[0]) + (q[2] - at[2]) * (q[2] - at[2]);
+        if (d < best_d) best_d = d, best = i;
+      }
+      used[best] = true;
+      std::copy(groups[best][0].pos, groups[best][0].pos + 3, at);
+      ordered.insert(ordered.end(), groups[best].begin(), groups[best].end());
+    }
+    t = std::move(ordered);
   } else if (mode == "jump") {
     const float here[3] = {F32(base, controller + 656), F32(base, controller + 660), F32(base, controller + 664)};
     for (int level = 1; level <= 5; ++level) {
@@ -237,8 +284,17 @@ void BuildTargets(uint8_t* base, uint32_t controller) {
   }
   const std::string& path = REXCVAR_GET(ap_dev_sweep_out);
   if (!path.empty() && (g_sweep.out = std::fopen(path.c_str(), "w")))
-    std::fputs("what,ordinal,sample,type,tx,ty,tz,x,y,z,collected,level,hold_ms,apex,seconds\n", g_sweep.out);
+    std::fputs("what,ordinal,sample,type,tx,ty,tz,x,y,z,collected,level,hold_ms,apex,seconds,retries\n", g_sweep.out);
   REXLOG_INFO("ap_dev_sweep: {} targets ({})", t.size(), mode.empty() ? "teleport_orb" : mode);
+}
+
+// Caps the agent's fall speed at 8 m/s: the Havok proxy's velocity (proxy+16, y at +20) and the controller's
+// own velocity vector at +672 (y at +676; Crackdown 1 zeroed the matching +352 for --teleport).
+void ClampFall(uint8_t* base, uint32_t controller) {
+  constexpr float kMax = -8.0f;
+  const uint32_t proxy = REX_LOAD_U32(controller + 560);
+  if (proxy && F32(base, proxy + 20) < kMax) REX_STORE_U32(proxy + 20, std::bit_cast<uint32_t>(kMax));
+  if (F32(base, controller + 676) < kMax) REX_STORE_U32(controller + 676, std::bit_cast<uint32_t>(kMax));
 }
 
 void SetAgility(PPCContext& ctx, uint8_t* base, int level) {
@@ -258,12 +314,18 @@ void StepSweep(PPCContext& ctx, uint8_t* base, uint32_t controller) {
   if (w.done) return;
   const uint32_t character = AgentCharacter(base);
   if (!character || REX_LOAD_U32(controller + 304) != character) return;
+  // Only a live agent counts: a dead one (deep water, run crackdown2_016) keeps the update running but loses its
+  // controller, and the watchdog's A press regenerates it.
+  g_sweep_alive_ms.store(NowMs(), std::memory_order_relaxed);
   const auto now = Clock::now();
   if (!w.started) {
+    if (!Stats(base) || REX_LOAD_U32(Stats(base) + 4012) == 0 || !REX_LOAD_U32(controller + 560)) return;
     if (w.start == Clock::time_point{}) w.start = now;
     if (now - w.start < std::chrono::duration<double>(REXCVAR_GET(ap_dev_teleport_delay_s))) return;
     w.started = true;
     BuildTargets(base, controller);
+    // Pickup sweeps run at Agility 5: the ring drops fall up to ~60 m and killed an Agility 1 agent.
+    if (REXCVAR_GET(ap_dev_sweep) == "pickups") SetAgility(ctx, base, 5);
   }
   const float y = F32(base, controller + 660);
   const double elapsed = std::chrono::duration<double>(now - w.step_start).count();
@@ -277,12 +339,34 @@ void StepSweep(PPCContext& ctx, uint8_t* base, uint32_t controller) {
       w.max_y = std::max(w.max_y, y);
       finished = elapsed > 1.0 + t.hold_ms / 1000.0 + 3.0;
     } else {
+      // Long drops kill the agent even at Agility 5 (runs crackdown2_014/016/018): cap the fall speed.
+      ClampFall(base, controller);
+      // Hold the agent at the target for 0.8 s so the area's collision streams in first: falling through unloaded
+      // ground after a long teleport killed it (run crackdown2_020, pickup 375).
+      if (elapsed < 0.8) {
+        Teleport(ctx, base, controller, t.pos);
+        w.still = 0;
+        w.last_y = y;
+        return;
+      }
       w.still = std::fabs(y - w.last_y) < 0.01f ? w.still + 1 : 0;
-      finished = (elapsed > 0.5 && w.still >= 20) || elapsed > 6.0;
+      finished = (elapsed > 1.3 && w.still >= 20) || elapsed > 20.0;
     }
     w.last_y = y;
     if (!finished) return;
     w.active = false;
+    // Teleports don't move an agent that hangs from a ledge (sweep run crackdown2_012). If the agent is not where
+    // it was sent, press B (let go), then send it again; up to three times.
+    Target& cur = w.targets[w.next - 1];
+    const float dx = F32(base, controller + 656) - cur.pos[0], dz = F32(base, controller + 664) - cur.pos[2];
+    if (cur.what != "jump" && dx * dx + dz * dz > 9.0f && cur.retries < 3) {
+      ++cur.retries;
+      --w.next;
+      w.release_until = now + std::chrono::milliseconds(500);
+      // B lets go of a ledge; A also regenerates a dead agent (falls kill at low Agility, run crackdown2_014).
+      crackdown2::SetTestButtons(cur.retries == 1 ? 0x2000 : 0x1000);
+      return;
+    }
     uint32_t type = 0, collected = 0;
     if (t.what != "jump") {
       const uint32_t p = REX_LOAD_U32(Stats(base) + 12 + 4 * t.ordinal);
@@ -290,9 +374,9 @@ void StepSweep(PPCContext& ctx, uint8_t* base, uint32_t controller) {
       collected = REX_LOAD_U8(p + 160) == 0;
     }
     if (w.out) {
-      std::fprintf(w.out, "%s,%u,%d,%u,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%u,%d,%d,%.2f,%.2f\n", t.what.c_str(),
+      std::fprintf(w.out, "%s,%u,%d,%u,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%u,%d,%d,%.2f,%.2f,%d\n", t.what.c_str(),
                    t.ordinal, t.sample, type, t.pos[0], t.pos[1], t.pos[2], F32(base, controller + 656), y,
-                   F32(base, controller + 664), collected, t.level, t.hold_ms, w.max_y - w.base_y, elapsed);
+                   F32(base, controller + 664), collected, t.level, t.hold_ms, w.max_y - w.base_y, elapsed, t.retries);
       std::fflush(w.out);
     }
   }
@@ -302,6 +386,12 @@ void StepSweep(PPCContext& ctx, uint8_t* base, uint32_t controller) {
     REXLOG_INFO("ap_dev_sweep: done, {} targets", w.targets.size());
     return;
   }
+  if (now < w.release_until) return;
+  if (w.release_until != Clock::time_point{}) {
+    w.release_until = {};
+    crackdown2::SetTestButtons(0);
+  }
+  if (!REX_LOAD_U32(controller + 560)) return;  // no character proxy yet (crash at guest 0x10, run crackdown2_011)
   const Target& t = w.targets[w.next++];
   if (t.what == "jump") SetAgility(ctx, base, t.level);
   Teleport(ctx, base, controller, t.pos);
@@ -314,8 +404,37 @@ void StepSweep(PPCContext& ctx, uint8_t* base, uint32_t controller) {
 }
 }  // namespace
 
+namespace crackdown2 {
+// Called from the pad hook (hooks_autoinput.cpp): extra buttons while a running sweep is stuck outside gameplay.
+uint16_t SweepWatchdogButtons() {
+  const int64_t alive = g_sweep_alive_ms.load(std::memory_order_relaxed);
+  if (!alive || g_sweep.done) return 0;
+  const int64_t now = NowMs();
+  if (now - alive <= 4000) return 0;
+  const int64_t phase = (now / 400) % 4;  // A (Regenerate), then Y (Regenerate at nearest drop point)
+  return phase == 0 ? 0x1000 : phase == 2 ? 0x8000 : 0;
+}
+}  // namespace crackdown2
+
+namespace crackdown2::ap {
+// Runs the sweep from the game update (hooks_framerate.cpp), not from the controller update: the controller update
+// stops while the agent hangs from a ledge (sweep run crackdown2_010 stalled there).
+void ProbeUpdate(PPCContext& ctx, uint8_t* base) {
+  static const bool on = REXCVAR_GET(ap_dev_teleport_orb) >= 0 || !REXCVAR_GET(ap_dev_sweep).empty();
+  if (on && g_controller) StepSweep(ctx, base, g_controller);
+}
+}  // namespace crackdown2::ap
+
+// Remembers the agent's controller for ProbeUpdate.
 REX_HOOK_RAW(sub_822498F8) {
   static const bool on = REXCVAR_GET(ap_dev_teleport_orb) >= 0 || !REXCVAR_GET(ap_dev_sweep).empty();
-  if (on) StepSweep(ctx, base, ctx.r3.u32);
+  if (on) {
+    const uint32_t character = AgentCharacter(base);
+    if (character && REX_LOAD_U32(ctx.r3.u32 + 304) == character) {
+      g_controller = ctx.r3.u32;
+      if (g_sweep.active && g_sweep.next && g_sweep.targets[g_sweep.next - 1].what != "jump")
+        ClampFall(base, ctx.r3.u32);
+    }
+  }
   __imp__sub_822498F8(ctx, base);
 }

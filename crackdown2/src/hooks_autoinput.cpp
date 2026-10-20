@@ -104,10 +104,13 @@ const Step* Current() {
 }
 
 std::atomic<uint16_t> g_test_buttons{0};
+}  // namespace
+namespace crackdown2 { uint16_t SweepWatchdogButtons(); }
+namespace {
 
 void Apply(PPCContext& ctx, uint8_t* base, uint32_t user, uint32_t state_ea) {
   if (user != 0 || !state_ea) return;
-  if (const uint16_t extra = g_test_buttons.load(std::memory_order_relaxed)) {
+  if (const uint16_t extra = g_test_buttons.load(std::memory_order_relaxed) | crackdown2::SweepWatchdogButtons()) {
     REX_STORE_U16(state_ea + 4, uint16_t(REX_LOAD_U16(state_ea + 4) | extra));
     ctx.r3.u64 = 0;
   }

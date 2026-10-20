@@ -37,6 +37,19 @@ collected pickup to `<user data>/archipelago/pickups.csv` with the logic level a
 agent was below the logic level show bands that are too strict, and orbs a player could not reach go into
 `AGILITY_OVERRIDES` (by registry ordinal).
 
+## Logic v2: measured (2026-10-20, catalog crackdown2-ap-3)
+
+A teleport sweep (`--ap_dev_sweep=pickups`, crackdown2/src/ap/ap_probe.cpp; runs crackdown2_020-030 on copies of a
+save) put the agent on all 852 non-online pickups. **All 800 orbs were collected by touch**; audio logs need the
+interact button (not covered by teleport). Each landing gives the surface under the pickup; `crackdown2/ap/climb.csv`
+(tools/re/ap_logic_from_sweep.py) is that surface minus the lowest sweep landing within 75 m. Climb by tier (median /
+p90 m): agility tier 0: 20/42, 1: 33/62, 2: 34/72, 3: 77/260; hidden: 0/58 (so v1 wrongly put ~80 rooftop hidden
+orbs in logic from the start). Jump apex at Agility 1-5 (held A, run crackdown2_009): 3.2/5.2/7.4/9.2/12.5 m.
+Level = max(v1 rule, climb band: <15 m 1, <30 m 2, <50 m 3, <80 m 4, else 5). Result: agility orbs 70/127/187/81/35
+at levels 1-5, hidden 219/29/19/15/18, audio logs 29/9/8/3/3. Still 318 checks need no Agility. Known limits: climb
+from a 75 m neighbourhood is a proxy (ledge routes can be easier); the "drop around each orb" pass was dropped
+because long falls kill the agent and the tool cannot regenerate it.
+
 ## 1. What Crackdown 1 does (the shape to copy)
 
 - **Everything runs inside the game exe.** `crackdown/src/ap/`: `client.cpp` (WinHTTP WebSocket, network thread only

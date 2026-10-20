@@ -14,4 +14,5 @@ void OnFrame(PPCContext& ctx, uint8_t* base);
 void ProbeFrame(uint8_t* base);
 void ProbeSetActive(PPCContext& ctx, uint8_t* base);
 void ProbeAddXP(PPCContext& ctx, uint8_t* base);  // runs the native AddXP
+void ProbeUpdate(PPCContext& ctx, uint8_t* base);  // test sweep, after each game update
 }  // namespace crackdown2::ap

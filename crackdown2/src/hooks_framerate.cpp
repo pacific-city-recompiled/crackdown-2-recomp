@@ -132,6 +132,7 @@ REX_HOOK_RAW(sub_82915C70) {
   // AP bridge on the game thread, after the update: queued network work, checks and skill grants (the present
   // hook runs on the render thread, where calling the skill setter crashed, run crackdown2_004).
   crackdown2::ap::OnFrame(ctx, base);
+  crackdown2::ap::ProbeUpdate(ctx, base);
 }
 
 // Step query: returns the step in f1.
