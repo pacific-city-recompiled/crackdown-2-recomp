@@ -239,6 +239,44 @@ void LogPickup(const Pickup& p, int agility) {
       << ',' << p.position[1] << ',' << p.position[2] << ',' << p.agility << ',' << agility << '\n';
 }
 
+// Race manager [0x83801614] (stored by sub_825D1478): races at +128..+132, in save order (load serializer
+// sub_82840B30 reads one u32 per race into race+940). A race's +940 stays -1 until it is won (sub_82855E10 stores
+// the time there). Returns the vector when it holds exactly the catalog's 30 races, matched by GUID (race+8..+20).
+void Observe(int64_t location, bool send);
+void SendPendingChecks();
+
+uint32_t RaceTable(uint8_t* base) {
+  const uint32_t m = REX_LOAD_U32(0x83801614);
+  if (!m) return 0;
+  const uint32_t begin = REX_LOAD_U32(m + 128), end = REX_LOAD_U32(m + 132);
+  if (!begin || end - begin != 4 * g.catalog->races.size()) return 0;
+  for (const auto& [ordinal, r] : g.catalog->races) {
+    const uint32_t race = REX_LOAD_U32(begin + 4 * ordinal);
+    char guid[33];
+    std::snprintf(guid, sizeof(guid), "%08X%08X%08X%08X", REX_LOAD_U32(race + 8), REX_LOAD_U32(race + 12),
+                  REX_LOAD_U32(race + 16), REX_LOAD_U32(race + 20));
+    if (r.guid != guid) return 0;
+  }
+  return begin;
+}
+
+// Won races the sidecar lacks become checks (gameplay wins and wins restored by a native load alike).
+void PollRaces(uint8_t* base) {
+  static uint32_t frame = 0;
+  if (++frame % 30) return;  // twice a second at 60 fps
+  const uint32_t begin = RaceTable(base);
+  if (!begin) return;
+  bool any = false;
+  for (const auto& [ordinal, r] : g.catalog->races) {
+    if (REX_LOAD_U32(REX_LOAD_U32(begin + 4 * ordinal) + 940) == 0xFFFFFFFFu) continue;
+    if (!g.session->contract().locations.contains(r.id) || g.session->Observed().contains(r.id)) continue;
+    REXLOG_INFO("ap: {} won (race {})", r.name, ordinal);
+    Observe(r.id, false);
+    any = true;
+  }
+  if (any) SendPendingChecks();
+}
+
 // --- network -------------------------------------------------------------
 
 void SendCommands(nlohmann::json commands) {
@@ -370,7 +408,7 @@ void HandlePacket(const NetEvent& e) {
         else if (type == "item_id" && g.catalog->item_names.contains(std::stoll(piece)))
           piece = g.catalog->item_names.at(std::stoll(piece));
         else if (type == "location_id")
-          if (const auto* pickup = g.catalog->ByLocation(std::stoll(piece))) piece = pickup->name;
+          if (auto name = g.catalog->LocationName(std::stoll(piece)); !name.empty()) piece = name;
       } catch (const std::exception&) {
       }
       text += piece;
@@ -405,7 +443,7 @@ void PumpNetwork() {
 
 // --- native lifecycle -----------------------------------------------------
 
-void Observe(int64_t location, bool send = true) {
+void Observe(int64_t location, bool send) {
   try {
     if (g.session->Observe(ActiveBinding(), location)) {
       REXLOG_INFO("ap: check observed location {}", location);
@@ -520,9 +558,10 @@ void Reconcile(PPCContext& ctx, uint8_t* base) {
     g.last_observe_retry = now;
     auto retry = std::move(g.retry_observe);
     g.retry_observe.clear();
-    for (auto id : retry) Observe(id);
+    for (auto id : retry) Observe(id, true);
   }
   if (g.server_ready && now - g.last_check_send > std::chrono::seconds(10)) SendPendingChecks();
+  PollRaces(base);
 
   const uint32_t skills = PrimarySkills(base);
   if (!skills || now - g.last_grant_try < std::chrono::milliseconds(500)) return;
@@ -670,7 +709,7 @@ REX_HOOK_RAW(sub_82709D18) {
   REXLOG_INFO("ap: {} collected ordinal {} lr {:08X} (logic Agility {}, agent Agility {})", it->second.name,
               ordinal, lr, it->second.agility, agility);
   LogPickup(it->second, agility);
-  if (g.session->contract().locations.contains(it->second.id)) Observe(it->second.id);
+  if (g.session->contract().locations.contains(it->second.id)) Observe(it->second.id, true);
 }
 
 // Gameplay XP for the agent is dropped in a bound save: skills rise only from received items.

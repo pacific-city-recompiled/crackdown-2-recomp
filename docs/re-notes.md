@@ -58,6 +58,15 @@ Archipelago Phase 0 (2026-10-20, plan in `docs/plan-archipelago.md`). Probe: `cr
   sets every skill with SetLevel(0) from LR 0x82486710.. (the setter clamps to 1); the bridge leaves native level 0
   alone. Screenshot `out/apnew1_330.png` (local). The later Diagnostics -> city change is not yet seen: if it
   happens without a native load, the bridge now binds when the in-memory progress fingerprint is in the lineage.
+- **Races (2026-10-20):** race manager [0x83801614] (sub_825D1478 stores the new object at 0x83800D08+2316; the stats
+  screen reads it as [0x8380195C-840]). Races: vector at +128..+132, 30 entries, the same order and GUIDs (race+8..+20)
+  in runs crackdown2_028 and _029. Its save interface at +8 (vtable 0x8215B688) loads with sub_82840B30: one u32 per
+  race into race+940 (-1 = not won), then counts won road races in +427 and rooftop races in +428. Prototype at
+  race+876: vtable 0x8215CAA0 = road (vcall +56 returns 5), 0x8215C888 = rooftop (4); 15 each, five per group
+  (race+932). Winning runs sub_82855E10 (road-race vtable 0x8218D308 slot), which stores the time in race+940,
+  counts it and unlocks achievement 22, then sub_82883960 (group done: 23 street / 24 rooftop). Position at race+0x70.
+  The bridge polls +940 twice a second in a bound save. Run crackdown2_030: `--ap_dev_complete_race=17` (synthetic:
+  writes +940) -> "Road Race 08 won" -> check 75401017 sent and acknowledged. A real win is not yet tested.
 - **Agent controller (test teleport):** sub_822498F8 (Crackdown 1 sub_822A9E78): position +656, Havok proxy +560,
   owner character +304; setPosition sub_82BFEC28 (Crackdown 1 sub_829D3560, identical body).
 - **Other check groups** (class strings, not yet traced): cRenegadeOrb 0x820E8708 (ctor sub_82757018), cStuntRing

@@ -21,8 +21,11 @@ FILLER = "Agency Commendation"
 GAME = "Crackdown 2"
 
 
-AGILITY_NEEDED = {p["name"]: p["agility"] for p in CATALOG["pickups"]}
+AGILITY_NEEDED = {p["name"]: p["agility"] for p in CATALOG["pickups"] + CATALOG["races"]}
+DRIVING_NEEDED = {r["name"]: r["driving"] for r in CATALOG["races"]}
 AGILITY_START = SKILLS["Progressive Agility"]["starting"]
+DRIVING_START = SKILLS["Progressive Driving"]["starting"]
+RACES = {r["name"]: r["id"] for r in CATALOG["races"]}
 
 
 def pickups(kind: str) -> dict:
@@ -62,7 +65,7 @@ class Crackdown2Web(WebWorld):
 
 
 class Crackdown2World(World):
-    """Collect agility and hidden orbs across Pacific City while your skills arrive from the multiworld."""
+    """Collect orbs and win races across Pacific City while your skills arrive from the multiworld."""
     game = GAME
     web = Crackdown2Web()
     settings: ClassVar[Crackdown2Settings]
@@ -70,10 +73,12 @@ class Crackdown2World(World):
     options_dataclass = Crackdown2Options
     options: Crackdown2Options
     item_name_to_id = dict(CATALOG["items"])
-    location_name_to_id = {**pickups("agility"), **pickups("hidden"), **pickups("audio_log")}
+    location_name_to_id = {**pickups("agility"), **pickups("hidden"), **pickups("audio_log"), **RACES}
     item_name_groups = {"Skills": set(SKILLS)}
     location_name_groups = {"Agility Orbs": set(pickups("agility")), "Hidden Orbs": set(pickups("hidden")),
-                            "Audio Logs": set(pickups("audio_log"))}
+                            "Audio Logs": set(pickups("audio_log")),
+                            "Road Races": {r["name"] for r in CATALOG["races"] if r["kind"] == "road"},
+                            "Rooftop Races": {r["name"] for r in CATALOG["races"] if r["kind"] == "rooftop"}}
 
     def create_item(self, name: str) -> Crackdown2Item:
         classification = ItemClassification.progression if name in SKILLS else ItemClassification.filler
@@ -88,6 +93,8 @@ class Crackdown2World(World):
             locations.update(pickups("hidden"))
         if self.options.include_audio_logs:
             locations.update(pickups("audio_log"))
+        if self.options.include_races:
+            locations.update(RACES)
         return locations
 
     def create_regions(self) -> None:
@@ -113,6 +120,12 @@ class Crackdown2World(World):
                 needed = AGILITY_NEEDED.get(location.name, AGILITY_START) - AGILITY_START
                 if needed > 0:
                     location.access_rule = lambda state, n=needed: state.has("Progressive Agility", self.player, n)
+        for location in self.multiworld.get_locations(self.player):
+            driving = DRIVING_NEEDED.get(location.name, DRIVING_START) - DRIVING_START
+            if driving > 0:  # road races: a car fast enough for the time limit
+                rule = location.access_rule
+                location.access_rule = lambda state, n=driving, r=rule: (
+                    r(state) and state.has("Progressive Driving", self.player, n))
         self.multiworld.completion_condition[self.player] = lambda state: all(
             state.has(name, self.player, s["maximum"] - s["starting"]) for name, s in SKILLS.items())
 
@@ -125,4 +138,5 @@ class Crackdown2World(World):
             "goal": "max_skills",
             "include_hidden_orbs": bool(self.options.include_hidden_orbs),
             "include_audio_logs": bool(self.options.include_audio_logs),
+            "include_races": bool(self.options.include_races),
         }

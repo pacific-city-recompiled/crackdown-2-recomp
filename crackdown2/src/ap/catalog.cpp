@@ -12,6 +12,7 @@ namespace crackdown2::ap {
 namespace {
 void Require(bool ok, const char* why) { if (!ok) throw std::runtime_error(why); }
 constexpr uint32_t kRegistrySize = 932;  // 500 agility + 80 online + 300 hidden + 52 audio logs (run crackdown2_003)
+constexpr uint32_t kRaceCount = 30;      // 15 road + 15 rooftop (run crackdown2_028)
 }  // namespace
 
 std::set<int64_t> Catalog::Locations(const Options& o) const {
@@ -19,7 +20,16 @@ std::set<int64_t> Catalog::Locations(const Options& o) const {
   for (const auto& [ordinal, p] : pickups)
     if (p.kind == "agility" || (p.kind == "hidden" && o.hidden_orbs) || (p.kind == "audio_log" && o.audio_logs))
       ids.insert(p.id);
+  if (o.races)
+    for (const auto& [ordinal, r] : races) ids.insert(r.id);
   return ids;
+}
+
+std::string Catalog::LocationName(int64_t id) const {
+  if (const auto* p = ByLocation(id)) return p->name;
+  for (const auto& [ordinal, r] : races)
+    if (r.id == id) return r.name;
+  return {};
 }
 
 const Pickup* Catalog::ByLocation(int64_t id) const {
@@ -69,6 +79,20 @@ Catalog ParseCatalog(std::string_view text) {
             "Invalid AP catalog pickup");
   }
   Require(c.pickups.size() == kRegistrySize, "Incomplete AP catalog");
+  for (const auto& o : j.at("races")) {
+    Race r;
+    r.id = o.at("id").get<int64_t>();
+    r.ordinal = o.at("ordinal").get<uint32_t>();
+    r.kind = o.at("kind").get<std::string>();
+    r.name = o.at("name").get<std::string>();
+    r.guid = o.at("guid").get<std::string>();
+    const auto& pos = o.at("position");
+    r.position = {pos.at(0).get<float>(), pos.at(1).get<float>(), pos.at(2).get<float>()};
+    Require((r.kind == "road" || r.kind == "rooftop") && r.ordinal < kRaceCount && r.guid.size() == 32 &&
+                !items.contains(r.id) && ids.insert(r.id).second && c.races.emplace(r.ordinal, r).second,
+            "Invalid AP catalog race");
+  }
+  Require(c.races.size() == kRaceCount, "Incomplete AP catalog races");
   return c;
 }
 
@@ -90,7 +114,8 @@ Contract ParseSlotContract(const Catalog& catalog, std::string_view text, const 
   Require(c.filler_item == catalog.filler_item, "Slot filler mismatch");
   c.goal = data.at("goal").get<std::string>();
   Require(c.goal == "max_skills", "Unsupported slot goal");
-  const Options options{data.at("include_hidden_orbs").get<bool>(), data.at("include_audio_logs").get<bool>()};
+  const Options options{data.at("include_hidden_orbs").get<bool>(), data.at("include_audio_logs").get<bool>(),
+                        data.at("include_races").get<bool>()};
   Require(locations == catalog.Locations(options), "Slot locations mismatch");
   c.locations = locations;
   return c;
@@ -108,7 +133,8 @@ void ValidateStoredContract(const Catalog& catalog, const Contract& c) {
           "Stored catalog/skills differ from the embedded catalog");
   bool any_option = false;
   for (bool hidden : {false, true})
-    for (bool logs : {false, true}) any_option |= c.locations == catalog.Locations({hidden, logs});
+    for (bool logs : {false, true})
+      for (bool races : {false, true}) any_option |= c.locations == catalog.Locations({hidden, logs, races});
   Require(any_option, "Stored locations differ from the embedded catalog");
 }
 }  // namespace crackdown2::ap

@@ -18,17 +18,26 @@ struct Pickup {
   std::string kind, name;  // kind: agility, hidden, online, audio_log
   std::array<float, 3> position{};
 };
+// One of the 30 races (race manager [0x83801614] + 128 + 4 * ordinal), checked by its GUID at race+8..+20.
+struct Race {
+  int64_t id = 0;
+  uint32_t ordinal = 0;
+  std::string kind, name, guid;  // kind: road, rooftop; guid: 32 hex digits
+  std::array<float, 3> position{};
+};
 struct Options {
-  bool hidden_orbs = true, audio_logs = false;
+  bool hidden_orbs = true, audio_logs = false, races = true;
 };
 struct Catalog {
   std::string version, game;
   std::map<int, SkillProgression> skills;
   int64_t filler_item = 0;
   std::map<uint32_t, Pickup> pickups;  // by ordinal
+  std::map<uint32_t, Race> races;      // by ordinal
   std::map<int64_t, std::string> item_names;
   std::set<int64_t> Locations(const Options&) const;  // online orbs never (Xbox Live only)
   const Pickup* ByLocation(int64_t id) const;
+  std::string LocationName(int64_t id) const;
 };
 Catalog ParseCatalog(std::string_view json);  // throws on an invalid catalog
 const Catalog& EmbeddedCatalog();

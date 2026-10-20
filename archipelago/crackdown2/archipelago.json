@@ -3,6 +3,6 @@
 	"version": 7,
 	"game": "Crackdown 2",
 	"minimum_ap_version": "0.6.8",
-	"world_version": "0.2.0",
+	"world_version": "0.3.0",
 	"authors": ["Jerrod"]
 }

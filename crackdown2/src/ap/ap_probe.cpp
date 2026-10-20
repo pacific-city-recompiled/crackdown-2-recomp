@@ -49,6 +49,9 @@ REXCVAR_DEFINE_INT32(ap_dev_sweep_to, 9999, "Crackdown2", "Test tool: last regis
 REXCVAR_DEFINE_STRING(ap_dev_sweep_skip, "", "Crackdown2",
                       "Test tool: skip pickups already in these sweep CSVs (comma-separated paths), to resume");
 REXCVAR_DEFINE_BOOL(ap_dev_sweep_ring, false, "Crackdown2", "Test tool: --ap_dev_sweep=pickups also drops around orbs");
+REXCVAR_DEFINE_INT32(ap_dev_complete_race, -1, "Crackdown2",
+                     "Test tool (synthetic): write a finish time into this race's +940 once, 20 s into gameplay, to "
+                     "exercise the race check path without driving the race");
 
 namespace {
 constexpr uint32_t kStatsPtr = 0x83800E20;
@@ -91,6 +94,60 @@ void DumpRegistry(uint8_t* base) {
   REXLOG_INFO("ap_probe: wrote {} pickups to {}", count, path);
 }
 
+// Race manager [0x83801614] (sub_825D1478 stores it at 0x83800D08+2316): its save interface at +8 (vtable
+// 0x8215B688, load sub_82840B30) reads one u32 per race into race+940 for the races in the vector at +128..+132.
+// Race +940 = -1 until completed; +876 = its game-mode prototype (vcall +56: 4 rooftop, 5 road). Logged once, when
+// the vector is filled and unchanged for 300 frames.
+void DumpRaces(uint8_t* base) {
+  static uint32_t stable = 0, last = 0;
+  static bool done = false;
+  if (done) return;
+  const uint32_t m = REX_LOAD_U32(0x83801614);
+  if (!m) return;
+  const uint32_t begin = REX_LOAD_U32(m + 128), end = REX_LOAD_U32(m + 132);
+  const uint32_t n = end > begin ? (end - begin) / 4 : 0;
+  if (n != last) { last = n; stable = 0; return; }
+  if (!n || n > 200 || ++stable < 300) return;
+  done = true;
+  REXLOG_INFO("ap_probe: race manager {:08X} vt {:08X} races {} road done {} rooftop done {}", m, REX_LOAD_U32(m), n,
+              REX_LOAD_U8(m + 427), REX_LOAD_U8(m + 428));
+  for (uint32_t i = 0; i < n; ++i) {
+    const uint32_t r = REX_LOAD_U32(begin + 4 * i);
+    const uint32_t proto = REX_LOAD_U32(r + 876);
+    REXLOG_INFO("ap_probe: race {} obj {:08X} vt {:08X} time {:08X} group {:08X} proto {:08X} proto_vt {:08X} "
+                "words {:08X} {:08X} {:08X} {:08X} {:08X} {:08X} {:08X} {:08X}", i, r, REX_LOAD_U32(r),
+                REX_LOAD_U32(r + 940), REX_LOAD_U32(r + 932), proto, proto ? REX_LOAD_U32(proto) : 0,
+                REX_LOAD_U32(r + 4), REX_LOAD_U32(r + 8), REX_LOAD_U32(r + 12), REX_LOAD_U32(r + 16),
+                REX_LOAD_U32(r + 20), REX_LOAD_U32(r + 24), REX_LOAD_U32(r + 28), REX_LOAD_U32(r + 32));
+  }
+  // JSON for tools/re/make_ap_catalog.py: ordinal, kind (prototype vtable 0x8215CAA0 road / 0x8215C888 rooftop),
+  // group, GUID (+8..+20) and position (+0x70).
+  if (const std::string& path = REXCVAR_GET(ap_probe_dump); !path.empty()) {
+    if (std::FILE* f = std::fopen((path + ".races.json").c_str(), "w")) {
+      std::fputs("[\n", f);
+      for (uint32_t i = 0; i < n; ++i) {
+        const uint32_t r = REX_LOAD_U32(begin + 4 * i);
+        const uint32_t pvt = REX_LOAD_U32(REX_LOAD_U32(r + 876));
+        std::fprintf(f, "%s{\"n\":%u,\"kind\":\"%s\",\"group\":\"%08X\",\"guid\":\"%08X%08X%08X%08X\","
+                     "\"pos\":[%.3f,%.3f,%.3f],\"time\":%d}\n", i ? "," : "", i,
+                     pvt == 0x8215CAA0 ? "road" : pvt == 0x8215C888 ? "rooftop" : "?", REX_LOAD_U32(r + 932),
+                     REX_LOAD_U32(r + 8), REX_LOAD_U32(r + 12), REX_LOAD_U32(r + 16), REX_LOAD_U32(r + 20),
+                     F32(base, r + 0x70), F32(base, r + 0x74), F32(base, r + 0x78), int32_t(REX_LOAD_U32(r + 940)));
+      }
+      std::fputs("]\n", f);
+      std::fclose(f);
+    }
+  }
+  // One full race object, for finding its name/id fields.
+  const uint32_t r0 = REX_LOAD_U32(begin);
+  for (uint32_t off = 0; off < 1024; off += 32) {
+    REXLOG_INFO("ap_probe: race0 +{:03X}: {:08X} {:08X} {:08X} {:08X} {:08X} {:08X} {:08X} {:08X}", off,
+                REX_LOAD_U32(r0 + off), REX_LOAD_U32(r0 + off + 4), REX_LOAD_U32(r0 + off + 8),
+                REX_LOAD_U32(r0 + off + 12), REX_LOAD_U32(r0 + off + 16), REX_LOAD_U32(r0 + off + 20),
+                REX_LOAD_U32(r0 + off + 24), REX_LOAD_U32(r0 + off + 28));
+  }
+}
+
 void LogSkills(uint8_t* base, uint32_t set, const char* what) {
   REXLOG_INFO("ap_probe: {} skillset {:08X} owner {:08X} max {} {} {} {} {} level {} {} {} {} {} xp {:.1f} {:.1f} "
               "{:.1f} {:.1f} {:.1f}", what, set, REX_LOAD_U32(set + 4), (int8_t)REX_LOAD_U8(set + 8),
@@ -106,7 +163,10 @@ namespace crackdown2 { void SetTestButtons(uint16_t buttons); }
 namespace crackdown2::ap {
 void ProbeFrame(uint8_t* base) {
   static const bool on = REXCVAR_GET(ap_probe);
-  if (on) DumpRegistry(base);
+  if (on) {
+    DumpRegistry(base);
+    DumpRaces(base);
+  }
 }
 }  // namespace crackdown2::ap
 
@@ -422,12 +482,23 @@ namespace crackdown2::ap {
 void ProbeUpdate(PPCContext& ctx, uint8_t* base) {
   static const bool on = REXCVAR_GET(ap_dev_teleport_orb) >= 0 || !REXCVAR_GET(ap_dev_sweep).empty();
   if (on && g_controller) StepSweep(ctx, base, g_controller);
+  static const int32_t race = REXCVAR_GET(ap_dev_complete_race);
+  static int frames = 0;
+  if (race >= 0 && g_controller && ++frames == 1200) {
+    const uint32_t m = REX_LOAD_U32(0x83801614);
+    const uint32_t begin = m ? REX_LOAD_U32(m + 128) : 0, end = m ? REX_LOAD_U32(m + 132) : 0;
+    if (begin && uint32_t(race) < (end - begin) / 4) {
+      REX_STORE_U32(REX_LOAD_U32(begin + 4 * race) + 940, 60000);
+      REXLOG_WARN("ap_dev_complete_race: race {} +940 = 60000 (synthetic)", race);
+    }
+  }
 }
 }  // namespace crackdown2::ap
 
 // Remembers the agent's controller for ProbeUpdate.
 REX_HOOK_RAW(sub_822498F8) {
-  static const bool on = REXCVAR_GET(ap_dev_teleport_orb) >= 0 || !REXCVAR_GET(ap_dev_sweep).empty();
+  static const bool on = REXCVAR_GET(ap_dev_teleport_orb) >= 0 || !REXCVAR_GET(ap_dev_sweep).empty() ||
+                         REXCVAR_GET(ap_dev_complete_race) >= 0;
   if (on) {
     const uint32_t character = AgentCharacter(base);
     if (character && REX_LOAD_U32(ctx.r3.u32 + 304) == character) {

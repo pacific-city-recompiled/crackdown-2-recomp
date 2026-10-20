@@ -12,6 +12,13 @@ class IncludeAudioLogs(Toggle):
     display_name = "Include Audio Logs"
 
 
+class IncludeRaces(DefaultOnToggle):
+    """Include the 15 road races and 15 rooftop races as checks (a check is sent the first time you win each).
+
+    Road races expect one Progressive Driving; rooftop races expect Agility 3."""
+    display_name = "Include Races"
+
+
 class AgilityLogic(Choice):
     """How much Agility the logic expects before an orb can be reached.
 
@@ -36,12 +43,13 @@ class Goal(Choice):
 class Crackdown2Options(PerGameCommonOptions):
     include_hidden_orbs: IncludeHiddenOrbs
     include_audio_logs: IncludeAudioLogs
+    include_races: IncludeRaces
     agility_logic: AgilityLogic
     goal: Goal
 
 
 option_groups = [
-    OptionGroup("Checks", [IncludeHiddenOrbs, IncludeAudioLogs]),
+    OptionGroup("Checks", [IncludeHiddenOrbs, IncludeAudioLogs, IncludeRaces]),
     OptionGroup("Logic", [AgilityLogic]),
     OptionGroup("Goal", [Goal]),
 ]
