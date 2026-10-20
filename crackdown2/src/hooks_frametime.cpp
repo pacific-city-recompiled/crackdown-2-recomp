@@ -100,8 +100,11 @@ void FlushFrameLog() {
 }
 }  // namespace crackdown2
 
+namespace crackdown2::ap { void ProbeFrame(uint8_t* base); }
+
 REX_HOOK_RAW(sub_82385DA8) {
   PaceFrame();
+  crackdown2::ap::ProbeFrame(base);
   OnFrame();
   crackdown2::UpdateSimClock();
   __imp__sub_82385DA8(ctx, base);

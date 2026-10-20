@@ -20,7 +20,33 @@ Evidence log. Every address is in the title-update-patched image (0.0.5.1), `.te
 
 ## Randomizer notes
 
-(none yet; record pickup/orb/spawn tables here with guest addresses.)
+Archipelago Phase 0 (2026-10-20, plan in `docs/plan-archipelago.md`). Probe: `crackdown2/src/ap/ap_probe.cpp`
+(`--ap_probe --ap_probe_dump=<json>`, logs only). Run crackdown2_003 (dev build, isolated copy of the profile in
+`--user_data_root`, `--auto_input` into the city): registry dump of 932 entries.
+
+- **Orb registry:** player stats object at [0x83800E20] (lis -31872, lwz 3616). sub_8270BA38 registers each pickup at
+  load: stats+12+4*n = pickup pointer, n = u32 stats+4012 (also stored in pickup+128), capacity 1000. Totals: +4016
+  hidden, +4020 agility, +4024 online; collected +4028 hidden, +4032 agility, +4036 online; per-district counts from
+  +4040. Run 003: 932 = 500 agility (types 0-3) + 300 hidden (type 4), vtable 0x82009F90; 80 online orbs (type 10,
+  vtable 0x8200AA08); 52 audio logs (type 9, vtable 0x82139A28, not counted in the totals). Registration order looks
+  stable (positions to be compared across two boots before IDs are frozen).
+- **Pickup object:** +128 registry index, +136 type, +140 district 0..3, +144/+148/+152 position (float), +160 active.
+  Agility type 0..3 is per orb (likely its height/value band; useful for logic).
+- **SetActive:** sub_82709D18(pickup r3, active r4). With +160 set and r4 = 0 it runs the type's counter through a
+  12-entry jump table at 0x82709D70 (types 0-3 -> sub_8270B8D0 agility, achievements 17 first / 18 all; 4 ->
+  sub_8270B778 hidden; 11 -> effect only), then stores r4 to +160. Overrides: sub_82711240 online orbs (achievement
+  27), sub_8270F9B0 audio logs (13/14, manager [0x83800E24]). **Save restore calls it too** (LR 0x8226B3C4: 900
+  pickups -> 1, then the 32 collected in that save -> 0), so a check needs a gameplay LR or a restore filter.
+- **Skills:** cSkillSet, owner character at +4; max-level byte +8+s, level byte +14+s, XP floats +20+4s and +44+4s.
+  Order 0 Agility, 1 Driving, 2 Explosives, 3 Strength, 4 Firearms (stats screen sub_822B4EA0, lines that read +8..+12);
+  a sixth skill 5 exists (SetLevel at load sets 0..5). sub_82753CA0(set, skill, f1 xp) adds XP and levels up via
+  sub_8232BE00 (fp match to Crackdown 1's 82543BB0); sub_82753EB8(set, skill, level) sets a level, clamped 1..5 (or
+  the byte at 0x820E08FB), zeroes XP, then sub_82753F48 plays the level-up effects. Load sets every skill to 1 from
+  LR 0x827243B4 first. Player: [0x83800F88] (lwz 3976), +136 - 28 -> vcall +1516 returns the cSkillSet.
+- **Other check groups** (class strings, not yet traced): cRenegadeOrb 0x820E8708 (ctor sub_82757018), cStuntRing
+  sub_82711C28, cSupplyEntryPoint sub_8273FC98, cTacticalObjective sub_824759A8, cBeaconMission sub_82461300; road and
+  rooftop race names at 0x833E6A60.. (Volk/GreenBay/ShaiGen road 5 each, Volk/GreenBay rooftop 5, UnityHeights 4,
+  AgencyTower 1). Achievement numbering = order of the English strings (0 First Hurdle .. 27 LIVE and Let LIVE).
 
 ## Press Start to gameplay (2026-10-18)
 

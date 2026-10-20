@@ -19,6 +19,7 @@ set(CRACKDOWN2_SOURCES
     src/hooks_intro.cpp
     src/hooks_frametime.cpp
     src/hooks_framerate.cpp
+    src/ap/ap_probe.cpp
 )
 
 if(WIN32)
