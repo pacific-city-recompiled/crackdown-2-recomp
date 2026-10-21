@@ -28,6 +28,15 @@ Options go on the command line or in crackdown2.toml next to the exe.
 Saves and the shader cache go to Documents\crackdown2. An empty portable.txt next
 to the exe keeps them in userdata\ instead.
 
+Archipelago (multiworld randomizer): install crackdown2.apworld from the same
+release into Archipelago 0.6.8 or newer and make a YAML (Crackdown 2.yaml in the
+release is the default template: 909 checks). Then start the game with
+  crackdown2.exe --ap_server=<host:port> --ap_slot=<name>
+(or use the ARCHIPELAGO tab of the Crackdown Recomp launcher; add
+--ap_password=<password> if the room has one) and start a NEW GAME. The save is
+bound to that seed, so use a fresh save (or launcher profile) for each seed.
+Not tested live yet: winning a race, an audio-log pickup, the Sunburst goal.
+
 Known issues:
   - Multiplayer (co-op, Deluge online, Host/Join) does not work yet. It is off
     unless you pass --net_mode; single player does not touch the network.
