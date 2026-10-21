@@ -29,7 +29,7 @@ Saves and the shader cache go to Documents\crackdown2. An empty portable.txt nex
 to the exe keeps them in userdata\ instead.
 
 Archipelago (multiworld randomizer): install crackdown2.apworld from the same
-release into Archipelago 0.6.8 or newer and make a YAML (Crackdown 2.yaml in the
+release into Archipelago 0.6.8 or newer and make a YAML (Crackdown2.yaml in the
 release is the default template: 909 checks). Then start the game with
   crackdown2.exe --ap_server=<host:port> --ap_slot=<name>
 (or use the ARCHIPELAGO tab of the Crackdown Recomp launcher; add
