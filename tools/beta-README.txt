@@ -49,6 +49,6 @@ Bug reports: include the latest logs\crackdown2_NNN.log (next to crackdown2.exe)
 VERSION.txt, what happened and how to reproduce it.
 
 Third-party notices are in LICENSES. The exact revision and SDK patch hashes are
-in VERSION.txt. Source and releases: https://github.com/Unowa001/Crackdown-2-Recomp
+in VERSION.txt. Source and releases: https://gitlab.com/pacific-city-recompiled/crackdown-2-recomp
 Unofficial fan project, not affiliated with or endorsed by Microsoft. It contains
 no game data; you must own the game and supply your own files.
