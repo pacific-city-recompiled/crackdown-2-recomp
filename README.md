@@ -4,6 +4,10 @@ Static recompilation of Crackdown 2 (Xbox 360, 2010, title 4D5308BC) to native P
 
 **No game data and no generated code is in this repository.** You supply your own disc dump, title update and DLC.
 
+**Getting it:** releases are on [GitLab](https://gitlab.com/pacific-city-recompiled/crackdown-2-recomp/-/releases).
+The [Crackdown 1 recomp launcher](https://gitlab.com/pacific-city-recompiled/crackdown-recomp/-/releases) 1.2.2 or newer
+installs and updates Crackdown 2 for you: pick CRACKDOWN 2 in its header and choose **Download runtime**.
+
 ## Status (2026-10-18)
 
 - Codegen is clean (0 unresolved calls). The project builds and links on Windows.
