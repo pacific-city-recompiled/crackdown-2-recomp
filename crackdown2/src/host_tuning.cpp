@@ -20,6 +20,8 @@
 
 #include <rex/cvar.h>
 #include <rex/filesystem.h>
+#include <rex/input/device_assignment.h>
+#include <rex/input/input_system.h>
 #include <rex/logging/macros.h>
 #include <rex/rex_app.h>
 #include <rex/memory/utils.h>
@@ -63,6 +65,25 @@ void ApplyGameDefaults() {
       REXLOG_WARN("crackdown2 default: could not set --{}={}", d.name, d.value);
     }
   }
+}
+
+}  // namespace crackdown2
+
+// Every physical pad drives guest user 0 (2026-10-26). The SDK gives each pad its own user index in connection order,
+// but only user 0 has a signed-in profile (xam_user.cpp). Austin's PC lists a PS4 pad first and his Xbox One S pad
+// second (cd2 log crackdown2_001), so his Start arrived as user 1 and the Press Start screen never moved on.
+// Crackdown 2 has no split screen (co-op is one player per PC), so nothing needs users 1-3.
+// --input_all_pads_user0=false gives the SDK's one-user-per-pad routing back.
+REXCVAR_DEFINE_BOOL(input_all_pads_user0, true, "Crackdown2", "Route every controller to player 1 (user 0)");
+
+namespace crackdown2 {
+
+void ApplyInputDefaults(rex::Runtime* runtime) {
+  if (!REXCVAR_GET(input_all_pads_user0) || !runtime || !runtime->input_system()) return;
+  // InputSystem is the only IInputSystem implementation (sdk input_system.h).
+  static_cast<rex::input::InputSystem*>(runtime->input_system())
+      ->SetDeviceAssignment(std::make_unique<rex::input::SharedAssignment>());
+  REXLOG_INFO("crackdown2 default: every controller drives user 0 (--input_all_pads_user0)");
 }
 
 }  // namespace crackdown2
