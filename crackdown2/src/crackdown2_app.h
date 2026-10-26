@@ -28,6 +28,7 @@ class Crackdown2App : public rex::ReXApp {
   // After the GPU plugin has loaded, right before the guest starts.
   void OnPreLaunchModule() override {
     crackdown2::ApplyGameDefaults();
+    crackdown2::ApplyInputDefaults(runtime());
     crackdown2::DumpGuestImage(runtime());
     SetGuestFrameStats(&crackdown2::GuestFrameStats);
     crackdown2::ap::Initialize(user_data_root());

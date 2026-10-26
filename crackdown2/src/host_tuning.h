@@ -12,6 +12,8 @@ void ApplyGameDefaults();
 // gpu_plugin=xenos unless set; portable mode and game folder discovery (host_tuning.cpp).
 void ApplyGpuPluginDefault();
 void ApplyStartupDefaults(rex::PathConfig& paths);
+// --input_all_pads_user0: every controller drives user 0, the only signed-in user.
+void ApplyInputDefaults(rex::Runtime* runtime);
 // --dump_image: writes the loaded guest image to a file.
 void DumpGuestImage(rex::Runtime* runtime);
 // Guest frame rate for the F3 overlay, and --frame_log flushing (hooks_frametime.cpp).

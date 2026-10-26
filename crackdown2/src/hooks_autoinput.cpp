@@ -4,7 +4,8 @@
 // and 0x829551D8 is XInputGetState(user r3, state r4) (sets r4=1 and r5=state). Same shape as Crackdown 1
 // 0x82743798 (found by the XamInputGetState import call in the generated code, 2026-10-18).
 // After --auto_input_delay_s, each token is held for its hold time (TOKEN:ms, default 300 ms), then the pad
-// is neutral for --auto_input_gap_ms before the next token. User 0 only. Without --auto_input nothing changes.
+// is neutral for --auto_input_gap_ms before the next token, on user --auto_input_user (default 0; 1 replays a second
+// pad's input, like Austin's Xbox pad before --input_all_pads_user0). Without --auto_input nothing changes.
 // Tokens: A B X Y START BACK UP DOWN LEFT RIGHT LB RB LS RS (buttons), LT RT (triggers),
 // LS_UP/LS_DOWN/LS_LEFT/LS_RIGHT and RS_UP/RS_DOWN/RS_LEFT/RS_RIGHT (full stick deflection), WAIT (nothing).
 // XINPUT_STATE: u32 packet; u16 buttons; u8 lt, rt; s16 lx, ly, rx, ry (big-endian in guest memory).
@@ -27,6 +28,7 @@ REXCVAR_DEFINE_STRING(auto_input, "", "Crackdown2",
                       "Test only: comma list of pad inputs TOKEN[:hold_ms] played in order (see hooks_autoinput.cpp)");
 REXCVAR_DEFINE_DOUBLE(auto_input_delay_s, 25.0, "Crackdown2", "Test only: seconds before --auto_input starts");
 REXCVAR_DEFINE_INT32(auto_input_gap_ms, 2700, "Crackdown2", "Test only: neutral time after each --auto_input token");
+REXCVAR_DEFINE_INT32(auto_input_user, 0, "Crackdown2", "Test only: guest user index --auto_input plays on");
 
 namespace {
 using Clock = std::chrono::steady_clock;
@@ -109,11 +111,14 @@ namespace crackdown2 { uint16_t SweepWatchdogButtons(); }
 namespace {
 
 void Apply(PPCContext& ctx, uint8_t* base, uint32_t user, uint32_t state_ea) {
-  if (user != 0 || !state_ea) return;
-  if (const uint16_t extra = g_test_buttons.load(std::memory_order_relaxed) | crackdown2::SweepWatchdogButtons()) {
-    REX_STORE_U16(state_ea + 4, uint16_t(REX_LOAD_U16(state_ea + 4) | extra));
-    ctx.r3.u64 = 0;
+  if (!state_ea) return;
+  if (user == 0) {
+    if (const uint16_t extra = g_test_buttons.load(std::memory_order_relaxed) | crackdown2::SweepWatchdogButtons()) {
+      REX_STORE_U16(state_ea + 4, uint16_t(REX_LOAD_U16(state_ea + 4) | extra));
+      ctx.r3.u64 = 0;
+    }
   }
+  if (user != uint32_t(REXCVAR_GET(auto_input_user))) return;
   const Step* s = Current();
   if (!s) return;
   REX_STORE_U16(state_ea + 4, uint16_t(REX_LOAD_U16(state_ea + 4) | s->buttons));
