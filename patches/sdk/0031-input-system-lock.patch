@@ -1,0 +1,83 @@
+From: Claude <noreply@anthropic.com>
+Subject: [PATCH] input: serialize InputSystem entry points
+
+Every InputSystem entry point calls RefreshDevices(), which rebuilds
+devices_/device_owners_ and notifies the assignment, with no lock. Crackdown 2
+polls the pad (XamInputGetState) on its main thread and rumbles it
+(XamInputSetState) on another, so the two rebuilt the vectors at once and one
+copied a torn DeviceInfo string: ud2 in RefreshDevices+0xbd8 under GetState,
+with thread 61 in RefreshDevices under SetState (Austin, PC, 2026-10-26,
+cell site takeover finish; dump crackdown2.exe.42784.dmp, 0xC000001D).
+
+A recursive mutex now covers SetDeviceAssignment, GetCapabilities, GetState,
+SetState and GetKeystroke.
+
+---
+diff --git a/include/rex/input/input_system.h b/include/rex/input/input_system.h
+index 1cb3faa..89dc182 100644
+--- a/include/rex/input/input_system.h
++++ b/include/rex/input/input_system.h
+@@ -11,6 +11,7 @@
+  */
+ 
+ #include <memory>
++#include <mutex>
+ #include <vector>
+ 
+ #include <rex/input/device_assignment.h>
+@@ -56,6 +57,11 @@ class InputSystem : public system::IInputSystem {
+ 
+   rex::ui::Window* window_ = nullptr;
+ 
++  // Guest threads poll and rumble concurrently (XamInputGetState on one,
++  // XamInputSetState on another), and every entry point re-enumerates into
++  // devices_. Recursive so a driver callback can re-enter safely.
++  std::recursive_mutex mutex_;
++
+   std::vector<std::unique_ptr<InputDriver>> drivers_;
+ 
+   std::unique_ptr<DeviceAssignment> assignment_;
+diff --git a/src/input/input_system.cpp b/src/input/input_system.cpp
+index 813bb1c..677b312 100644
+--- a/src/input/input_system.cpp
++++ b/src/input/input_system.cpp
+@@ -72,6 +72,7 @@ void InputSystem::SetActiveCallback(std::function<bool()> callback) {
+ }
+ 
+ void InputSystem::SetDeviceAssignment(std::unique_ptr<DeviceAssignment> assignment) {
++  std::lock_guard<std::recursive_mutex> lock(mutex_);
+   assignment_ = std::move(assignment);
+   if (assignment_) {
+     assignment_->OnDevicesChanged(devices_);
+@@ -186,6 +187,7 @@ const DeviceInfo* InputSystem::DeviceInfoFor(DeviceId id) const {
+ 
+ X_RESULT InputSystem::GetCapabilities(uint32_t user_index, uint32_t flags,
+                                       X_INPUT_CAPABILITIES* out_caps) {
++  std::lock_guard<std::recursive_mutex> lock(mutex_);
+   SCOPE_profile_cpu_f("hid");
+   if (!out_caps || !assignment_) {
+     return X_ERROR_DEVICE_NOT_CONNECTED;
+@@ -213,6 +215,7 @@ X_RESULT InputSystem::GetCapabilities(uint32_t user_index, uint32_t flags,
+ }
+ 
+ X_RESULT InputSystem::GetState(uint32_t user_index, X_INPUT_STATE* out_state) {
++  std::lock_guard<std::recursive_mutex> lock(mutex_);
+   SCOPE_profile_cpu_f("hid");
+   if (!assignment_) {
+     return X_ERROR_DEVICE_NOT_CONNECTED;
+@@ -252,6 +255,7 @@ X_RESULT InputSystem::GetState(uint32_t user_index, X_INPUT_STATE* out_state) {
+ }
+ 
+ X_RESULT InputSystem::SetState(uint32_t user_index, X_INPUT_VIBRATION* vibration) {
++  std::lock_guard<std::recursive_mutex> lock(mutex_);
+   SCOPE_profile_cpu_f("hid");
+   if (!assignment_) {
+     return X_ERROR_DEVICE_NOT_CONNECTED;
+@@ -294,6 +298,7 @@ X_RESULT InputSystem::SetState(uint32_t user_index, X_INPUT_VIBRATION* vibration
+ 
+ X_RESULT InputSystem::GetKeystroke(uint32_t user_index, uint32_t flags,
+                                    X_INPUT_KEYSTROKE* out_keystroke) {
++  std::lock_guard<std::recursive_mutex> lock(mutex_);
+   SCOPE_profile_cpu_f("hid");
+   if (!assignment_) {
+     return X_ERROR_DEVICE_NOT_CONNECTED;
