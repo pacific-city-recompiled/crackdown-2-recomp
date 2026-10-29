@@ -7,13 +7,16 @@ param(
     # Single-game launcher build folder (crackdown-recomp launcher, LAUNCHER_GAME=cd2). Also builds the app-launcher
     # ZIP Crackdown2-Windows-<version>.zip (Quiver): the launcher at the top, this package in cd2\. Its name must not
     # start with Crackdown2Recomp-: the combined launcher refuses a release with two ZIPs of its prefix.
-    [string]$Launcher
+    [string]$Launcher,
+    # A full release (tag v<version>): no "beta" in the ZIP name or VERSION.txt.
+    [switch]$Stable
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path $PSScriptRoot -Parent
 $sdk = Join-Path $repo 'sdk'
 $output = Join-Path $repo 'out/packages'
-$packageName = "Crackdown2Recomp-beta$Version"
+$channel = if ($Stable) { '' } else { 'beta' }
+$packageName = "Crackdown2Recomp-$channel$Version"
 $stage = Join-Path $output $packageName
 $zip = Join-Path $output "$packageName.zip"
 
@@ -101,7 +104,7 @@ foreach ($relative in @('libmspack/libmspack/COPYING.LIB','disruptorplus/LICENSE
 $sdkVersion = Git-Text $sdk @('describe','--tags','--always')
 $repoVersion = Git-Text $repo @('describe','--tags','--always')
 $patchList = Get-ChildItem (Join-Path $repo 'patches/sdk') -Filter '*.patch' | Sort-Object Name | ForEach-Object { "$($_.Name) SHA256=$((Get-FileHash $_.FullName -Algorithm SHA256).Hash)" }
-@("Crackdown 2 Recomp beta $Version", "Repo: $repoVersion", "SDK: $sdkVersion", 'Applied patches:', $patchList) | Set-Content (Join-Path $stage 'VERSION.txt') -Encoding UTF8
+@(("Crackdown 2 Recomp $channel $Version" -replace '  ',' '), "Repo: $repoVersion", "SDK: $sdkVersion", 'Applied patches:', $patchList) | Set-Content (Join-Path $stage 'VERSION.txt') -Encoding UTF8
 
 # Every non-system import of the exe and DLLs must be in the package (Windows CRT is a documented prerequisite).
 $llvm = Join-Path $env:ProgramFiles 'LLVM/bin/llvm-readobj.exe'
