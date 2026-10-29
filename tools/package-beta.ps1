@@ -3,7 +3,11 @@
 # Build first: build-sdk.bat, then build-cd2.bat. This script does not publish anything.
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory)][ValidatePattern('^[A-Za-z0-9][A-Za-z0-9._-]{0,39}$')][string]$Version
+    [Parameter(Mandatory)][ValidatePattern('^[A-Za-z0-9][A-Za-z0-9._-]{0,39}$')][string]$Version,
+    # Single-game launcher build folder (crackdown-recomp launcher, LAUNCHER_GAME=cd2). Also builds the app-launcher
+    # ZIP Crackdown2-Windows-<version>.zip (Quiver): the launcher at the top, this package in cd2\. Its name must not
+    # start with Crackdown2Recomp-: the combined launcher refuses a release with two ZIPs of its prefix.
+    [string]$Launcher
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path $PSScriptRoot -Parent
@@ -119,15 +123,45 @@ foreach ($file in Get-ChildItem $stage -Recurse -File) {
     $relative = $file.FullName.Substring($stage.Length + 1)
     if ($relative -match '(^|[\\/])(game|tu|generated)([\\/]|$)|\.xex$|\.xexp$|\.iso$|_recomp\..*\.cpp$') { throw "Forbidden package input: $relative" }
 }
-# Entry names use '/' (Compress-Archive in PowerShell 5.1 writes '\').
+# One package directory per ZIP (both launchers strip it). Entry names use '/' (Compress-Archive in PowerShell 5.1
+# writes '\').
 Add-Type -AssemblyName System.IO.Compression, System.IO.Compression.FileSystem
-$archive = [IO.Compression.ZipFile]::Open($zip, [IO.Compression.ZipArchiveMode]::Create)
-try {
-    foreach ($file in Get-ChildItem $stage -Recurse -File | Sort-Object FullName) {
-        $entry = $packageName + '/' + $file.FullName.Substring($stage.Length + 1).Replace('\', '/')
-        [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, $file.FullName, $entry, [IO.Compression.CompressionLevel]::Optimal) | Out-Null
-    }
-} finally { $archive.Dispose() }
-$zipHash = (Get-FileHash -LiteralPath $zip -Algorithm SHA256).Hash.ToLowerInvariant()
-"$zipHash  $packageName.zip" | Set-Content -LiteralPath "$zip.sha256" -Encoding ASCII
+function New-PackageZip([string]$Folder, [string]$Name, [string]$Path) {
+    $archive = [IO.Compression.ZipFile]::Open($Path, [IO.Compression.ZipArchiveMode]::Create)
+    try {
+        foreach ($file in Get-ChildItem $Folder -Recurse -File | Sort-Object FullName) {
+            $entry = $Name + '/' + $file.FullName.Substring($Folder.Length + 1).Replace('\', '/')
+            [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, $file.FullName, $entry, [IO.Compression.CompressionLevel]::Optimal) | Out-Null
+        }
+    } finally { $archive.Dispose() }
+    $hash = (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()
+    "$hash  $(Split-Path $Path -Leaf)" | Set-Content -LiteralPath "$Path.sha256" -Encoding ASCII
+}
+New-PackageZip $stage $packageName $zip
 Write-Output "Created local beta package: $zip"
+
+if ($Launcher) {
+    $windowsName = "Crackdown2-Windows-$Version"
+    $windowsStage = Join-Path $output $windowsName
+    $windowsZip = Join-Path $output "$windowsName.zip"
+    if ((Test-Path -LiteralPath $windowsStage) -or (Test-Path -LiteralPath $windowsZip)) { throw 'This Windows package version already exists' }
+    $launcherExe = Join-Path $Launcher 'Crackdown2Recomp.exe'
+    if (-not (Test-Path -LiteralPath $launcherExe -PathType Leaf)) { throw "No Crackdown2Recomp.exe in $Launcher (build the launcher with -DLAUNCHER_GAME=cd2)" }
+    New-Item -ItemType Directory -Path $windowsStage | Out-Null
+    # Exactly one exe at the top: app launchers start the only one there.
+    Copy-Item -LiteralPath $launcherExe -Destination $windowsStage
+    Copy-Item -LiteralPath (Join-Path $Launcher 'assets') -Destination $windowsStage -Recurse
+    Copy-Item -LiteralPath (Join-Path $Launcher 'LICENSES') -Destination $windowsStage -Recurse
+    Copy-Item -LiteralPath (Join-Path $repo 'tools/windows-README.txt') -Destination (Join-Path $windowsStage 'README.txt')
+    # The game in cd2\, the layout the combined launcher installs, without the Python setup (the launcher installs).
+    $cd2 = Join-Path $windowsStage 'cd2'
+    New-Item -ItemType Directory -Path $cd2 | Out-Null
+    foreach ($name in 'crackdown2.exe', 'rexruntime.dll', 'rexgpu-xenos.dll', 'game-manifest.txt', 'VERSION.txt') {
+        Copy-Item -LiteralPath (Join-Path $stage $name) -Destination $cd2
+    }
+    Copy-Item -LiteralPath $licenses -Destination $cd2 -Recurse
+    $tops = @(Get-ChildItem $windowsStage -File | Where-Object Extension -In '.exe', '.bat', '.cmd')
+    if ($tops.Count -ne 1) { throw 'The Windows package must have exactly one program at the top' }
+    New-PackageZip $windowsStage $windowsName $windowsZip
+    Write-Output "Created local Windows (app launcher) package: $windowsZip"
+}
