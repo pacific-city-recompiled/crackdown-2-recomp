@@ -15,6 +15,7 @@ set(CRACKDOWN2_SOURCES
     src/main.cpp
     src/hooks_aspect.cpp
     src/hooks_autoinput.cpp
+    src/hooks_camera.cpp
     src/host_tuning.cpp
     src/host_tuning.cpp
     src/hooks_intro.cpp
