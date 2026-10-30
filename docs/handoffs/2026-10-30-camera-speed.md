@@ -1,6 +1,6 @@
 # Handoff 2026-10-30: camera turn speed (`--camera_sensitivity`)
 
-Branch `feat/camera-sensitivity` (off `feat/pc-port-standard`, PR #2). PR: see below.
+Branch `feat/camera-sensitivity` (off `feat/pc-port-standard`, PR #2): PR #3 https://github.com/pacific-city-recompiled/crackdown-2-recomp/pull/3
 
 ## What changed
 
