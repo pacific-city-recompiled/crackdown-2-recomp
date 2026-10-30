@@ -13,6 +13,7 @@ include(generated/rexglue.cmake)
 # Sources
 set(CRACKDOWN2_SOURCES
     src/main.cpp
+    src/hooks_aspect.cpp
     src/hooks_autoinput.cpp
     src/host_tuning.cpp
     src/host_tuning.cpp
