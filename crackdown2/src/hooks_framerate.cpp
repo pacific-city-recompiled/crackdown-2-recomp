@@ -7,7 +7,8 @@
 // - Sixteen inlined timers add `locked ? 33 : ...` ms per frame (config/midasm_hooks.toml).
 // - The clock object [0x82800B0C] is always locked (+13 = 1) in retail.
 // At 60 fps all three run twice as fast. With --sim_game_clock the update dt and the step query are scaled by
-// measured step / (1/30) and the 16 timers get the measured whole ms (remainder carried to the next frame);
+// measured step / (1/30) and the 16 timers get the measured whole ms (remainder carried to the next frame;
+// the float step itself is not rounded, which matters at 120/144 fps);
 // the pooled 1/30 literal itself is left alone (Crackdown 1's --sim_step_literal: it has other readers, Havok's
 // hkWorldCinfo among them). Measured = host time between presents (hooks_frametime.cpp), clamped to
 // 1/240..1/20 s so loading stalls don't become huge steps. Flags are read once, at the first frame.
@@ -111,7 +112,10 @@ void UpdateSimClock() {
     const uint32_t ms = uint32_t(std::floor(g_ms_carry));  // >= 4 since dt >= 1/240 s
     g_ms_carry -= ms;
     g_frame_ms.store(ms, std::memory_order_relaxed);
-    g_step_scale.store(float(ms) / 1000.0f * 30.0f, std::memory_order_relaxed);
+    // The float step uses the measured time, not the whole ms: at 120/144 fps a frame is 8.3/6.9 ms, and rounding
+    // to 8/9 or 6/7 ms would make each step up to 15% off (judder). The ms timers keep the carry, so both add up
+    // to the same (clamped) time.
+    g_step_scale.store(float(dt * 30.0), std::memory_order_relaxed);
   }
   g_last_frame = now;
 }
