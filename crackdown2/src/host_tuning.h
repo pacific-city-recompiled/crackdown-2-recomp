@@ -1,6 +1,8 @@
 // crackdown2 - host-side defaults the SDK leaves off
 #pragma once
 
+#include <cstdint>
+
 #include <rex/ui/overlay/debug_overlay.h>
 
 namespace rex { class Runtime; struct PathConfig; }
@@ -21,4 +23,9 @@ rex::ui::FrameStats GuestFrameStats();
 void FlushFrameLog();
 // --sim_game_clock: measures this frame (hooks_framerate.cpp); called from the per-frame hook.
 void UpdateSimClock();
+// --aspect_ratio as a number (16:9 when unset or not understood), and whether it is 16:9 (hooks_aspect.cpp).
+double AspectRatio();
+bool AspectRatioIsDefault();
+// Writes the camera aspect ratio when --aspect_ratio isn't 16:9; per guest frame (hooks_frametime.cpp).
+void ApplyAspectRatio(uint8_t* base);
 }  // namespace crackdown2
