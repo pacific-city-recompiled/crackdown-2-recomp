@@ -110,7 +110,7 @@ Crackdown result: 9 config entries, then a clean codegen (about 30s, 182 MB of C
 1. Install VS 2022 with "Desktop development with C++" (it provides the Windows SDK, CMake and Ninja), plus Clang 20+ via `winget install LLVM.LLVM`. VS 2022 bundles an older Clang. `vcvars64` does not put any Clang on PATH, so `build-and-run.bat` adds `%ProgramFiles%\LLVM\bin` itself.
 1b. Turn on **Developer Mode** (Settings > System > For developers). The SDK's libmspack and o1heap dependencies contain git symlinks, and without Developer Mode they check out as one-line text files ("lzxd.c:1: expected identifier"). `build-and-run.bat` re-checks them out as real links.
 2. Open an **x64 Native Tools Command Prompt for VS 2022**.
-3. `git clone --recursive https://gitlab.com/pacific-city-recompiled/crackdown-recomp.git`, then copy the `game\` folder in next to `crackdown\`. The Samba share works, or use extract-xiso on Windows.
+3. `git clone --recursive https://github.com/pacific-city-recompiled/crackdown-recomp.git`, then copy the `game\` folder in next to `crackdown\`. The Samba share works, or use extract-xiso on Windows.
 4. Build the SDK (after applying `patches\sdk\*.patch`, see section 2; `build-and-run.bat` does both): `cd sdk && cmake --preset win-amd64 && cmake --build out\build\win-amd64 --config Release --target install`
 5. Codegen: `cd ..\crackdown && ..\sdk\out\install\win-amd64\bin\rexglue.exe codegen crackdown_manifest.toml`
 6. Build: `cmake --preset win-amd64-release && cmake --build --preset win-amd64-release`
