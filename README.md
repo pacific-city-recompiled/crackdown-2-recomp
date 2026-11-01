@@ -81,8 +81,8 @@ The whole launcher works with a controller, so it is comfortable from the couch,
 
 ## Settings
 
-Settings save on their own and apply the next time you press Play. The launcher already shows aspect ratio,
-camera speed and 120 / 144 fps for Crackdown 2; the game supports them from the next release. Rare and debug options sit under each
+Settings save on their own and apply the next time you press Play. The launcher's aspect ratio, camera speed and
+120 / 144 fps options don't affect Crackdown 2 1.0.1 yet; they are still in development for the game. Rare and debug options sit under each
 page's **Show advanced settings**.
 
 | Page | What's there |
