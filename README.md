@@ -4,7 +4,7 @@
 
 **Crackdown 2 (Xbox 360, 2010), recompiled to run natively on Windows PC.**
 
-60 fps · up to 4K · ultrawide · controller-friendly launcher · DLC · Archipelago
+60 fps · up to 4K · controller-friendly launcher · DLC · Archipelago
 
 [![Latest release](https://img.shields.io/github/v/release/pacific-city-recompiled/crackdown-2-recomp?label=release&color=2ea44f)](https://github.com/pacific-city-recompiled/crackdown-2-recomp/releases/latest)
 [![License](https://img.shields.io/github/license/pacific-city-recompiled/crackdown-2-recomp?color=lightgrey)](https://github.com/pacific-city-recompiled/crackdown-2-recomp/blob/main/LICENSE)
@@ -81,13 +81,14 @@ The whole launcher works with a controller, so it is comfortable from the couch,
 
 ## Settings
 
-Settings save on their own and apply the next time you press Play. Rare and debug options sit under each
+Settings save on their own and apply the next time you press Play. The launcher already shows aspect ratio,
+camera speed and 120 / 144 fps for Crackdown 2; the game supports them from the next release. Rare and debug options sit under each
 page's **Show advanced settings**.
 
 | Page | What's there |
 |---|---|
-| **Display** | Fullscreen, resolution (720p up to 4K), aspect ratio (wider ratios show more, no stretching), frame rate (60 fps default, 30 fps original, 120 / 144 experimental), anti-aliasing |
-| **Gameplay** | Language, skip intro logos, camera turn speed (0.25x to 4x), mouse and keyboard |
+| **Display** | Fullscreen, resolution (720p up to 4K), frame rate (60 fps default, 30 fps for the original timing), anti-aliasing |
+| **Gameplay** | Language, skip intro logos, mouse and keyboard |
 | **Saves & Archipelago** | Save profiles, the saves folder (`Documents\crackdown2`), portable mode, Archipelago connection |
 | **About** | Versions, verify game files, logs folder, copy system info |
 
