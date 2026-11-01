@@ -107,5 +107,6 @@ REX_HOOK_RAW(sub_82385DA8) {
   crackdown2::ap::ProbeFrame(base);
   OnFrame();
   crackdown2::UpdateSimClock();
+  crackdown2::ApplyAspectRatio(base);
   __imp__sub_82385DA8(ctx, base);
 }

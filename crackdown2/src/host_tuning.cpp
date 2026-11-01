@@ -14,6 +14,7 @@
 
 #include "host_tuning.h"
 
+#include <cmath>
 #include <fstream>
 #include <string>
 #include <string_view>
@@ -63,6 +64,22 @@ void ApplyGameDefaults() {
       REXLOG_INFO("crackdown2 default: --{}={}", d.name, d.value);
     } else {
       REXLOG_WARN("crackdown2 default: could not set --{}={}", d.name, d.value);
+    }
+  }
+  // --aspect_ratio: give the guest frame buffer the same shape as the camera (hooks_aspect.cpp), width a multiple
+  // of 8. Height: the window's when one is set, else 720. The SDK takes the video mode height from window_height
+  // whenever video_mode_height holds its default (720), so a 720-line width in a 1080-high window would become a
+  // 14:9 mode that the presenter letterboxes (Crackdown 1 GitHub issue #13).
+  const auto user_set = [](const char* name) { return rex::cvar::GetFlagSource(name) != rex::cvar::Source::kDefault; };
+  if (!AspectRatioIsDefault() && !user_set("video_mode_width") && !user_set("video_mode_height")) {
+    const int32_t window_height = rex::cvar::Query<int32_t>("window_height");
+    const int height = user_set("window_height") && window_height > 0 ? window_height : 720;
+    const int width = int(std::lround(height * AspectRatio() / 8.0)) * 8;
+    if (rex::cvar::SetFlagByName("video_mode_width", std::to_string(width)) &&
+        rex::cvar::SetFlagByName("video_mode_height", std::to_string(height))) {
+      REXLOG_INFO("crackdown2 default: --video_mode_width={} --video_mode_height={} (aspect_ratio)", width, height);
+    } else {
+      REXLOG_WARN("crackdown2 default: could not set the video mode for aspect_ratio");
     }
   }
 }
