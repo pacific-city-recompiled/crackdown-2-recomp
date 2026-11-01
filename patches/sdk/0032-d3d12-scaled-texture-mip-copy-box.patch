@@ -1,0 +1,50 @@
+From: Jerrod <jerrod.uno@gmail.com>
+Date: Sun, 1 Nov 2026 06:00:00 +0000
+Subject: [PATCH] d3d12: clamp scaled texture mip copies to the host mip size
+
+With draw resolution scaling, a scaled-resolve texture is created at guest
+size * scale, so D3D12 sizes its mips as max((size * scale) >> level, 1).
+The load path lays out the copy buffer as max(size >> level, 1) * scale.
+Once a dimension reaches 1 these differ (Crackdown 2 resolves a mipmapped
+256x1 RGBA8 texture: at 2x mip 1 is 256x1 on the host, 256x2 in the
+footprint), and levels below the packed tail were copied with no source
+box, so CopyTextureRegion ran past the destination
+(COPYTEXTUREREGION_DSTREGIONOUTOFBOUNDS), the command list failed to
+close and ExecuteCommandLists removed the device (DXGI_ERROR_INVALID_CALL)
+right after the boot logo. Copy only the host mip's extent, like the packed
+tail branch and the Vulkan backend (imageExtent) already do, clamped to
+the footprint, which is the smaller one for some non-power-of-two sizes.
+---
+diff --git a/src/graphics/d3d12/texture_cache.cpp b/src/graphics/d3d12/texture_cache.cpp
+index 2be0e8e..ffe3cec 100644
+--- a/src/graphics/d3d12/texture_cache.cpp
++++ b/src/graphics/d3d12/texture_cache.cpp
+@@ -1920,6 +1920,28 @@ bool D3D12TextureCache::LoadTextureDataFromResidentMemoryImpl(Texture& texture,
+                      host_block_height);
+       source_box.back = source_box.front + std::max(depth >> level, uint32_t(1));
+       source_box_ptr = &source_box;
++    } else if (texture_resolution_scaled) {
++      // The footprint is max(guest size >> level, 1) * scale, but the host
++      // texture was created at guest size * scale, so its mips are
++      // max((size * scale) >> level, 1), smaller once a dimension reaches 1
++      // (a 256x1 resolve at 2x: mip 1 is 256x1 on the host, 256x2 in the
++      // footprint). For non-power-of-two sizes the footprint can instead be
++      // the smaller one (65 at 2x: mip 1 is 65 on the host, 64 in the
++      // footprint), so copy the overlap of the two.
++      const D3D12_SUBRESOURCE_FOOTPRINT& footprint = location_source.PlacedFootprint.Footprint;
++      source_box.left = 0;
++      source_box.top = 0;
++      source_box.front = 0;
++      source_box.right = std::min(
++          footprint.Width,
++          rex::align(std::max((width * texture_resolution_scale_x) >> level, uint32_t(1)),
++                     host_block_width));
++      source_box.bottom = std::min(
++          footprint.Height,
++          rex::align(std::max((height * texture_resolution_scale_y) >> level, uint32_t(1)),
++                     host_block_height));
++      source_box.back = std::min(footprint.Depth, std::max(depth >> level, uint32_t(1)));
++      source_box_ptr = &source_box;
+     } else {
+       source_box_ptr = nullptr;
+     }
